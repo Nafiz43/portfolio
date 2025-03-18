@@ -1,0 +1,88 @@
+  document.addEventListener("DOMContentLoaded", function () {
+    const experiences = [
+      {
+        title: "Graduate Research Fellow",
+        company: "UC Davis",
+        companyLink: "https://www.ucdavis.edu/",
+        logo: "img/ucd_logo.png",
+        date: "September 2023 - Present",
+        width: 80,
+        height: 80,
+        tasks: [
+          "Developed <strong>ReACT-GPT</strong>, a <strong>Retrieval-Augmented Generation (RAG)</strong> framework utilizing <strong>LangChain</strong>, <strong>ChromaDB</strong>, and <strong>Ollama</strong> to synthesize actionable insights and key findings from scientific articles.",
+          "Developed <a href='https://github.com/Nafiz43/EvidenceBot' target='_blank'><strong>EvidenceBot</strong></a>, an open-source application using <strong>Streamlit</strong> and the <strong>ReACT-GPT</strong> framework.",
+          "Enhanced the performance of foundational language models (<strong>Llama</strong>, <strong>Mixtral</strong>) on targeted tasks through strategic fine-tuning techniques.",
+          "Engineered and optimized various LSTM-based models (<strong>Dilated-LSTM</strong>, <strong>Bi-LSTM</strong>, <strong>Stacked-LSTM</strong>) to improve accuracy in forecasting the graduation status of <strong>Open Source Software (OSS)</strong> projects."
+        ]
+      },
+      {
+        title: "Lecturer",
+        company: "MIST",
+        companyLink: "https://www.mist.ac.bd/",
+        logo: "img/mist_logo.png",
+        date: "March 2021 - August 2023",
+        width: 80,
+        height: 80,
+        tasks: [
+          "Instructed six theory courses (<strong>Data Structure</strong>, <strong>Software Engineering</strong>, <strong>Programming Language</strong>, <strong>Discrete Mathematics</strong>, etc.).",
+          "Co-supervised <strong>ten undergraduate</strong> thesis teams, guiding students in their research and project development.",
+          "Collaborated in <strong>25 ML-based</strong> research projects with students and faculty members."
+        ]
+      },
+      {
+        title: "Software Engineer",
+        company: "CACR, MIST",
+        companyLink: "https://www.mist.ac.bd/",
+        logo: "img/mist_logo.png",
+        date: "July 2022 - August 2023",
+        width: 80,
+        height: 80,
+        tasks: [
+          "Developed the <strong>AFMC Admission Test</strong> Module, a software solution for the AFMC Entrance exam.",
+          "Spearheaded a team to develop <strong>C-Archive</strong> using <strong>PHP</strong>, <strong>MySQL</strong>, and <strong>Bootstrap</strong>.",
+          "Developed a <strong>Digital Plot Distribution</strong> system in collaboration with <a href='https://rajuk.gov.bd/' target='_blank'>RAJUK</a>."
+        ]
+      },
+      {
+        title: "Software Engineer",
+        company: "GuardForce Securities",
+        logo: "img/guard_force.png",
+        date: "August 2019 - February 2020",
+        width: 140,
+        height: 60,
+        tasks: [
+          "Designed and implemented an <strong>Employee Management System (EMS)</strong> using <strong>JavaFX</strong> and <strong>MySQL</strong> database with multiple levels of security authorizations, which is used to maintain over 3500 employees."
+        ]
+      }
+    ];
+
+    const experienceContainer = document.getElementById("experience-section");
+
+    experiences.forEach(exp => {
+      const experienceItem = document.createElement("div");
+      experienceItem.classList.add("resume-item", "flex-column", "mb-5");
+      
+      experienceItem.innerHTML = `
+        <div class="resume-content">
+          <span>
+            <a href="${exp.companyLink}" target="_blank">
+              <img src="${exp.logo}" width="${exp.width}" height="${exp.height}" style="padding: 2px;" />
+            </a>
+            <b style="margin-left: 10px">
+              <font size="+2" color="black">${exp.title}, <a href="${exp.companyLink}" target="_blank">${exp.company}</a></font>
+            </b>
+          </span>
+        </div>
+        <div class="resume-date text-md-right">
+          <span class="text-primary">${exp.date}</span>
+        </div>
+        <div>
+          <ul style="list-style-type: disc; padding-left: 60px;">
+            ${exp.tasks.map(task => `<li>${task}</li>`).join("")}
+          </ul>
+        </div>
+      `;
+
+      experienceContainer.appendChild(experienceItem);
+    });
+  });

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
   <meta charset="utf-8">
@@ -20,10 +19,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
   <!-- Custom styles for this template -->
   <link href="css/resume.css" rel="stylesheet">
+
   <script src="js/articles.js"></script>
   <script src="js/projects.js"></script>
   <script src="js/activities.js"></script>
-
+  <script src="js/work_experience.js"></script>
+  <script src="js/awards.js"></script>
 
 
 </head>
@@ -47,21 +48,15 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#work">Experience</a>
+          <a class="nav-link js-scroll-trigger" href="#experience-section">Experience</a>
         </li>
-
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#awards">Awards</a>
         </li>
 
-
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#Activities">Activities</a>
         </li>
-
-
-
-
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#research">Research</a>
         </li>
@@ -73,12 +68,6 @@
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#teaching">Teaching</a>
         </li>
-		   
-        
-		    
-        <!-- <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#projects">Projects</a>
-        </li> -->
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
         </li>
@@ -103,8 +92,6 @@
 
        <p class="lead mb-5"> Hi! I am pursuing PhD in Computer Science at <a href="https://www.ucdavis.edu/" target="_blank">University of California - Davis</a>, where I work in <a href="https://decallab.cs.ucdavis.edu/"> DECAL lab</a> with professor <a href="https://cs.ucdavis.edu/directory/vladimir-filkov" target="_blank">Vladimir Filkov</a>. 
       Formerly, I served as a  <a href="https://www.mist.ac.bd/department/cse/facultyMembers/nafiz_imtiaz_khan-351" target="_blank"> Lecturer</a> in the Department of Computer Science and Engineering (CSE) at <a href="https://www.mist.ac.bd/" target="_blank">MIST</a>. 
-
-        <!-- I completed my undergraduate thesis under the supervision of <a href="https://scholar.google.com/citations?user=hPyJkJEAAAAJ&hl=en" target="_blank">Dr. Muhammad Nazrul Islam</a>.  -->
         My research interests broadly lies in: 
           <blockquote>
             <ul>
@@ -125,11 +112,6 @@
 
     		<p class="lead mb-5">Apart from my academic activities, I like to explore new things and embrace unknown challenges in my life. In my spare time, I love playing table tennis and badminton.</p>
 
-
-        <!-- <p class="lead mb-5">Outside of my academic life, I’m passionate about exploring new experiences—whether that means tackling exciting challenges or enjoying my favorite sports and books. I get a kick out of playing pool, badminton, and cycling. When I want to unwind, I grab a book and immerse myself in different worlds to experience the lives of characters who feel incredibly real to me. In doing so, living a hundred different lives during my time on Earth, each filled with its own unique stories and thrills.</p> -->
-
-         <!-- My research interest lies broadly in application of deep learning and computer vision in computational biology and bioinformatics. Specifically, I like to map the problems in computational biology to popular machine learning and vision problems and come up with new efficient algorithms.<br> Currently I am working on representation learning for imaging data and its applications in bioimage informatics, more specifically, electron tomography images. Previously, I have worked on structural bioinformatics, specifically, protein folding. -->
-<!--     		<p class="lead mb-5">Apart from my academic activities, I like to travel to new places. I have visited 3 countries till now and it's in my bucket list to increase the number to 50 before I turn 50. I like to hangout with my friends and family in my off-time and listen to songs whenever I can.</p> -->
         <div class="row">
          <div class="col-md-5">
               <h3>Interests</h3>
@@ -180,10 +162,6 @@
           <a href="https://www.linkedin.com/in/nafiz43" target="_blank">
             <i class="fab fa-linkedin-in"></i>
           </a>
-          
-	      <!--   <a href="https://www.quora.com/profile/Rafid-Uddin-Duran" target="_blank">
-            <i class="fab fa-quora"></i>
-          </a> -->
           <a href="https://scholar.google.com/citations?user=UDxK99QAAAAJ&hl=en" target="_blank" rel="noopener">
               <i class="ai ai-google-scholar"></i>
           </a>
@@ -198,122 +176,10 @@
     <section class="resume-section p-1 p-lg-5" id="work">
      <div class="w-100">
        <h2 class="mb-5">Work Experience</h2>
-   
-       <!-- UCD Experience -->
-       <div class="resume-item flex-column mb-5">
-         <div class="resume-content">
-           <span> 
-             <a href="https://www.ucdavis.edu/" target="_blank">
-               <img src="img/ucd_logo.png" width="80" height="80" style="padding: 2px;" />
-             </a>
-             <b style="margin-left: 0px">
-               <font size="+2" color="black">Graduate Research Fellow, <a href="https://www.ucdavis.edu/" target="_blank">UC Davis</a></font>
-             </b>
-           </span>
-           <h3 class="mb-0"></h3>
-         </div>
-   
-         <div class="resume-date text-md-right">
-           <span class="text-primary">September 2023 - Present</span>
-         </div>
-   
-         <div>
-          
-
-           <ul style="list-style-type: disc; padding-left: 60px;">
-             <li>Developed <strong>ReACT-GPT</strong>, a <strong>Retrieval-Augmented Generation (RAG)</strong> framework utilizing <strong>LangChain</strong>, <strong>ChromaDB</strong>, and <strong>Ollama</strong> to synthesize actionable insights and key findings from scientific articles.</li>
-             <li>Developed <a href="https://github.com/Nafiz43/EvidenceBot" target="_blank"><strong>EvidenceBot</strong></a>, an open-source application using <strong>Streamlit</strong> and the <strong>ReACT-GPT</strong> framework, enabling users to query and extract information from various documents effectively.</li>
-             <li>Enhanced the performance of foundational language models (<strong>Llama</strong>, and <strong>Mixtral</strong>) on targeted tasks through strategic fine-tuning techniques, including <strong>PEFT</strong> and <strong>LoRA</strong>.</li>
-             <li>Engineered and optimized various LSTM-based models (<strong>Dilated-LSTM</strong>, <strong>Bi-LSTM</strong>, and <strong>Stacked-LSTM</strong>) to improve accuracy in forecasting the graduation status of <strong>Open Source Software (OSS)</strong> projects.</li>
-             <li>Developed <a href="https://nafiz43.github.io/ReACTive/" target="_blank"><strong>ReACTive</strong></a>, a visualization tool for ReACTs (Researched ACTionables) with <strong>Pyvis</strong> and <strong>Bootstrap</strong>.</li>
-           </ul>
-         </div>
-       </div>
-
-        <!-- MIST Experience -->
-     <div class="resume-item flex-column mb-5">
-       <div class="resume-content">
-         <span> 
-           <a href="https://www.mist.ac.bd/" target="_blank">
-             <img src="img/mist_logo.png" width="80" height="80" style="padding: 2px;" />
-           </a>
-           <b style="margin-left: 0px">
-             <font size="+2" color="black">Lecturer, <a href="https://www.mist.ac.bd/" target="_blank">MIST</a></font>
-           </b>
-         </span>
-         <h3 class="mb-0"></h3>
-       </div>
-
-       <div class="resume-date text-md-right">
-         <span class="text-primary">March 2021 - August 2023</span>
-       </div>
-
-       <div>
-         <ul style="list-style-type: disc; padding-left: 60px;">
-           <li>Instructed six theory courses (<strong>Data Structure</strong>, <strong>Software Engineering</strong>, <strong>Programming Language</strong>, <strong>Discrete Mathematics</strong>, etc.) and eight sessional courses (<strong>Integrated Design Project</strong>, <strong>System Design and Development</strong>, etc).</li>
-           <li>Co-supervised <strong>ten undergraduate</strong> thesis teams, guiding students in their research and project development.</li>
-           <li>Collaborated in <strong>25 ML-based</strong> research projects with students and faculty members.</li>        
-         </ul>
-       </div>
-     </div>
-
-     <!-- Robi Experience -->
-     <div class="resume-item flex-column mb-5">
-       <div class="resume-content">
-         <span>
-           <a href="https://www.mist.ac.bd/" target="_blank">
-             <img src="img/mist_logo.png"  width="80" height="80" style="padding: 2px;" />
-           </a>
-           <b>
-             <font size="+2" color="black">Software Engineer, CACR, MIST</font>
-           </b>
-         </span>
-         <h3 class="mb-0"></h3>
-       </div>
-
-       <div class="resume-date text-md-right">
-         <span class="text-primary">July 2022 - August 2023</span>
-       </div>
-
-       <div>
-         <ul style="list-style-type: disc; padding-left: 60px;">
-           <li>Developed the <strong>AFMC Admission Test</strong> Module, a software solution for the AFMC Entrance exam, utilizing <strong>Node.js</strong>, <strong>Bootstrap</strong>, and <strong>MongoDB</strong> to generate unique randomized questions for 30,000 candidates and automate the evaluation and ranking process.</li>
-           <li>Spearheaded a team to develop <strong>C-Archive</strong> using <strong>PHP</strong>, <strong>MySQL</strong>, and <strong>Bootstrap</strong> to store ongoing events/records for the department.</li>
-           <li>Developed a <strong>Digital Plot Distribution</strong> system in collaboration with <a href="https://rajuk.gov.bd/" target="_blank">RAZUK</a>, utilizing <strong>Node.js</strong>, <strong>Bootstrap</strong>, and <strong>MongoDB</strong>.</li>   
-           <li>Developed the <strong>Website</strong> of <a href="https://nafiz43.github.io/ICT-Innovation-Fest/" target="_blank">MIST Inter-University ICT Innovation Fest</a> with <strong>HTML</strong>, <strong>CSS</strong>, and <strong>Bootstrap</strong>.</li>
-     
-         </ul>
-       </div>
-     </div>
-
-   <!-- GuardForce Experience -->
-   <div class="resume-item flex-column mb-5">
-     <div class="resume-content">
-       <span>
-         <img src="img/guard_force.png" width="100" height="40" style="padding: 2px;" />
-         <b>
-           <font size="+2" color="black">Software Engineer, GuardForce Securities</font>
-         </b>
-       </span>
-       <h3 class="mb-0"></h3>
-     </div>
-
-     <div class="resume-date text-md-right">
-       <span class="text-primary">August 2019 - February 2020</span>
-     </div>
-
-     <div>
-       <ul style="list-style-type: disc; padding-left: 60px;">
-         <li>Designed and implemented an <strong>Employee Management System (EMS)</strong> using <strong>JavaFX</strong> and <strong>MySQL</strong> database with multiple levels of security authorizations, which is used to maintain over 3500 employees.</li>
-
-       </ul>
-     </div>
-   </div>
-
+       <div id="experience-section"></div>
      </div>
    </section>
    
-
    <hr class="m-0">
 
 
@@ -324,39 +190,7 @@
        <div class="w-100">
          <h2 class="mb-5">Awards &amp; Honors</h2>
          <ul class="fa-ul mb-0">
- 
-           <li>
-             <i class="fa-li fa fa-trophy text-warning"></i>
-            Champion in the application category of the <a href="https://www.hamlynsymposium.org/challenges/medical-robotics-for-contagious-diseases/" target="_blank">Medical Robotics Challenge for Contagious Diseases</a>, organized by <a href="https://www.imperial.ac.uk/">Imperial College London.</a> <a href="https://mist.ac.bd/department/cse/announcement/193/team_uvc_purge_conquered_international_medical_robotics_challege" target="_blank">[REF]</a></li>
-           
- 
-           <li>
-             <i class="fa-li fa fa-trophy text-warning"></i>
-             Champion in the creative app contest of the “Tri Robo Cup”, organized by the <a href="https://mist.ac.bd/page/robotics-club" target="_blank">MIST Robotics club.</a> <a href="https://drive.google.com/file/d/1fWp9PXR1GYYmgZY76oHXcJ-EOUPXFaop/view?usp=sharing" target="_blank">[REF]</a> </li>
- 
-           <li>
-             <i class="fa-li fa fa-trophy text-warning"></i>
-             Top Downloaded Article Award - 2020, issued by the <a href="" target="_blank">Engineering Reports.</a> <a href="https://drive.google.com/file/d/15FRjKlYTPpc7f4MiKO8ry2pez2X-cZ5P/view?usp=sharing" target="_blank">[REF]</a> </li>
- 
-           <li>
-             <i class="fa-li fa fa-trophy text-warning"></i>
-               Top Downloaded Article Award - 2021, issued by the <a href="" target="_blank">Engineering Reports.</a> <a href="https://drive.google.com/file/d/1vzAHdLtPQgW8uY1vK2QUrCbUdfOwiO42/view?usp=sharing" target="_blank">[REF]</a> </li>
-                 
-                 
-           <li>
-             <i class="fa-li fa fa-trophy text-warning"></i>
-             Deans List Award - 3 times</li>
-           
-           <li>
-             <i class="fa-li fa fa-trophy text-warning"></i>
-             University Merit Scholarship - 6 times</li>
-           
-           <li>
-               <i class="fa-li fa fa-trophy text-warning"></i>
-               GGCS Summer Ph.D Fellowship - 2024</li>
-           <li>
-            
- 
+            <div id="awards-list"></div>
          </ul>
        </div>
      </section>
@@ -367,12 +201,9 @@
      <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="Activities">
          <div class="w-100">
            <h2 class="mb-5">Activities</h2>
-           
-         <ul class="fa-ul mb-0">
-
-
+            <ul class="fa-ul mb-0">
             <div id="activity-list"></div>
-           </ul>
+            </ul>
          </div>
        </section>
    
@@ -449,19 +280,12 @@
 			      </ul>
           </div>
   			<div class="resume-date text-md-right">
-              <!-- <span class="text-primary">February 2021 - June 2021</span> -->
         </div>
       </div>
 	       
 	  </section>
 
 
-
-
-
-
-
-    
 
     <hr class="m-0">
 
