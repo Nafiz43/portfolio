@@ -1,10 +1,10 @@
 # Personal Portfolio Website
 
-A simple, responsive portfolio site I built for my academic/professional profile. Feel free to fork and adapt it for your own use.
+A simple, responsive portfolio site I built for my academic/professional profile. It's easy to customize and maintain. Feel free to fork and adapt it for your own use!
 
-## What it is
+## Overview
 
-Basic portfolio website with sections for education, work experience, research, projects, and contact info. Uses vanilla JavaScript to load content dynamically from separate data files, making it easy to update without touching the main HTML.
+A basic portfolio website with sections for education, work experience, research, projects, and contact info. Uses vanilla JavaScript to load content dynamically from separate data files, making it easy to update without touching the main HTML.
 
 ## Features
 
@@ -23,7 +23,7 @@ Basic portfolio website with sections for education, work experience, research, 
 
 ## Project Structure
 
-```
+```plaintext
 ├── index.html              # Main page
 ├── css/resume.css         # Custom styles
 ├── js/
@@ -40,16 +40,16 @@ Basic portfolio website with sections for education, work experience, research, 
 ## Setup
 
 1. Clone or download the repo
-2. Open `index.html` in your browser (or use a local server)
+2. Open [`index.html`](index.html) in your browser (or use a local server)
 3. Replace the content in the JS files with your own data
-4. Update personal info in `index.html`
+4. Update personal info in [`index.html`](index.html)
 5. Swap out the profile picture and favicon
 
 ## Customizing Content
 
 The portfolio loads most content from JavaScript files, so you can update your info without digging into the HTML:
 
-**Research/Publications** (`js/articles.js`):
+**Research/Publications** ([`js/articles.js`](js/articles.js)):
 ```javascript
 const articles = [
     {
@@ -61,7 +61,7 @@ const articles = [
 ];
 ```
 
-**Projects** (`js/projects.js`):
+**Projects** ([`js/projects.js`](js/projects.js)):
 ```javascript
 const projects = [
     {
@@ -72,13 +72,13 @@ const projects = [
 ];
 ```
 
-Same pattern for work experience, awards, etc. Check the existing files to see the data structure.
+Same pattern for work experience ([`js/work_experience.js`](js/work_experience.js)), awards ([`js/awards.js`](js/awards.js)), and other sections. Check the existing files to see the data structure.
 
 ## Using This Template
 
 Go ahead and fork this if it's useful to you. Just drop a credit somewhere (footer, readme, wherever) mentioning it was adapted from my template. Something like:
 
-```
+```plaintext
 Template adapted from Nafiz Imtiaz Khan's portfolio
 ```
 
@@ -91,7 +91,7 @@ That's it. No need to ask permission or anything.
 - All content is static - no backend needed
 - PDF embedding uses Google Drive viewer, but you can swap in any PDF URL
 
-## Issues?
+## Need Help?
 
 If you run into problems or have suggestions, feel free to open an issue or reach out:
 
