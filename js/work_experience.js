@@ -1,6 +1,19 @@
   document.addEventListener("DOMContentLoaded", function () {
     const experiences = [
       {
+        title: "Human Frontier Collective Specialist – GenAI (Internship)",
+        company: "Scale AI, Inc.",
+        companyLink: "https://scale.com/",
+        logo: "https://media.licdn.com/dms/image/v2/D560BAQFLIeQFxapL7Q/company-logo_200_200/B56Za2650hGgAI-/0/1746825617004/scaleai_logo?e=1758153600&v=beta&t=ALCwhJxT6gX4JzkzeKojp4k5Vnf2LLLZyT7QTsU176M",
+        date: "Aug 2025 – Sep 2025",
+        width: 80,
+        height: 80,
+        tasks: [
+          "Designed and critiqued complex, domain-specific problem sets to rigorously test cutting-edge generative AI models, identifying limitations and refining performance.",
+          "Collaborated with Scale researchers in interdisciplinary sessions to analyze model behavior, shape AI research directions, and explore experimental applications."
+        ]
+      },
+      {
         title: "Graduate Research Fellow",
         company: "UC Davis",
         companyLink: "https://www.ucdavis.edu/",
