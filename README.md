@@ -101,4 +101,4 @@ If you run into problems or have suggestions, feel free to open an issue or reac
 
 ## License
 
-MIT License - do whatever you want with it.
+MIT License
