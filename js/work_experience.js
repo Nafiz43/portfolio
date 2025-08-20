@@ -2,7 +2,7 @@
     const experiences = [
       {
         title: "Human Frontier Collective Specialist – GenAI (Internship)",
-        company: "Scale AI, Inc.",
+        company: "Scale AI",
         companyLink: "https://scale.com/",
         logo: "https://media.licdn.com/dms/image/v2/D560BAQFLIeQFxapL7Q/company-logo_200_200/B56Za2650hGgAI-/0/1746825617004/scaleai_logo?e=1758153600&v=beta&t=ALCwhJxT6gX4JzkzeKojp4k5Vnf2LLLZyT7QTsU176M",
         date: "Aug 2025 – Sep 2025",
@@ -15,6 +15,9 @@
       },
       {
         title: "Founding Engineer and Project Manager",
+        company: "Elta AI",
+        companyLink: "https://www.elta.ai/",
+        logo: "https://www.elta.ai/content/images/2025/07/eltaes_tra1.png",
         company: "Eltaes LLC",
         companyLink: "https://eltaes.com/",
         logo: "https://via.placeholder.com/80x80?text=Eltaes",
