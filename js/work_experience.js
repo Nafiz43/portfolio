@@ -15,17 +15,14 @@
       },
       {
         title: "Founding Engineer and Project Manager",
-        company: "Elta AI",
+        company: "ELTA AI",
         companyLink: "https://www.elta.ai/",
-        logo: "https://www.elta.ai/content/images/2025/07/eltaes_tra1.png",
-        company: "Eltaes LLC",
-        companyLink: "https://eltaes.com/",
-        logo: "https://via.placeholder.com/80x80?text=Eltaes",
+        logo: "https://raw.githubusercontent.com/Nafiz43/portfolio/refs/heads/main/img/elta.png",
         date: "June 2025 – Present",
         width: 80,
         height: 80,
         tasks: [
-          "Building ELTAES safety and emergency planning app with Flutter, LLM-powered RAG checklists, agentic AI for real-time monitoring, and privacy-compliant emergency contact workflows."
+          "Building ELTA AI safety and emergency planning app with Flutter, LLM-powered RAG checklists, agentic AI for real-time monitoring, and privacy-compliant emergency contact workflows."
         ]
       },
       {
