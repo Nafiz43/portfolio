@@ -73,6 +73,18 @@
         ]
       },
       {
+        title: "Industrial Trainee",
+        company: "Robi Axiata Limited",
+        companyLink: "https://www.robi.com.bd/",
+        logo: "https://raw.githubusercontent.com/Nafiz43/portfolio/refs/heads/main/img/robi.png",
+        date: "December 2019 - January 2020",
+        width: 80,
+        height: 80,
+        tasks: [
+          "Developed optimized route plans for the <strong>Direct Sales Representative (DSR) Route Optimization</strong> project, enhancing DSRs' efficiency in servicing retail shops by analyzing walking patterns and incorporating real-world constraints."
+        ]
+      },
+      {
         title: "Software Engineer",
         company: "GuardForce Securities",
         logo: "img/guard_force.png",
