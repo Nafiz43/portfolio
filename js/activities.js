@@ -21,13 +21,7 @@
       },
       {
         title: "Reviewer",
-        venue: "SAGE Open",
-        venueLink: "https://chi2023.acm.org/"
-      },
-      {
-        title: "Reviewer",
-        venue: "CHI 2023",
-        venueLink: "https://drive.google.com/file/d/1N1PFF3CgG6IWv6YXdNbLijXegnZINwo9/view?usp=sharing"
+        venue: "SAGE Open, CHI 2023, Academia Oncology, Deep Science Publishing"
       },
       {
         title: "Program Committee Member and Reviewer",

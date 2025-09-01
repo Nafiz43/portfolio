@@ -39,10 +39,10 @@
         refLink: "https://drive.google.com/file/d/1vzAHdLtPQgW8uY1vK2QUrCbUdfOwiO42/view?usp=sharing"
       },
       {
-        title: "Deans List Award - 3 times"
+        title: "MIST Dean's List Award - Three Consecutive Academic Years"
       },
       {
-        title: "University Merit Scholarship - 6 times"
+        title: "MIST Merit Scholarship - Six Academic Semesters"
       },
       {
         title: "GGCS Summer Ph.D Fellowship - 2024"
