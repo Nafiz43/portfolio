@@ -30,13 +30,7 @@
       },
       {
         title: "Chief Technical Officer",
-        venue: "BEPZA Recruitment Exam - 2022",
-        venueLink: "https://www.bepza.gov.bd/"
-      },
-      {
-        title: "Chief Technical Officer",
-        venue: "AFMC Admission Test - 2021",
-        venueLink: "https://afmc.edu.bd/"
+        venue: "AFMC Admission Test - 2021 & 2022, BEPZA Recruitment Exam - 2022"
       },
       {
         title: "Event Coordinator",
