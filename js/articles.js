@@ -6,6 +6,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     const articles = [
         {
+            "title": "OSSPREY: AI-Driven Forecasting and Intervention for OSS Project Sustainability",
+            "link": "https://conf.researchr.org/details/ase-2025/ase-2025-tool-demonstration-track/27/OSSPREY-AI-Driven-Forecasting-and-Intervention-for-OSS-Project-Sustainability",
+            "authors": "<b>Nafiz Imtiaz Khan</b>, Vladimir Filkov",
+            "image": "https://raw.githubusercontent.com/OSS-PREY/OSSPREY-Website/refs/heads/main/static/images/ossprey-dashboard-2.PNG",
+            "description": "Open source software (OSS) underpins modern software infrastructure, yet many projects struggle with long-term sustainability. OSSPREY is an AI-powered platform that predicts the sustainability trajectory for any GitHub-hosted project, helping maintainers act before downturns.\\n\\n      The system aggregates longitudinal socio-technical signals—commits, issues, contributor interactions—and feeds them into a transformer-based model that produces month-by-month sustainability forecasts. When OSSPREY detects a looming decline, it surfaces evidence-based interventions grounded in peer-reviewed software engineering studies. By combining real-time project data, forecasting, and actionable guidance within an interactive dashboard, OSSPREY offers maintainers a practical co-pilot for sustaining OSS projects at scale."
+        },
+        {
             "title": "EvidenceBot: A Privacy-Preserving, Customizable RAG-Based Tool for Enhancing Large Language Model Interactions",
             "link": "https://drive.google.com/file/d/1lSl8PXrCvKIuOCeOzNE0KIPx-CMAP6OS/view",
             "authors": "<b>Nafiz Imtiaz Khan</b>, Vladimir Filkov",
