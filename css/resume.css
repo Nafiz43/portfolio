@@ -42,6 +42,11 @@ h3 {
   font-size: 2rem;
 }
 
+#research .resume-content h3,
+#project .resume-content h3 {
+  font-size: 1.5rem;
+}
+
 p.lead {
   font-size: 1.2rem;
   font-weight: 400;
