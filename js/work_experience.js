@@ -14,18 +14,6 @@
         ]
       },
       {
-        title: "Founding Engineer and Project Manager",
-        company: "ELTA AI",
-        companyLink: "https://www.elta.ai/",
-        logo: "https://raw.githubusercontent.com/Nafiz43/portfolio/refs/heads/main/img/elta.png",
-        date: "June 2025 – Present",
-        width: 80,
-        height: 80,
-        tasks: [
-          "Building ELTA AI safety and emergency planning app with Flutter, LLM-powered RAG checklists, agentic AI for real-time monitoring, and privacy-compliant emergency contact workflows."
-        ]
-      },
-      {
         title: "Graduate Research Fellow",
         company: "UC Davis",
         companyLink: "https://www.ucdavis.edu/",
