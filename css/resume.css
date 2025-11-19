@@ -248,6 +248,30 @@ a:hover, a:focus, a:active {
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    body.dark-mode {
+      --claude-orange: #f4a261;
+      --claude-orange-light: #f7b787;
+      --claude-orange-dark: #e76f51;
+      --claude-orange-subtle: rgba(247, 183, 135, 0.15);
+      --claude-orange-muted: rgba(247, 183, 135, 0.08);
+      --claude-bg-primary: #0f172a;
+      --claude-bg-secondary: #111827;
+      --claude-surface: #1f2937;
+      --claude-surface-hover: rgba(31, 41, 55, 0.95);
+      --claude-text-primary: #f8fafc;
+      --claude-text-secondary: #e2e8f0;
+      --claude-text-muted: #94a3b8;
+      --claude-text-inverse: #0f172a;
+      --glass-bg: rgba(15, 23, 42, 0.85);
+      --glass-bg-strong: rgba(15, 23, 42, 0.95);
+      --glass-border: rgba(247, 183, 135, 0.25);
+      --glass-shadow: 0 8px 32px rgba(15, 23, 42, 0.6);
+      --glass-shadow-hover: 0 16px 48px rgba(15, 23, 42, 0.85);
+      background: linear-gradient(135deg, #0b1120 0%, #111827 60%, #1f2937 100%);
+      color: var(--claude-text-primary);
     }
 
     /* Subtle background pattern */
@@ -265,6 +289,49 @@ a:hover, a:focus, a:active {
       opacity: 0.3;
       pointer-events: none;
       z-index: -1;
+    }
+
+    body.dark-mode::before {
+      opacity: 0.15;
+    }
+
+    #theme-toggle {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 1050;
+      background: var(--glass-bg-strong);
+      color: var(--claude-text-primary);
+      border: 1px solid var(--glass-border);
+      border-radius: 999px;
+      padding: 0.5rem 1.5rem;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: var(--glass-shadow);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+    }
+
+    #theme-toggle:hover,
+    #theme-toggle:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: var(--glass-shadow-hover);
+      outline: none;
+    }
+
+    #theme-toggle span {
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+      #theme-toggle {
+        top: 1rem;
+        right: 1rem;
+        padding: 0.45rem 1.2rem;
+      }
     }
 
     /* Sidebar - Claude inspired */
