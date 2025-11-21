@@ -23,6 +23,7 @@
         height: 80,
         tasks: [
           "Spearheaded a team to develop the <a href='https://oss-prey.github.io/OSSPREY-Website/' target='_blank'>OSSPREY</a> tool to support sustainable open-source development by providing real-time project analytics, temporal AI-driven sustainability forecasts, and evidence-based recommendations using LLMs.",
+          "Spearheaded a team to develop the <a href='https://oss-prey.github.io/OSSPREY-Website/' target='_blank'>OSSPREY</a> tool to support sustainable open-source development by providing real-time project analytics, temporal AI-driven sustainability forecasts, and evidence-based recommendations using LLMs.",
           "Developed <a href='https://github.com/Nafiz43/ReACT-GPT'  target='_blank'>ReACT-GPT</a>, an <strong>LLM</strong>-powered framework utilizing <strong>LangChain</strong>, <strong>ChromaDB</strong>, and <strong>Ollama</strong> to synthesize actionable insights and key findings from scientific articles.",
           "Developed <a href='https://nafiz43.github.io/EvidenceBot/'><strong>EvidenceBot</strong></a>, an open-source application using <strong>Streamlit</strong> and the <strong>ReACT-GPT</strong> framework, enabling users to query and extract information from various documents effectively.",
           "Developed <a href='https://nafiz43.github.io/PCL-Fetcher/'><strong>PCL-Fetcher</strong></a>, a pipeline that automates the documentation of procedural case logs using LLMs. The system analyzes procedural reports by posing targeted questions and generating structured responses",
