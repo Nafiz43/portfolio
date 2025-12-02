@@ -94,13 +94,13 @@
       
       experienceItem.innerHTML = `
         <div class="resume-content">
-          <span>
+          <span class="experience-header">
             <a href="${exp.companyLink}" target="_blank">
               <img src="${exp.logo}" width="${exp.width}" height="${exp.height}" style="padding: 2px;" />
             </a>
-            <b style="margin-left: 10px">
-              <font size="+2" color="black">${exp.title}, <a href="${exp.companyLink}" target="_blank">${exp.company}</a></font>
-            </b>
+            <span class="experience-title">
+              ${exp.title}, <a class="experience-company" href="${exp.companyLink}" target="_blank">${exp.company}</a>
+            </span>
           </span>
         </div>
         <div class="resume-date text-md-right">
