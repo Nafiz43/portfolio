@@ -22,6 +22,7 @@
         width: 80,
         height: 80,
         tasks: [
+          "Led the end-to-end development of <a href='https://repowise.github.io/RepoWise-website/' target='_blank' rel='noopener noreferrer'> RepoWise</a>, an AI-powered governance analytics platform that uses multi-stage intent classification, dual-retrieval RAG pipelines, and LLM-driven reasoning to deliver real-time insights and actionable recommendations for any GitHub repository.",
           "Spearheaded a team to develop the <a href='https://oss-prey.github.io/OSSPREY-Website/' target='_blank'>OSSPREY</a> tool to support sustainable open-source development by providing real-time project analytics, temporal AI-driven sustainability forecasts, and evidence-based recommendations using LLMs.",
           "Developed <a href='https://github.com/Nafiz43/ReACT-GPT'  target='_blank'>ReACT-GPT</a>, an <strong>LLM</strong>-powered framework utilizing <strong>LangChain</strong>, <strong>ChromaDB</strong>, and <strong>Ollama</strong> to synthesize actionable insights and key findings from scientific articles.",
           "Developed <a href='https://nafiz43.github.io/EvidenceBot/'><strong>EvidenceBot</strong></a>, an open-source application using <strong>Streamlit</strong> and the <strong>ReACT-GPT</strong> framework, enabling users to query and extract information from various documents effectively.",
