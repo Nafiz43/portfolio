@@ -10,7 +10,7 @@
         refLink: "https://mist.ac.bd/department/cse/announcement/193/team_uvc_purge_conquered_international_medical_robotics_challege"
       },
       {
-        title: "<a href=\"https://innovate.ucdavis.edu/leaders-future\" target=\"_blank\">Leaders for the Future</a> Fellowship, 2025-2026"
+        title: "<a href=\"https://innovate.ucdavis.edu/people/nafiz-imtiaz-khan" target=\"_blank\">Leaders for the Future</a> Fellowship, Mike and Renée Child Institute for Innovation and Entrepreneurship, 2025-2026"
       },
       {
         title: "<a href=\"https://grad.ucdavis.edu/travel-awards\" target=\"_blank\">Graduate Student Travel Award</a>, 2025"
