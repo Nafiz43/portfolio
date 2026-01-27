@@ -46,7 +46,7 @@
         title: "MIST Merit Scholarship - Six Academic Semesters"
       },
       {
-        title: "UC Davis GGCS Summer Ph.D Fellowship - 2024"
+        title: "UC Davis GGCS Summer PhD Fellowship - 2024"
       }
     ];
 
