@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         {
           "title": "Leveraging Language Models to Discover Evidence-Based Actions for OSS Sustainability",
-          "link": "https://drive.google.com/file/d/1gGNAqNloJJA4DdH3x1gStLO5DGkcx6M0/view",
+          "link": "https://arxiv.org/abs/2602.11746",
           "authors": "<b>Nafiz Imtiaz Khan</b>, Vladimir Filkov",
             "venue": "Submitted – under review",
             "year": "TBD",
