@@ -60,6 +60,24 @@ document.addEventListener("DOMContentLoaded", function () {
           "description": "While COVID-19 is ravaging the lives of millions of people across the globe, a second pandemic \u201cblack fungus\u201d has surfaced robbing people of their lives especially people who are recovering from coronavirus. Thus, the objective of this article is to analyze public perceptions through sentiment analysis regarding black fungus during the COVID-19 pandemic. To attain the objective, first, a support vector machine (SVM) model, with an average AUC of 82.75%, was developed to classify user sentiments in terms of anger, fear, joy, and sad. Next, this SVM model was used to predict the class labels of the public tweets (n = 6477) related to COVID-19 and black fungus. As outcome, this article found public perceptions towards black fungus during COVID-19 pandemic belong mostly to sad (n= 2370, 36.59%), followed by joy (n = 2095, 32.34%), fear (n = 1914, 29.55%) and anger (n = 98, 1.51%). This article also found that public perceptions are varied to some critical concerns like education, lockdown, hospital, oxygen, quarantine, and vaccine. For example, people mostly exhibited fear in social media about education, hospital, vaccine while some people expressed joy about education, hospital, vaccine, and oxygen. Again, it was found that mass people have an ignorance tendency to lockdown, COVID-19 restrictions, and prescribed hygiene rules although the coronavirus and black fungus infection rates broke the previous infection records."
         },
         {
+          "title": "Article (Springer DOI: 10.1007/s42979-024-03055-1)",
+          "link": "https://link.springer.com/article/10.1007/s42979-024-03055-1",
+          "authors": "<b>Nafiz Imtiaz Khan</b>",
+            "venue": "Springer",
+            "year": "2024",
+          "image": "img/chapter.png",
+          "description": "Springer publication available at DOI 10.1007/s42979-024-03055-1."
+        },
+        {
+          "title": "Article (Springer DOI: 10.1007/s42979-024-03055-1)",
+          "link": "https://link.springer.com/article/10.1007/s42979-024-03055-1",
+          "authors": "<b>Nafiz Imtiaz Khan</b>",
+            "venue": "Springer",
+            "year": "2024",
+          "image": "img/chapter.png",
+          "description": "Springer publication available at DOI 10.1007/s42979-024-03055-1."
+        },
+        {
           "title": "Exploring machine learning algorithms to find the best features for predicting modes of childbirth",
           "link": "https://ieeexplore.ieee.org/abstract/document/9296752",
           "authors": "Muhammad Nazrul Islam, Tahasin Mahmud, <b>Nafiz Imtiaz Khan</b>, Sumaiya Nuha Mustafina, A. K. M. Najmul Islam",
