@@ -51,8 +51,8 @@ document.addEventListener("DOMContentLoaded", function () {
           "description": "Preprint available on arXiv: 2602.22462."
         },
         {
-          "title": "Socio-Technical Networks-Based Modeling of Apache and Eclipse Incubator Project Sustainability",
-          "link": "https://drive.google.com/file/d/15HXFdyAErjZNZfHidZ66R3-bCmyXczwk/view",
+          "title": "arXiv Preprint: 2602.17112",
+          "link": "https://arxiv.org/abs/2602.17112",
           "authors": "<b>Nafiz Imtiaz Khan</b>, Arjun Ashok, Swati Singhvi, \u0218tefan St\u0103nciulescu, Vladimir Filkov",
             "venue": "Submitted – under review",
             "year": "TBD",
