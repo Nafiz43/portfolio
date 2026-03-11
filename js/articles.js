@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         {
             "title": "OSSPREY: AI-Driven Forecasting and Intervention for OSS Project Sustainability",
             "link": "https://conf.researchr.org/details/ase-2025/ase-2025-tool-demonstration-track/27/OSSPREY-AI-Driven-Forecasting-and-Intervention-for-OSS-Project-Sustainability",
-            "authors": "<b>Nafiz Imtiaz Khan</b>, Vladimir Filkov",
+            "authors": "<b>Nafiz Imtiaz Khan</b>, Priyal Soni, Arjun Ashok, Vladimir Filkov",
             "venue": "ASE 2025 Tool Demonstrations (IEEE/ACM International Conference on Automated Software Engineering)",
             "year": "2025",
             "image": "https://raw.githubusercontent.com/OSS-PREY/OSSPREY-Website/refs/heads/main/static/images/ossprey-dashboard-2.PNG",
@@ -40,24 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
             "year": "TBD",
           "image": "img/EvidenceBotArchitecture.png",
           "description": "When successful, Open Source Software (OSS) projects can provide tremendous economic value for society, but the road to their success is not straightforward. Keeping a project on the trajectory to success calls for effective and actionable models for forecasting their sustainability. However, the distributed, multilayered structures of OSS projects make it challenging for practitioners to map model features to specific actions. Consequently, there is a pressing need for actionable recommendations derived from empirical evidence, coming out of prior studies which have established direct links between model features and actionable outcomes.\n\n      In this study, we propose a Retrieval-Augmented Generation (RAG)-based pipeline that employs a combination of traditional and strategic LLM prompting techniques to extract actionable recommendations from scientific articles in Software Engineering. Our two-layered approach first utilizes conventional prompting to identify actionables, followed by a follow-up prompting technique to supplement these insights with contextual information, enhancing their practical applicability. Through a comprehensive analysis of 823 articles published in top-ranked Software Engineering venues in the 21st century, we have extracted 2,234 actionable recommendations. This research not only addresses potential concerns of using Large Language Models (LLMs) for such tasks but also provides a robust methodology for deriving and evaluating actionable insights. The adaptation of these recommendations has the potential to aid thousands of OSS projects that may be at risk at any given time, potentially saving valuable resources."
-        },
-        {
-          "title": "arXiv:2602.22462",
-          "link": "https://arxiv.org/abs/2602.22462",
-          "authors": "<b>Nafiz Imtiaz Khan</b>, Vladimir Filkov",
-            "venue": "Submitted – under review",
-            "year": "TBD",
-          "image": "img/EvidenceBotArchitecture.png",
-          "description": "Preprint available on arXiv: 2602.22462."
-        },
-        {
-          "title": "arXiv Preprint: 2602.17112",
-          "link": "https://arxiv.org/abs/2602.17112",
-          "authors": "<b>Nafiz Imtiaz Khan</b>, Arjun Ashok, Swati Singhvi, \u0218tefan St\u0103nciulescu, Vladimir Filkov",
-            "venue": "Submitted – under review",
-            "year": "TBD",
-          "image": "img/apache_eclipse_grad_forecast.png",
-          "description": "Despite the paramount importance of OSS projects, many fail due to a lack of coordination and community-building support. As contributions to OSS projects are often not directly incentivized, the trajectory to achieve success and remain sustainable is complex and can depend on many implicit factors. To enhance their development trajectories, projects join foundations such as Apache, Eclipse, Linux, and others. Often, those foundations work by implicitly and/or explicitly modifying the actions and governance of the projects and offering tailored suggestions and support to build effective and diverse communities of developers. However, the foundations differ significantly in key aspects, including their policies, incubation models, funding, and project support mechanisms. This diversity makes planning for sustainability a complex process for individual projects.\n\n      In this paper, we conducted an in-depth empirical study of projects from two open-source foundations, Apache and Eclipse, to identify implicit differences between them through building models of sustainability in each. We demonstrate that when trained on data from individual foundations\u2019 projects, our robust machine-learning models are capable of effectively predicting project sustainability outcomes. Moreover, the models prove more effective when trained on data from both foundations. Leveraging prior work, we map the models\u2019 significant features to actionable recommendations during project downturns. Finally, we applied the jointly trained models to case studies of several failed projects from both within and outside the foundations. Based on our analysis, we provide retrospective actionable suggestions that could have altered the projects' trajectories."
         },
         {
           "title": "COVID-19 and Black Fungus: Analysis of Public Perceptions through Machine Learning",
