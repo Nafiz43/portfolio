@@ -1,19 +1,6 @@
   document.addEventListener("DOMContentLoaded", function () {
     const experiences = [
       {
-        title: "Human Frontier Collective Specialist – GenAI (Internship)",
-        company: "Scale AI",
-        companyLink: "https://scale.com/",
-        logo: "img/Scale-logo.jpg",
-        date: "Aug 2025 – Sep 2025",
-        width: 80,
-        height: 80,
-        tasks: [
-          "Designed and critiqued complex, domain-specific problem sets to rigorously test cutting-edge generative AI models, identifying limitations and refining performance.",
-          "Collaborated with Scale researchers in interdisciplinary sessions to analyze model behavior, shape AI research directions, and explore experimental applications."
-        ]
-      },
-      {
         title: "Graduate Research Fellow",
         company: "UC Davis",
         companyLink: "https://www.ucdavis.edu/",
@@ -28,9 +15,23 @@
           "Developed <a href='https://nafiz43.github.io/EvidenceBot/'><strong>EvidenceBot</strong></a>, an open-source application using <strong>Streamlit</strong> and the <strong>ReACT-GPT</strong> framework, enabling users to query and extract information from various documents effectively.",
           "Developed <a href='https://nafiz43.github.io/PCL-Fetcher/'><strong>PCL-Fetcher</strong></a>, a pipeline that automates the documentation of procedural case logs using LLMs. The system analyzes procedural reports by posing targeted questions and generating structured responses",
           "Developed <a href='https://github.com/Nafiz43/VLMs-for-Mammograms' target='_blank'>MammoGen-RAG</a>, a multi-modal RAG-based pipeline integrated with Vision-Language Models(VLMs) to automate the generation of mammography reports.",
+          "Developed <a href='https://github.com/Nafiz43/AngioVision' target='_blank' rel='noopener noreferrer'>AngioVision</a>, a vision-language framework for radiology that integrates multi-sequence DICOM data with clinical reports to enable report-level reasoning, automated QA, and scalable evaluation of diagnostic insights using both local and large-scale models.",
           "Enhanced the performance of foundational language models (<strong>Llama</strong>, <strong>Mixtral</strong>) on targeted tasks through strategic fine-tuning techniques.",
           "Engineered and optimized various LSTM-based models (<strong>Dilated-LSTM</strong>, <strong>Bi-LSTM</strong>, <strong>Stacked-LSTM</strong>) to improve accuracy in forecasting the graduation status of <strong>Open Source Software (OSS)</strong> projects.",
           "Developed <a href='https://nafiz43.github.io/ReACTive/feature.html#section1' target='_blank'>ReACTive</a>, a visualization tool for ReACTs (Researched ACTionables) with <strong>Pyvis</strong> and <strong>Bootstrap</strong>",
+        ]
+      },
+      {
+        title: "Human Frontier Collective Specialist – GenAI (Internship)",
+        company: "Scale AI",
+        companyLink: "https://scale.com/",
+        logo: "img/Scale-logo.jpg",
+        date: "Aug 2025 – Sep 2025",
+        width: 80,
+        height: 80,
+        tasks: [
+          "Designed and critiqued complex, domain-specific problem sets to rigorously test cutting-edge generative AI models, identifying limitations and refining performance.",
+          "Collaborated with Scale researchers in interdisciplinary sessions to analyze model behavior, shape AI research directions, and explore experimental applications."
         ]
       },
       {
