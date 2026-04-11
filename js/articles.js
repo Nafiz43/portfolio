@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const articles = [
         {
             "title": "OSSPREY: AI-Driven Forecasting and Intervention for OSS Project Sustainability",
-            "link": "https://conf.researchr.org/details/ase-2025/ase-2025-tool-demonstration-track/27/OSSPREY-AI-Driven-Forecasting-and-Intervention-for-OSS-Project-Sustainability",
+            "link": "https://ieeexplore.ieee.org/abstract/document/11334666",
             "authors": "<b>Nafiz Imtiaz Khan</b>, Priyal Soni, Arjun Ashok, Vladimir Filkov",
             "venue": "ASE 2025 Tool Demonstrations (IEEE/ACM International Conference on Automated Software Engineering)",
             "year": "2025",
