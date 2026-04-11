@@ -25,13 +25,23 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         {
           "title": "From Models to Practice: Enhancing OSS Project Sustainability with Evidence-Based Advice",
-          "link": "https://www.cs.ucdavis.edu/~filkov/papers/react.pdf",
+          "link": "https://dl.acm.org/doi/abs/10.1145/3663529.3663777",
           "authors": "<b>Nafiz Imtiaz Khan</b>, Vladimir Filkov",
             "venue": "FSE 2024 (Foundations of Software Engineering)",
             "year": "2024",
           "image": "img/react_paper.png",
           "description": "Sustainability in Open Source Software (OSS) projects is crucial for long-term innovation, community support, and the enduring success of open-source solutions. Although multitude of studies have provided effective models for OSS sustainability, their practical implications have been lacking because most identified features are not amenable to direct tuning by developers (e.g., levels of communication, number of commits per project). \n\n      In this paper, we report on preliminary work toward making models more actionable based on evidence-based findings from prior research. Given a set of identified features of interest to OSS project sustainability, we performed a comprehensive literature review related to those features to uncover practical, evidence-based advice, which we call Researched Actionables (ReACTs). The ReACTs are practical advice with specific steps, found in prior work to associate with tangible results. Starting from a set of sustainability-related features, this study contributes 105 ReACTs to the SE community by analyzing 186 published articles. Moreover, this study introduces a newly developed tool (ReACTive) designed to enhance the exploration of ReACTs through visualization across various facets of the OSS ecosystem. The ReACTs idea opens new avenues for connecting SE metrics to actionable research in SE in general."
         },
+         {
+          "title": "Intelligent Documentation in Medical Education: Can AI Replace Manual Case Logging?",
+          "link": "https://arxiv.org/abs/2601.12648",
+          "authors": "<b>Nafiz Imtiaz Khan</b>, Kiley Cleland, Vladimir Filkov, and Roger Eric Goldman",
+            "venue": "JAMIA Open",
+            "year": "2026",
+          "image": "img/documentation_burden.png",
+          "description": "Procedural case logs are a core requirement in radiology training, yet they are time-consuming to complete and prone to inconsistency when authored manually. This study investigates whether large language models (LLMs) can automate procedural case log documentation directly from free-text radiology reports. We evaluate multiple local and commercial LLMs under instruction-based and chain-of-thought prompting to extract structured procedural information from 414 curated interventional radiology reports authored by nine residents between 2018 and 2024. Model performance is assessed using sensitivity, specificity, and F1-score, alongside inference latency and token efficiency to estimate operational cost. Results show that both local and commercial models achieve strong extraction performance, with best F1-scores approaching 0.87, while exhibiting different trade-offs between speed and cost. Automation using LLMs has the potential to substantially reduce clerical burden for trainees and improve consistency in case logging. These findings demonstrate the feasibility of AI-assisted documentation in medical education and highlight the need for further validation across institutions and clinical workflows."
+        },
+        
         {
           "title": "Leveraging Language Models to Discover Evidence-Based Actions for OSS Sustainability",
           "link": "https://arxiv.org/abs/2602.11746",
