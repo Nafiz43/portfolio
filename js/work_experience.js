@@ -22,6 +22,19 @@
         ]
       },
       {
+        title: "Artificial Intelligence Intern",
+        company: "BetterHelp",
+        companyLink: "https://www.betterhelp.com/",
+        logo: "img/betterhelp_logo.png",
+        date: "June 2026 - Present",
+        width: 80,
+        height: 80,
+        tasks: [
+          // TODO: replace with an accurate description of your BetterHelp AI Intern work
+          "Contributing to AI/ML initiatives as part of the Artificial Intelligence Intern team at BetterHelp (Remote, San Jose, California).",
+        ]
+      },
+      {
         title: "Human Frontier Collective Specialist – GenAI (Internship)",
         company: "Scale AI",
         companyLink: "https://scale.com/",
