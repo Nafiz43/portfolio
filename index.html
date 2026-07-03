@@ -9,6 +9,11 @@
   <title>Nafiz Imtiaz Khan</title>
   <link rel="icon" type="image/x-icon" href="img/icon.png" />
   
+  <!-- Preconnect to third-party origins to shave off DNS/TLS latency -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -16,20 +21,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css" crossorigin="anonymous">
-  
+
   <!-- Custom styles -->
   <link href="css/resume.css" rel="stylesheet">
 
-  <style>
-   
-  </style>
-
-  <script src="js/articles.js"></script>
-  <script src="js/projects.js"></script>
-  <script src="js/activities.js"></script>
-  <script src="js/work_experience.js"></script>
-  <script src="js/awards.js"></script>
-  <script src="js/teaching_experience_mist.js"></script>
+  <!-- Deferred so these data scripts don't block HTML parsing/first paint -->
+  <script src="js/articles.js" defer></script>
+  <script src="js/projects.js" defer></script>
+  <script src="js/activities.js" defer></script>
+  <script src="js/work_experience.js" defer></script>
+  <script src="js/awards.js" defer></script>
+  <script src="js/teaching_experience_mist.js" defer></script>
 </head>
 
 <body id="page-top">

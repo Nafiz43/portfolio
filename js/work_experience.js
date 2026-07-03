@@ -97,7 +97,7 @@
         <div class="resume-content">
           <span class="experience-header">
             <a href="${exp.companyLink}" target="_blank">
-              <img src="${exp.logo}" width="${exp.width}" height="${exp.height}" style="padding: 2px;" />
+              <img src="${exp.logo}" width="${exp.width}" height="${exp.height}" style="padding: 2px;" loading="lazy" decoding="async" />
             </a>
             <span class="experience-title">
               ${exp.title}, <a class="experience-company" href="${exp.companyLink}" target="_blank">${exp.company}</a>

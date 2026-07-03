@@ -326,7 +326,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const articleHTML = `
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5 ${isOdd ? 'flex-md-row-reverse' : ''}">
           <div class="col-lg-4 col-md-4 col-sm-12">
-            <img class="img-fluid" src="${article.image}" alt="">
+            <img class="img-fluid" src="${article.image}" alt="" loading="lazy" decoding="async">
           </div>
           <div class="resume-content">
             <h3 class="mb-0"><a href="${article.link}" target="_blank">${article.title}</a></h3>
