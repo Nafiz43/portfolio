@@ -66,7 +66,7 @@
         title: "Industrial Trainee",
         company: "Robi Axiata Limited",
         companyLink: "https://www.robi.com.bd/",
-        logo: "https://raw.githubusercontent.com/Nafiz43/portfolio/refs/heads/main/img/robi.png",
+        logo: "img/robi.png",
         date: "December 2019 - January 2020",
         width: 80,
         height: 80,

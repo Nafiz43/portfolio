@@ -17,10 +17,15 @@
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Claude AI inspired fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Claude AI inspired fonts: preloaded so the request starts immediately but
+       doesn't block first paint (font-display:swap already covers the text swap) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css" crossorigin="anonymous">
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css" crossorigin="anonymous">
+  </noscript>
 
   <!-- Custom styles -->
   <link href="css/resume.css" rel="stylesheet">
@@ -285,7 +290,7 @@
       <div class="w-100">
         <h2 class="mb-5">Viewers Preview</h2>
         <div class="subheading mb-3">
-            <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=iSczBJZDQnnrYdfWN_VUx-yJBTmYYZMucxu5jdWAigc&cl=ffffff&w=a"></script>
+            <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=iSczBJZDQnnrYdfWN_VUx-yJBTmYYZMucxu5jdWAigc&cl=ffffff&w=a" async></script>
         </div>
       </div>
     </section>
