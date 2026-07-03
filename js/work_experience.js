@@ -1,27 +1,6 @@
   document.addEventListener("DOMContentLoaded", function () {
     const experiences = [
       {
-        title: "Graduate Research Fellow",
-        company: "UC Davis",
-        companyLink: "https://www.ucdavis.edu/",
-        logo: "img/ucd_logo.png",
-        date: "September 2023 - Present",
-        width: 80,
-        height: 80,
-        tasks: [
-          "Led the end-to-end development of <a href='https://repowise.github.io/RepoWise-website/' target='_blank' rel='noopener noreferrer'> RepoWise</a>, an AI-powered governance analytics platform that uses multi-stage intent classification, dual-retrieval RAG pipelines, and LLM-driven reasoning to deliver real-time insights and actionable recommendations for any GitHub repository.",
-          "Spearheaded a team to develop the <a href='https://oss-prey.github.io/OSSPREY-Website/' target='_blank'>OSSPREY</a> tool to support sustainable open-source development by providing real-time project analytics, temporal AI-driven sustainability forecasts, and evidence-based recommendations using LLMs.",
-          "Developed <a href='https://github.com/Nafiz43/ReACT-GPT'  target='_blank'>ReACT-GPT</a>, an <strong>LLM</strong>-powered framework utilizing <strong>LangChain</strong>, <strong>ChromaDB</strong>, and <strong>Ollama</strong> to synthesize actionable insights and key findings from scientific articles.",
-          "Developed <a href='https://nafiz43.github.io/EvidenceBot/'><strong>EvidenceBot</strong></a>, an open-source application using <strong>Streamlit</strong> and the <strong>ReACT-GPT</strong> framework, enabling users to query and extract information from various documents effectively.",
-          "Developed <a href='https://nafiz43.github.io/PCL-Fetcher/'><strong>PCL-Fetcher</strong></a>, a pipeline that automates the documentation of procedural case logs using LLMs. The system analyzes procedural reports by posing targeted questions and generating structured responses",
-          "Developed <a href='https://github.com/Nafiz43/VLMs-for-Mammograms' target='_blank'>MammoGen-RAG</a>, a multi-modal RAG-based pipeline integrated with Vision-Language Models(VLMs) to automate the generation of mammography reports.",
-          "Developed <a href='https://github.com/Nafiz43/AngioVision' target='_blank' rel='noopener noreferrer'>AngioVision</a>, a vision-language framework for radiology that integrates multi-sequence DICOM data with clinical reports to enable report-level reasoning, automated QA, and scalable evaluation of diagnostic insights using both local and large-scale models.",
-          "Enhanced the performance of foundational language models (<strong>Llama</strong>, <strong>Mixtral</strong>) on targeted tasks through strategic fine-tuning techniques.",
-          "Engineered and optimized various LSTM-based models (<strong>Dilated-LSTM</strong>, <strong>Bi-LSTM</strong>, <strong>Stacked-LSTM</strong>) to improve accuracy in forecasting the graduation status of <strong>Open Source Software (OSS)</strong> projects.",
-          "Developed <a href='https://nafiz43.github.io/ReACTive/feature.html#section1' target='_blank'>ReACTive</a>, a visualization tool for ReACTs (Researched ACTionables) with <strong>Pyvis</strong> and <strong>Bootstrap</strong>",
-        ]
-      },
-      {
         title: "Artificial Intelligence Intern",
         company: "BetterHelp",
         companyLink: "https://www.betterhelp.com/",
@@ -45,6 +24,27 @@
         tasks: [
           "Designed and critiqued complex, domain-specific problem sets to rigorously test cutting-edge generative AI models, identifying limitations and refining performance.",
           "Collaborated with Scale researchers in interdisciplinary sessions to analyze model behavior, shape AI research directions, and explore experimental applications."
+        ]
+      },
+      {
+        title: "Graduate Research Fellow",
+        company: "UC Davis",
+        companyLink: "https://www.ucdavis.edu/",
+        logo: "img/ucd_logo.png",
+        date: "September 2023 - Present",
+        width: 80,
+        height: 80,
+        tasks: [
+          "Led the end-to-end development of <a href='https://repowise.github.io/RepoWise-website/' target='_blank' rel='noopener noreferrer'> RepoWise</a>, an AI-powered governance analytics platform that uses multi-stage intent classification, dual-retrieval RAG pipelines, and LLM-driven reasoning to deliver real-time insights and actionable recommendations for any GitHub repository.",
+          "Spearheaded a team to develop the <a href='https://oss-prey.github.io/OSSPREY-Website/' target='_blank'>OSSPREY</a> tool to support sustainable open-source development by providing real-time project analytics, temporal AI-driven sustainability forecasts, and evidence-based recommendations using LLMs.",
+          "Developed <a href='https://github.com/Nafiz43/ReACT-GPT'  target='_blank'>ReACT-GPT</a>, an <strong>LLM</strong>-powered framework utilizing <strong>LangChain</strong>, <strong>ChromaDB</strong>, and <strong>Ollama</strong> to synthesize actionable insights and key findings from scientific articles.",
+          "Developed <a href='https://nafiz43.github.io/EvidenceBot/'><strong>EvidenceBot</strong></a>, an open-source application using <strong>Streamlit</strong> and the <strong>ReACT-GPT</strong> framework, enabling users to query and extract information from various documents effectively.",
+          "Developed <a href='https://nafiz43.github.io/PCL-Fetcher/'><strong>PCL-Fetcher</strong></a>, a pipeline that automates the documentation of procedural case logs using LLMs. The system analyzes procedural reports by posing targeted questions and generating structured responses",
+          "Developed <a href='https://github.com/Nafiz43/VLMs-for-Mammograms' target='_blank'>MammoGen-RAG</a>, a multi-modal RAG-based pipeline integrated with Vision-Language Models(VLMs) to automate the generation of mammography reports.",
+          "Developed <a href='https://github.com/Nafiz43/AngioVision' target='_blank' rel='noopener noreferrer'>AngioVision</a>, a vision-language framework for radiology that integrates multi-sequence DICOM data with clinical reports to enable report-level reasoning, automated QA, and scalable evaluation of diagnostic insights using both local and large-scale models.",
+          "Enhanced the performance of foundational language models (<strong>Llama</strong>, <strong>Mixtral</strong>) on targeted tasks through strategic fine-tuning techniques.",
+          "Engineered and optimized various LSTM-based models (<strong>Dilated-LSTM</strong>, <strong>Bi-LSTM</strong>, <strong>Stacked-LSTM</strong>) to improve accuracy in forecasting the graduation status of <strong>Open Source Software (OSS)</strong> projects.",
+          "Developed <a href='https://nafiz43.github.io/ReACTive/feature.html#section1' target='_blank'>ReACTive</a>, a visualization tool for ReACTs (Researched ACTionables) with <strong>Pyvis</strong> and <strong>Bootstrap</strong>",
         ]
       },
       {
