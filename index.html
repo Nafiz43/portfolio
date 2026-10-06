@@ -28,35 +28,30 @@
   </noscript>
 
   <!-- Custom styles -->
-  <link href="css/resume.css" rel="stylesheet">
+  <link href="css/resume.css?v=9" rel="stylesheet">
 
   <!-- Deferred so these data scripts don't block HTML parsing/first paint -->
-  <script src="js/articles.js" defer></script>
+  <script src="js/articles.js?v=7" defer></script>
   <script src="js/projects.js" defer></script>
-  <script src="js/activities.js" defer></script>
-  <script src="js/work_experience.js" defer></script>
-  <script src="js/awards.js" defer></script>
+  <script src="js/activities.js?v=2" defer></script>
+  <script src="js/work_experience.js?v=3" defer></script>
+  <script src="js/awards.js?v=3" defer></script>
   <script src="js/teaching_experience_mist.js" defer></script>
 </head>
 
 <body id="page-top">
-  <button id="theme-toggle" type="button" aria-label="Toggle color theme" aria-pressed="false">
-    <span aria-hidden="true">🌙</span> Dark Mode
-  </button>
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="sideNav">
-    <a class="navbar-brand js-scroll-trigger" href="#page-top">
-      <span class="d-block d-lg-none">Nafiz Imtiaz Khan</span>
-      <span class="d-none d-lg-block">
-        <img class="img-fluid img-profile rounded-circle mx-auto mb-0" style="height: 125px;" src="img/IMG_3770.jpeg" alt="">
-      </span>
-    </a>
+    <a class="navbar-brand js-scroll-trigger" href="#page-top">Nafiz Imtiaz Khan</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#research">Publications</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#work">Experience</a>
@@ -69,9 +64,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#patents">Patents</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#research">Research</a>
         </li>
         <!--
         <li class="nav-item">
@@ -88,6 +80,9 @@
           <a class="nav-link js-scroll-trigger" href="#cv">Resume</a>
         </li>
       </ul>
+      <button id="theme-toggle" type="button" aria-label="Toggle color theme" aria-pressed="false">
+        <span aria-hidden="true">🌙</span> Dark
+      </button>
     </div>
   </nav>
 
@@ -95,49 +90,22 @@
     <!-- About Section -->
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
       <div class="w-100">
+        <img class="about-photo" src="img/IMG_3770.jpeg" alt="Nafiz Imtiaz Khan">
         <h2 class="mb-0">Nafiz Imtiaz 
-          <span class="text-primary" style="font-size: 3.5rem;"><b>Khan</b></span>
+          <span class="text-primary"><b>Khan</b></span>
         </h2>
-        <div class="subheading mb-5">AI/ML Engineer | Data Science Researcher | CS PhD Fellow</div>
+        <div class="subheading mb-5">PhD Student in Computer Science, University of California, Davis</div>
 
-        <p class="lead mb-5">Hi! I am pursuing PhD in Computer Science at <a href="https://www.ucdavis.edu/" target="_blank">University of California - Davis</a>, where I work in <a href="https://decallab.cs.ucdavis.edu/">DECAL lab</a> with professor <a href="https://cs.ucdavis.edu/directory/vladimir-filkov" target="_blank">Vladimir Filkov</a>. I am co-advised by Professor <a href="https://health.ucdavis.edu/vascular/team/42868/roger-goldman-vascular-and-interventional-radiology-sacramento" target="_blank">Roger Eric Goldman</a>. 
+        <p class="lead">Hi! I am pursuing PhD in Computer Science at <a href="https://www.ucdavis.edu/" target="_blank">University of California - Davis</a>, where I work in <a href="https://decallab.cs.ucdavis.edu/">DECAL lab</a> with professor <a href="https://cs.ucdavis.edu/directory/vladimir-filkov" target="_blank">Vladimir Filkov</a>. I am co-advised by Professor <a href="https://health.ucdavis.edu/vascular/team/42868/roger-goldman-vascular-and-interventional-radiology-sacramento" target="_blank">Roger Eric Goldman</a>. 
       Formerly, I served as a <a href="https://www.mist.ac.bd/department/cse/facultyMembers/nafiz_imtiaz_khan-351" target="_blank">Lecturer</a> in the Department of Computer Science and Engineering (CSE) at <a href="https://www.mist.ac.bd/" target="_blank">MIST</a>. 
-        My research interests broadly lies in:</p>
-        
-        <blockquote>
-          <ul>
-            <li>
-              <p style="font-variant:small-caps; font-size: 22px;"><b>application of large language models (LLMs), machine learning (ML), and deep learning (DL) in software engineering and health informatics</b></p>
-            </li>
-            <li>
-              <p style="font-variant:small-caps; font-size: 22px;"><b>building efficient and scalable ML/DL pipelines for real-world problem solving</b></p>
-            </li>
-            <li>
-              <p style="font-variant:small-caps; font-size: 22px;"><b>fine-tuning large language models for domain-specific applications</b></p>
-            </li>
-            <li>
-              <p style="font-variant:small-caps; font-size: 22px;"><b>developing retrieval-augmented generation (RAG) frameworks</b></p>
-            </li>
-          </ul>
-        </blockquote>
+      </p>
+        <p class="lead">My research applies large language models, vision-language models, and machine learning to software engineering and health informatics. Recent work covers retrieval-augmented generation (RAG), fine-tuning LLMs for domain-specific tasks, and building scalable ML pipelines for real-world problems.</p>
 
-        <p class="lead mb-5">Apart from my academic activities, I like to explore new things and embrace unknown challenges in my life. In my spare time, I love playing table tennis and badminton.</p>
+        <p class="lead">Apart from my academic activities, I like to explore new things and embrace unknown challenges in my life. In my spare time, I love playing table tennis and badminton.</p>
 
         <div class="row">
-          <div class="col-md-5">
-            <div class="glass-card">
-              <h3>Interests</h3>
-              <ul class="ul-interests">
-                <li style="text-align: left;">Data Science</li>
-                <li style="text-align: left;">Software Engineering</li>
-                <li style="text-align: left;">Health Care Informatics</li>
-                <li style="text-align: left;">Natural Language Processing</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="col-md-7">
-            <div class="glass-card">
+          <div class="col-12">
+            <div>
               <h3>Education</h3>
               <ul class="ul-edu fa-ul">
                 <li>
@@ -193,6 +161,14 @@
       </div>
     </section>
 
+    <!-- Research Section -->
+    <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="research">
+      <div class="w-100">
+        <h2 class="mb-5">Publications</h2>
+        <div id="research-container"></div>
+      </div>
+    </section>
+
     <!-- Work Experience Section -->
     <section class="resume-section p-1 p-lg-5" id="work">
       <div class="w-100">
@@ -205,9 +181,7 @@
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="awards">
       <div class="w-100">
         <h2 class="mb-5">Awards &amp; Honors</h2>
-        <ul class="fa-ul mb-0">
-          <div id="awards-list"></div>
-        </ul>
+        <ul class="plain-list" id="awards-list"></ul>
       </div>
     </section>
 
@@ -215,9 +189,7 @@
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="activities">
       <div class="w-100">
         <h2 class="mb-5">Professional &amp; Leadership Activities</h2>
-        <ul class="fa-ul mb-0">
-          <div id="activity-list"></div>
-        </ul>
+        <ul class="plain-list" id="activity-list"></ul>
       </div>
     </section>
 
@@ -238,14 +210,6 @@
       </div>
     </section>
 
-    <!-- Research Section -->
-    <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="research">
-      <div class="w-100">
-        <h2 class="mb-5">Research</h2>
-        <div id="research-container"></div>
-      </div>
-    </section>
-
     <!--
     <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="project">
       <div class="w-100">
@@ -262,9 +226,7 @@
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
             <h3 class="mb-0">Courses Taught at MIST</h3>
-            <ul class="ul-interests">
-              <div id="courses-taught-mist"></div>
-            </ul>
+            <ul class="plain-list" id="courses-taught-mist"></ul>
           </div>
           <div class="resume-date text-md-right">
           </div>
@@ -284,9 +246,9 @@
 
 
         <!-- Viewer Preview -->
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="contact">
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="visitors">
       <div class="w-100">
-        <h2 class="mb-5">Viewers Preview</h2>
+        <h2 class="mb-5">Visitors</h2>
         <div class="subheading mb-3">
             <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=iSczBJZDQnnrYdfWN_VUx-yJBTmYYZMucxu5jdWAigc&cl=ffffff&w=a" async></script>
         </div>
@@ -328,69 +290,12 @@
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="js/resume.min.js"></script>
-  <script src="js/theme-toggle.js"></script>
+  <script src="js/resume.min.js?v=2"></script>
+  <script src="js/theme-toggle.js?v=2"></script>
 
 
 
   <script>
-    // Add fade-in animation to sections on scroll
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fade-in');
-        }
-      });
-    }, observerOptions);
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const sections = document.querySelectorAll('.resume-section');
-      sections.forEach(section => {
-        observer.observe(section);
-      });
-
-      // Add stagger animation to resume items
-      setTimeout(() => {
-        const resumeItems = document.querySelectorAll('.resume-item');
-        resumeItems.forEach((item, index) => {
-          item.style.animationDelay = `${index * 0.1}s`;
-          item.classList.add('fade-in');
-        });
-      }, 500);
-    });
-
-    // Smooth scroll enhancement
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Add hover effects to images
-    document.addEventListener('DOMContentLoaded', () => {
-      const images = document.querySelectorAll('.resume-item img');
-      images.forEach(img => {
-        img.addEventListener('mouseenter', function() {
-          this.style.filter = 'brightness(1.05) contrast(1.05)';
-        });
-        img.addEventListener('mouseleave', function() {
-          this.style.filter = 'brightness(1) contrast(1)';
-        });
-      });
-    });
-
     // Enhanced accessibility
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Tab') {

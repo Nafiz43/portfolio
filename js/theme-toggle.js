@@ -1,7 +1,7 @@
 (function() {
   function updateButtonText(button, isDark) {
     if (!button) return;
-    button.innerHTML = (isDark ? '<span aria-hidden="true">☀️</span> Light Mode' : '<span aria-hidden="true">🌙</span> Dark Mode');
+    button.innerHTML = (isDark ? '<span aria-hidden="true">☀️</span> Light' : '<span aria-hidden="true">🌙</span> Dark');
     button.setAttribute('aria-pressed', isDark ? 'true' : 'false');
   }
 

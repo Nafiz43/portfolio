@@ -1,0 +1,32 @@
+name: Sync publications from ORCID
+
+on:
+  schedule:
+    - cron: "0 8 * * *"   # daily, 1am Pacific
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["data/publications.manual.json", "tools/sync_publications.py"]
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tools/sync_publications.py
+      - name: Commit publications.json
+        id: commit
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: sync publications from ORCID [skip ci]"
+          file_pattern: data/publications.json
+      # Pushes made with GITHUB_TOKEN don't trigger the Pages build on their own.
+      - name: Rebuild GitHub Pages
+        if: steps.commit.outputs.changes_detected == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds"

@@ -104,27 +104,21 @@
 
     experiences.forEach(exp => {
       const experienceItem = document.createElement("div");
-      experienceItem.classList.add("resume-item", "flex-column", "mb-5");
+      experienceItem.classList.add("exp-item");
       
       experienceItem.innerHTML = `
-        <div class="resume-content">
-          <span class="experience-header">
-            <a href="${exp.companyLink}" target="_blank">
-              <img src="${exp.logo}" width="${exp.width}" height="${exp.height}" style="padding: 2px;" loading="lazy" decoding="async" />
-            </a>
-            <span class="experience-title">
-              ${exp.title}, <a class="experience-company" href="${exp.companyLink}" target="_blank">${exp.company}</a>
-            </span>
-          </span>
+        <div class="exp-head">
+          <img src="${exp.logo}" alt="" class="exp-logo" loading="lazy" decoding="async" />
+          <div class="exp-role">
+            <span class="experience-title">${exp.title}</span>
+            ${exp.companyLink ? `<a class="experience-company" href="${exp.companyLink}" target="_blank">${exp.company}</a>` : `<span class="experience-company">${exp.company}</span>`}
+          </div>
+          <span class="item-year">${exp.date}</span>
         </div>
-        <div class="resume-date text-md-right">
-          <span class="text-primary">${exp.date}</span>
-        </div>
-        <div>
-          <ul style="list-style-type: disc; padding-left: 60px;">
-            ${exp.tasks.map(task => `<li>${task}</li>`).join("")}
-          </ul>
-        </div>
+        <ul class="exp-tasks">
+          ${exp.tasks.slice(0, 3).map(task => `<li>${task}</li>`).join("")}
+        </ul>
+        ${exp.tasks.length > 3 ? `<details class="exp-more"><summary>${exp.tasks.length - 3} more</summary><ul class="exp-tasks">${exp.tasks.slice(3).map(task => `<li>${task}</li>`).join("")}</ul></details>` : ""}
       `;
 
       experienceContainer.appendChild(experienceItem);
