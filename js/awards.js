@@ -27,25 +27,19 @@
         event: "Tri Robo Cup",
         eventLink: "",
         organizer: "MIST Robotics Club",
-        organizerLink: "",
-        ref: "[REF]",
-        refLink: "https://drive.google.com/file/d/1fWp9PXR1GYYmgZY76oHXcJ-EOUPXFaop/view?usp=sharing"
+        organizerLink: ""
       },
       {
         year: "2020",
         title: "Top Downloaded Article Award, issued by ",
         event: "Engineering Reports",
-        eventLink: "",
-        ref: "[REF]",
-        refLink: "https://drive.google.com/file/d/15FRjKlYTPpc7f4MiKO8ry2pez2X-cZ5P/view?usp=sharing"
+        eventLink: ""
       },
       {
         year: "2021",
         title: "Top Downloaded Article Award, issued by ",
         event: "Engineering Reports",
-        eventLink: "",
-        ref: "[REF]",
-        refLink: "https://drive.google.com/file/d/1vzAHdLtPQgW8uY1vK2QUrCbUdfOwiO42/view?usp=sharing"
+        eventLink: ""
       },
       {
         year: "2017-2021",
@@ -69,7 +63,6 @@
       const awardItem = document.createElement("li");
       awardItem.innerHTML = `
         ${award.title}${award.event ? link(award.eventLink, award.event) : ""}${award.organizer ? `, organized by ${link(award.organizerLink, award.organizer)}` : ""}
-        ${award.ref ? link(award.refLink, award.ref) : ""}
         <span class="item-year">${award.year}</span>
       `;
       awardsContainer.appendChild(awardItem);
