@@ -937,6 +937,6 @@ section.resume-section { scroll-margin-top: 3.5rem; }
 }
 
 /* One font family site-wide: Inter for all text, serif only for the name and section titles. */
-body, body *:not(h1):not(h2):not(h2 *):not(.fa):not(.fab):not(.fas):not(.far):not(code) {
+body, body *:not(h1):not(h2):not(h2 *):not(.fa):not(.fab):not(.fas):not(.far):not(.ai):not(code) {
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
 }
