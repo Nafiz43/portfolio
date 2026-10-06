@@ -942,3 +942,12 @@ body, body *:not(h1):not(h2):not(h2 *):not(.fa):not(.fab):not(.fas):not(.far):no
 }
 
 .last-updated, .last-updated span { margin: 1rem 0 0; font-size: 0.8rem !important; color: var(--claude-text-muted) !important; }
+
+/* Phones: centered photo and name, date under the job title, no inline PDF (mobile browsers can't render it). */
+@media (max-width: 768px) {
+  .about-photo { float: none; display: block; width: 120px; height: 120px; margin: 0 auto 1rem; }
+  #about h2, #about .subheading { text-align: center; }
+  .exp-head { row-gap: 0; }
+  .exp-head .item-year { flex-basis: 100%; padding-left: calc(40px + 0.9rem); }
+  .resume-embed { display: none; }
+}
