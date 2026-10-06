@@ -940,3 +940,5 @@ section.resume-section { scroll-margin-top: 3.5rem; }
 body, body *:not(h1):not(h2):not(h2 *):not(.fa):not(.fab):not(.fas):not(.far):not(.ai):not(code) {
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
 }
+
+.last-updated, .last-updated span { margin: 1rem 0 0; font-size: 0.8rem !important; color: var(--claude-text-muted) !important; }
