@@ -951,3 +951,12 @@ body, body *:not(h1):not(h2):not(h2 *):not(.fa):not(.fab):not(.fas):not(.far):no
   .exp-head .item-year { flex-basis: 100%; padding-left: calc(40px + 0.9rem); }
   .resume-embed { display: none; }
 }
+
+/* News */
+.news-list { list-style: none; padding: 0; margin: 0 0 0.5rem; }
+.news-list li { margin-bottom: 0.3rem; }
+.news-date { display: inline-block; min-width: 5.5rem; color: var(--claude-text-muted) !important; font-size: 0.9rem !important; }
+
+/* Publications: full list folded under the selected ones */
+.pub-all { margin-top: 1rem; }
+.pub-all > summary { cursor: pointer; font-weight: 600; color: var(--claude-orange-dark); }

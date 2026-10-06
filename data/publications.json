@@ -32,6 +32,7 @@
     "link": "https://link.springer.com/chapter/10.1007/978-3-032-39763-8_16",
     "award": "Best Paper Award",
     "description": "RepoWise is an AI-powered governance analytics platform for GitHub repositories. It uses multi-stage intent classification, dual-retrieval RAG pipelines, and LLM-driven reasoning to answer questions about a repository and deliver real-time insights and actionable recommendations.",
+    "selected": true,
     "doi": "10.1007/978-3-032-39763-8_16"
   },
   {
@@ -41,6 +42,7 @@
     "year": "2026",
     "link": "https://doi.org/10.1093/jamiaopen/ooag067",
     "description": "Procedural case logs are a core requirement in radiology training, yet they are time-consuming to complete and prone to inconsistency when authored manually. This study investigates whether large language models (LLMs) can automate procedural case log documentation directly from free-text radiology reports. We evaluate multiple local and commercial LLMs under instruction-based and chain-of-thought prompting to extract structured procedural information from 414 curated interventional radiology reports authored by nine residents between 2018 and 2024. Model performance is assessed using sensitivity, specificity, and F1-score, alongside inference latency and token efficiency to estimate operational cost. Results show that both local and commercial models achieve strong extraction performance, with best F1-scores approaching 0.87, while exhibiting different trade-offs between speed and cost. Automation using LLMs has the potential to substantially reduce clerical burden for trainees and improve consistency in case logging. These findings demonstrate the feasibility of AI-assisted documentation in medical education and highlight the need for further validation across institutions and clinical workflows.",
+    "selected": true,
     "doi": "10.1093/jamiaopen/ooag067"
   },
   {
@@ -50,6 +52,7 @@
     "year": "2026",
     "link": "https://doi.org/10.1016/j.jss.2026.112985",
     "description": "Many OSS projects join foundations such as Apache, Eclipse, and OSGeo, to aid their immediate plans and improve long-term prospects by getting governance advice, incubation support, and community-building mechanisms. But foundations differ in their policies, funding models, and support strategies. Moreover, since projects joining these foundations are diverse, coming at different lifecycle stages and having different needs, it can be challenging to decide on the appropriate project-foundation match and on the project-specific plan for sustainability. Here, we present an empirical study and quantitative analysis of the sustainability of incubator projects in the Apache, Eclipse, and OSGeo foundations, and, additionally, of OSS projects from GitHub outside of foundations. We develop foundation-specific sustainability models and a project triage, based on projects' sociotechnical trace profiles, and demonstrate their effectiveness across the foundations. Our results show that our models with triage can effectively forecast sustainability outcomes not only within but across foundations. In addition, the generalizability of the framework allows us to apply the approach to GitHub projects outside the foundations. We complement our findings with actionable recovery strategies from previous work and apply them to case studies of failed incubator projects. Our study highlights the value of sociotechnical frameworks in characterizing and addressing software project sustainability issues.",
+    "selected": true,
     "doi": "10.1016/j.jss.2026.112985"
   },
   {
@@ -58,7 +61,8 @@
     "venue": "ASE 2025 Tool Demonstrations (IEEE/ACM International Conference on Automated Software Engineering)",
     "year": "2025",
     "link": "https://ieeexplore.ieee.org/abstract/document/11334666",
-    "description": "Open source software (OSS) underpins modern software infrastructure, yet many projects struggle with long-term sustainability. OSSPREY is an AI-powered platform that predicts the sustainability trajectory for any GitHub-hosted project, helping maintainers act before downturns. The system aggregates longitudinal socio-technical signals—commits, issues, contributor interactions—and feeds them into a transformer-based model that produces month-by-month sustainability forecasts. When OSSPREY detects a looming decline, it surfaces evidence-based interventions grounded in peer-reviewed software engineering studies. By combining real-time project data, forecasting, and actionable guidance within an interactive dashboard, OSSPREY offers maintainers a practical co-pilot for sustaining OSS projects at scale."
+    "description": "Open source software (OSS) underpins modern software infrastructure, yet many projects struggle with long-term sustainability. OSSPREY is an AI-powered platform that predicts the sustainability trajectory for any GitHub-hosted project, helping maintainers act before downturns. The system aggregates longitudinal socio-technical signals—commits, issues, contributor interactions—and feeds them into a transformer-based model that produces month-by-month sustainability forecasts. When OSSPREY detects a looming decline, it surfaces evidence-based interventions grounded in peer-reviewed software engineering studies. By combining real-time project data, forecasting, and actionable guidance within an interactive dashboard, OSSPREY offers maintainers a practical co-pilot for sustaining OSS projects at scale.",
+    "selected": true
   },
   {
     "title": "EvidenceBot: A Privacy-Preserving, Customizable RAG-Based Tool for Enhancing Large Language Model Interactions",
@@ -67,6 +71,7 @@
     "year": "2025",
     "link": "https://dl.acm.org/doi/10.1145/3696630.3728607",
     "description": "When successful, Open Source Software (OSS) projects can provide tremendous economic value for society, but the road to their success is not straightforward. Keeping a project on the trajectory to success calls for effective and actionable models for forecasting their sustainability. However, the distributed, multilayered structures of OSS projects make it challenging for practitioners to map model features to specific actions. Consequently, there is a pressing need for actionable recommendations derived from empirical evidence, coming out of prior studies which have established direct links between model features and actionable outcomes. In this study, we propose a Retrieval-Augmented Generation (RAG)-based pipeline that employs a combination of traditional and strategic LLM prompting techniques to extract actionable recommendations from scientific articles in Software Engineering. Our two-layered approach first utilizes conventional prompting to identify actionables, followed by a follow-up prompting technique to supplement these insights with contextual information, enhancing their practical applicability. Through a comprehensive analysis of 823 articles published in top-ranked Software Engineering venues in the 21st century, we have extracted 2,234 actionable recommendations. This research not only addresses potential concerns of using Large Language Models (LLMs) for such tasks but also provides a robust methodology for deriving and evaluating actionable insights. The adaptation of these recommendations has the potential to aid thousands of OSS projects that may be at risk at any given time, potentially saving valuable resources.",
+    "selected": true,
     "doi": "10.1145/3696630.3728607"
   },
   {
@@ -91,6 +96,7 @@
     "year": "2024",
     "link": "https://dl.acm.org/doi/abs/10.1145/3663529.3663777",
     "description": "Sustainability in Open Source Software (OSS) projects is crucial for long-term innovation, community support, and the enduring success of open-source solutions. Although multitude of studies have provided effective models for OSS sustainability, their practical implications have been lacking because most identified features are not amenable to direct tuning by developers (e.g., levels of communication, number of commits per project). In this paper, we report on preliminary work toward making models more actionable based on evidence-based findings from prior research. Given a set of identified features of interest to OSS project sustainability, we performed a comprehensive literature review related to those features to uncover practical, evidence-based advice, which we call Researched Actionables (ReACTs). The ReACTs are practical advice with specific steps, found in prior work to associate with tangible results. Starting from a set of sustainability-related features, this study contributes 105 ReACTs to the SE community by analyzing 186 published articles. Moreover, this study introduces a newly developed tool (ReACTive) designed to enhance the exploration of ReACTs through visualization across various facets of the OSS ecosystem. The ReACTs idea opens new avenues for connecting SE metrics to actionable research in SE in general.",
+    "selected": true,
     "doi": "10.1145/3663529.3663777"
   },
   {

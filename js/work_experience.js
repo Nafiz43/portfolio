@@ -5,12 +5,11 @@
         company: "BetterHelp",
         companyLink: "https://www.betterhelp.com/",
         logo: "img/betterhelp_logo.png",
-        date: "June 2026 - Present",
+        date: "June 2026 - September 2026",
         width: 80,
         height: 80,
         tasks: [
-          // TODO: replace with an accurate description of your BetterHelp AI Intern work
-          "Contributing to AI/ML initiatives as part of the Artificial Intelligence Intern team at BetterHelp (Remote, San Jose, California).",
+          "Contributed to research efforts to remove biases from language models.",
         ]
       },
       {
