@@ -102,12 +102,57 @@
     "source": "orcid"
   },
   {
+    "title": "Behavior Based Group Recommendation from Social Media Dataset by Using Deep Learning and Topic Modeling",
+    "authors": "Md. Saddam Hossain Mukta, Jubaer Ahmed, Mohaimenul Azam Khan Raiaan, Nur Mohammad Fahad, Muhammad Nazrul Islam, Nafiz Imtiaz, Md. Adnanul Islam, Mohammed Eunus Ali, Sami Azam",
+    "venue": "SN Computer Science",
+    "year": "2024",
+    "link": "https://doi.org/10.1007/s42979-024-03055-1",
+    "doi": "10.1007/s42979-024-03055-1",
+    "source": "orcid"
+  },
+  {
     "title": "A Multilingual Handwriting Learning System for Visually Impaired People",
     "authors": "Muhammad Nazrul Islam, Raiyan Jahangir, Nasif Shahriar Mohim, Md. Wasif-Ul-Islam, Anika Ashraf, <b>Nafiz Imtiaz Khan</b>, Mohammad Ratul Mahjabin, Abu Saleh Musa Miah, Jungpil Shin",
     "venue": "IEEE Access",
     "year": "2024",
     "link": "https://doi.org/10.1109/ACCESS.2024.3353781",
     "doi": "10.1109/ACCESS.2024.3353781",
+    "source": "orcid"
+  },
+  {
+    "title": "A federated learning aided system for classifying cervical cancer using PAP-SMEAR images",
+    "authors": "Nazia Shehnaz Joynab, Muhammad Nazrul Islam, Ramiza Rumaisa Aliya, A.S.M. Rakibul Hasan, <b>Nafiz Imtiaz Khan</b>, Iqbal H. Sarker",
+    "venue": "Informatics in Medicine Unlocked",
+    "year": "2024",
+    "link": "https://doi.org/10.1016/j.imu.2024.101496",
+    "doi": "10.1016/j.imu.2024.101496",
+    "source": "orcid"
+  },
+  {
+    "title": "A Blockchain-based Framework to Develop a Sustainable Supply Chain Management System for Apparel Industry",
+    "authors": "Muhtasim Fuad, B M Nishanul Alam Nishat, Tashfia Fatema, Mohian Islam, Faria Habib, Fahim Foysal, Saba Ahmed, <b>Nafiz Imtiaz Khan</b>, Muhammad Nazrul Islam",
+    "venue": "2023 IEEE 9th International Women in Engineering (WIE) Conference on Electrical and Computer Engineering (WIECON-ECE)",
+    "year": "2023",
+    "link": "https://doi.org/10.1109/wiecon-ece60392.2023.10456466",
+    "doi": "10.1109/wiecon-ece60392.2023.10456466",
+    "source": "orcid"
+  },
+  {
+    "title": "Proposing Novel Recurrent Neural Network Architectures for Infant Cry Detection in Domestic Context",
+    "authors": "Raiyan Jahangir, Nasif Shahriar Mohim, <b>Nafiz Imtiaz Khan</b>, Md Akhtaruzzaman, Muhammad Nazrul Islam",
+    "venue": "2023 IEEE 11th Region 10 Humanitarian Technology Conference (R10-HTC)",
+    "year": "2023",
+    "link": "https://doi.org/10.1109/r10-htc57504.2023.10461731",
+    "doi": "10.1109/r10-htc57504.2023.10461731",
+    "source": "orcid"
+  },
+  {
+    "title": "Designing User Interfaces for Illiterate and Semi-Literate Users: A Systematic Review and Future Research Agenda",
+    "authors": "Muhammad Nazrul Islam, <b>Nafiz Imtiaz Khan</b>, Toki Tahmid Inan, Iqbal H. Sarker",
+    "venue": "Sage Open",
+    "year": "2023",
+    "link": "https://doi.org/10.1177/21582440231172741",
+    "doi": "10.1177/21582440231172741",
     "source": "orcid"
   },
   {
@@ -188,6 +233,15 @@
     "year": "2022",
     "link": "https://link.springer.com/chapter/10.1007/978-3-031-10031-4_10",
     "description": "This study explores the requirements and possibilities of wearable devices for ensuring and supporting the home quarantine of suspected COVID-19 patients. We adopted a design science research (DSR) approach and conducted a requirement elicitation study through semi-structured interviews with 36 participants including doctors, home quarantined people and local administrative personnel. Based on the analysis of the interview data, we identified some design considerations for the proposed system. Based on these results we developed a proto- type wearable device and a cloud-server solution which we tested with regards to usability and how well the system meets our design goals. The findings suggest the proposed solution to be able to assist in the remote monitoring of the location and health condition of quarantined people, relieving work load from medical doctors as well as quarantine surveillance officials. The designed wearable device is reusable, meaning that once a patient has recovered from the disease, the same device can be used by other patient."
+  },
+  {
+    "title": "Towards Developing a Voice-Over-Guided System for Visually Impaired People to Learn Writing the Alphabets",
+    "authors": "Raiyan Jahangir, Md. Wasif-Ul-Islam, Nasif Shahriar Mohim, Anika Ashraf, <b>Nafiz Imtiaz Khan</b>, Muhammad Nazrul Islam",
+    "venue": "2022 25th International Conference on Computer and Information Technology (ICCIT)",
+    "year": "2022",
+    "link": "https://doi.org/10.1109/iccit57492.2022.10055542",
+    "doi": "10.1109/iccit57492.2022.10055542",
+    "source": "orcid"
   },
   {
     "title": "Exploring machine learning algorithms to find the best features for predicting modes of childbirth",

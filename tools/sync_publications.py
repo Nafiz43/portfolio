@@ -49,6 +49,20 @@ def authors_of(cr):
     return ", ".join(names)
 
 
+def orcid_authors(put_code):
+    """Fallback for works Crossref can't name (no DOI, e.g. BibTeX imports): ORCID's own contributor list."""
+    try:
+        work = get(f"https://pub.orcid.org/v3.0/{ORCID}/work/{put_code}")
+    except Exception:
+        return ""
+    names = [(c.get("credit-name") or {}).get("value", "") for c in (work.get("contributors") or {}).get("contributor", [])]
+    return ", ".join(bold_me(n) for n in names if n)
+
+
+def bold_me(n):
+    return f"<b>{n}</b>" if n.startswith(ME[0]) and n.endswith(ME[1]) else n
+
+
 def orcid_works():
     works = []
     for g in get(f"https://pub.orcid.org/v3.0/{ORCID}/works")["group"]:
@@ -61,6 +75,7 @@ def orcid_works():
             "year": (((w.get("publication-date") or {}).get("year")) or {}).get("value", ""),
             "venue": (w.get("journal-title") or {}).get("value", ""),
             "doi": doi,
+            "put_code": w["put-code"],
         })
     # A preprint is dropped when a published version of the same title exists.
     published = [w for w in works if w["type"] not in PREPRINT_TYPES]
@@ -73,8 +88,7 @@ def to_entry(w):
     venue = w["venue"] or (cr.get("container-title") or [""])[-1] or (cr.get("institution") or [{}])[0].get("name", "")
     return {
         "title": re.sub(r"\s+", " ", w["title"]).strip(),
-        # ponytail: works without a DOI get no author list; add them to the manual file if that matters.
-        "authors": authors_of(cr),
+        "authors": authors_of(cr) or (orcid_authors(w["put_code"]) if w.get("put_code") else ""),
         "venue": "" if preprint else venue,
         "year": "TBD" if preprint else w["year"],
         "link": f"https://doi.org/{w['doi']}" if w["doi"] else "",
@@ -107,6 +121,7 @@ def demo():
     works = [{"title": "COVID‐19 and black fungus: Analysis of the public perceptions through machine learning", "type": "journal-article", "year": "2022", "venue": "", "doi": "10.1/x"}]
     merged = merge(manual, works)
     assert len(merged) == 1 and merged[0]["doi"] == "10.1/x", merged
+    assert bold_me("Nafiz Imtiaz Khan") == "<b>Nafiz Imtiaz Khan</b>" and bold_me("Vladimir Filkov") == "Vladimir Filkov"
     assert [e["year"] for e in order([{"year": "2021"}, {"year": "TBD"}, {"year": "2026"}])] == ["TBD", "2026", "2021"]
 
 
