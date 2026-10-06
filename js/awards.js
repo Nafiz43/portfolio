@@ -8,11 +8,9 @@
         year: "2020",
         title: "Champion in the application category of the ",
         event: "Medical Robotics Challenge for Contagious Diseases",
-        eventLink: "https://www.hamlynsymposium.org/challenges/medical-robotics-for-contagious-diseases/",
+        eventLink: "",
         organizer: "Imperial College London",
-        organizerLink: "https://www.imperial.ac.uk/",
-        ref: "[REF]",
-        refLink: "https://mist.ac.bd/department/cse/announcement/193/team_uvc_purge_conquered_international_medical_robotics_challege"
+        organizerLink: "https://www.imperial.ac.uk/"
       },
       {
         year: "2025-2026",
@@ -29,7 +27,7 @@
         event: "Tri Robo Cup",
         eventLink: "",
         organizer: "MIST Robotics Club",
-        organizerLink: "https://mist.ac.bd/page/robotics-club",
+        organizerLink: "",
         ref: "[REF]",
         refLink: "https://drive.google.com/file/d/1fWp9PXR1GYYmgZY76oHXcJ-EOUPXFaop/view?usp=sharing"
       },
@@ -66,11 +64,12 @@
     const awardsContainer = document.getElementById("awards-list");
     // Newest first; undated entries sink to the bottom.
     awards.sort((a, b) => b.year.localeCompare(a.year));
+    const link = (url, text) => url ? `<a href="${url}" target="_blank">${text}</a>` : text;
     awards.forEach(award => {
       const awardItem = document.createElement("li");
       awardItem.innerHTML = `
-        ${award.title}${award.event ? `<a href="${award.eventLink}" target="_blank">${award.event}</a>` : ""}${award.organizer ? `, organized by <a href="${award.organizerLink}" target="_blank">${award.organizer}</a>` : ""}
-        ${award.ref ? `<a href="${award.refLink}" target="_blank">${award.ref}</a>` : ""}
+        ${award.title}${award.event ? link(award.eventLink, award.event) : ""}${award.organizer ? `, organized by ${link(award.organizerLink, award.organizer)}` : ""}
+        ${award.ref ? link(award.refLink, award.ref) : ""}
         <span class="item-year">${award.year}</span>
       `;
       awardsContainer.appendChild(awardItem);

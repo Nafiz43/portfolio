@@ -21,14 +21,14 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         {
           "title": "UVC-PURGE V2.0",
-          "link": "https://mist.ac.bd/blog/cse/post/uvc_purge_v20-146",
+          "link": "",
           "authors": "",
           "image": "img/sfrc.jpeg",
           "description": "UVC-PURGE\u201d is a semi-autonomous UVC disinfection robot to fight against COVID-19 Pandemic. UVC-PURGE is robust, compact, and user-friendly in nature. This robot has been equipped with six T5 UVC (254 nm) lamps to destroy the SARS-CoV-2 virus (coronavirus) effectively in a standard 12\u2019 x 16\u2019 room with a disinfection time of 2-3 minutes. The Robot provides real-time camera feedback for better navigation. While disinfecting this semi-autonomous robot is capable enough to avoid any obstacles in that room. Being fully wireless and controlled by a mobile app or computer, UVC- PURGE is very user-friendly with 1600 square feet of coverage area and provides a battery backup of 2 hours. It is applicable for any indoor environment such as an Empty COVID patient ward, Empty ICU, Operation Theatre, Office room, Classroom, Corridor, Personal Apartment, etc."
         },
         {
           "title": "AFMC Admission Test System",
-          "link": "https://mist.ac.bd/department/cse/announcement/346/department_of_cse_successfully_conducted_the_armed_forces_medical_college_afmc_admission_test_2021",
+          "link": "",
           "authors": "",
           "image": "img/uvc.gif",
           "description": "AFMC Admission Test Module is developed for conducting the yearly AFMC Entrance exam. The software\n            module generates randomized MCQ questions for all the students, registered for the admission test. Thus\n            each of the students, participating in the exam, appears on the test with a unique set of questions. Next, the\n            solution evaluates each unique answer script and provides the students\u2019 ranking based on their merit. The\n            software has been used for conducting the AFMC admission Test 2021, where the number of candidates was\n            approximately 30,000."
