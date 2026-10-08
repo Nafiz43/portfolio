@@ -1,0 +1,52 @@
+#portfolio-chat { --chat-accent: #a7462c; font: 14px/1.5 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--claude-text-primary); position: relative; z-index: 1050; }
+body.dark-mode #portfolio-chat { --chat-accent: #f4a261; }
+#portfolio-chat *, #portfolio-chat *::before, #portfolio-chat *::after { box-sizing: border-box; }
+#portfolio-chat [hidden] { display: none !important; }
+#portfolio-chat button, #portfolio-chat textarea, #portfolio-chat a, #portfolio-chat span, #portfolio-chat p { font: inherit; }
+#portfolio-chat button, #portfolio-chat a { -webkit-tap-highlight-color: transparent; }
+#portfolio-chat button { cursor: pointer; }
+#portfolio-chat button:disabled { cursor: wait; opacity: .55; }
+#portfolio-chat :focus-visible { outline: 3px solid var(--claude-orange); outline-offset: 3px; }
+#portfolio-chat .chat-launcher { position: fixed; right: 28px; bottom: 24px; display: flex; align-items: center; gap: 10px; border: 1px solid var(--glass-border); border-radius: 999px; background: var(--claude-text-primary); color: var(--claude-bg-primary); padding: 14px 20px; box-shadow: 0 8px 30px #0002; font-weight: 500; }
+#portfolio-chat .chat-launcher-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--claude-orange); margin-left: 8px; }
+#chat-panel { position: fixed; bottom: 90px; right: 28px; width: 420px; height: min(690px, calc(100dvh - 120px)); display: flex; flex-direction: column; border: 1px solid var(--glass-border); border-radius: 20px; background: var(--claude-surface); box-shadow: 0 16px 70px #0003; overflow: hidden; }
+#portfolio-chat .chat-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 24px 22px 20px; background: var(--claude-bg-secondary); border-bottom: 1px solid var(--glass-border); }
+#portfolio-chat .chat-eyebrow { color: var(--chat-accent); font-size: 9px; letter-spacing: .16em; font-weight: 700; margin-bottom: 8px; }
+#portfolio-chat #chat-title { margin: 0 0 7px; font: 26px/1.15 Georgia, serif; text-transform: none; letter-spacing: -.7px; color: var(--claude-text-primary); }
+#portfolio-chat #chat-status { margin: 0; font-size: 11px; color: var(--claude-text-secondary); }
+#portfolio-chat .chat-close { border: 0; padding: 0; width: 32px; height: 32px; border-radius: 50%; background: transparent; color: var(--claude-text-secondary); font-size: 26px; line-height: 1; }
+#portfolio-chat .chat-close:hover { background: var(--glass-border); }
+#portfolio-chat .chat-transcript { flex: 1; min-height: 90px; padding: 22px; overflow-y: auto; overscroll-behavior: contain; }
+#portfolio-chat .chat-message { margin-bottom: 24px; overflow-wrap: anywhere; }
+#portfolio-chat .chat-message:last-child { margin-bottom: 0; }
+#portfolio-chat .chat-speaker { display: block; margin-bottom: 7px; font-size: 9px; font-weight: 600; letter-spacing: .12em; color: var(--claude-text-muted); }
+#portfolio-chat .chat-message p { margin: 0; font-size: 14px; line-height: 1.65; white-space: pre-wrap; }
+#portfolio-chat .chat-user { border-left: 2px solid var(--claude-orange); padding: 10px 14px; background: var(--claude-orange-muted); border-radius: 0 10px 10px 0; }
+#portfolio-chat .chat-suggestions { display: flex; flex-wrap: wrap; gap: 7px; padding: 0 22px 16px; }
+#portfolio-chat .chat-suggestions button, #portfolio-chat .chat-retry { border: 1px solid var(--glass-border); background: transparent; color: var(--claude-text-secondary); padding: 8px 11px; border-radius: 8px; font-size: 11px; }
+#portfolio-chat .chat-suggestions button:hover, #portfolio-chat .chat-retry:hover { background: var(--claude-orange-subtle); }
+#portfolio-chat .chat-tools { display: flex; justify-content: space-between; gap: 10px; align-items: center; padding: 0 22px 12px; }
+#portfolio-chat .chat-booking-link { color: var(--chat-accent); font-size: 12px; font-weight: 500; }
+#portfolio-chat .chat-reset { background: none; border: 0; padding: 5px; color: var(--claude-text-muted); font-size: 11px; }
+#portfolio-chat .chat-form { margin: 0 14px; padding: 10px; display: flex; align-items: flex-end; gap: 8px; border: 1px solid var(--glass-border); background: var(--claude-bg-secondary); border-radius: 12px; }
+#portfolio-chat #chat-input { flex: 1; min-width: 0; resize: none; border: 0; padding: 3px 4px; background: transparent; color: var(--claude-text-primary); font-size: 14px; line-height: 1.5; }
+#portfolio-chat #chat-input::placeholder { color: var(--claude-text-muted); }
+#portfolio-chat .chat-send { flex-shrink: 0; display: grid; place-items: center; width: 34px; height: 34px; border: 0; border-radius: 8px; background: var(--chat-accent); color: var(--claude-bg-primary); }
+#portfolio-chat .chat-footnote { font-size: 9px; line-height: 1.5; color: var(--claude-text-muted); text-align: center; margin: 10px 14px 13px; }
+#portfolio-chat .chat-sources { display: flex; flex-direction: column; gap: 4px; margin-top: 12px; border-top: 1px solid var(--glass-border); padding-top: 9px; }
+#portfolio-chat .chat-sources > span { font-size: 8px; letter-spacing: .1em; color: var(--claude-text-muted); }
+#portfolio-chat .chat-source { font-size: 11px; color: var(--chat-accent); line-height: 1.5; }
+#portfolio-chat .chat-booking-button { display: inline-block; background: var(--chat-accent); color: var(--claude-bg-primary); border-radius: 8px; padding: 10px 14px; font-size: 12px; font-weight: 500; margin-top: 12px; }
+#portfolio-chat .chat-waiting p { color: var(--claude-text-muted); animation: chat-pulse 1.6s ease-in-out infinite; }
+#portfolio-chat .chat-retry { margin-top: 10px; }
+#portfolio-chat .chat-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+@keyframes chat-pulse { 50% { opacity: .5; } }
+@media (prefers-reduced-motion: reduce) { #portfolio-chat .chat-waiting p { animation: none; } }
+@media (max-width: 520px) {
+  #portfolio-chat .chat-launcher { bottom: max(16px, env(safe-area-inset-bottom)); right: 16px; padding: 12px 16px; }
+  #chat-panel { right: 10px; bottom: calc(78px + env(safe-area-inset-bottom)); width: calc(100vw - 20px); height: min(690px, calc(100dvh - 98px - env(safe-area-inset-bottom))); border-radius: 16px; }
+  #portfolio-chat .chat-header { padding: 18px; }
+  #portfolio-chat .chat-transcript { padding: 18px; }
+  #portfolio-chat #chat-input { font-size: 16px; }
+}
+@media print { #portfolio-chat { display: none; } }

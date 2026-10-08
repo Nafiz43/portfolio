@@ -8,6 +8,8 @@ A basic portfolio website with sections for education, work experience, research
 
 ## Features
 
+- Conversational portfolio assistant backed by a local Ollama model and knowledge graph
+- Google Calendar meeting booking from the chat interface
 - Responsive design
 - Fixed sidebar navigation 
 - Dynamic content loading from JS modules
@@ -38,6 +40,8 @@ A basic portfolio website with sections for education, work experience, research
 ```
 
 ## Setup
+
+For the local conversation server on port 5000, see [server/README.md](server/README.md).
 
 1. Clone or download the repo
 2. Open [`index.html`](index.html) in your browser (or use a local server)
