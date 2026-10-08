@@ -32,7 +32,7 @@
       </div>
       <div class="chat-tools"><a class="chat-booking-link" href="${BOOKING}" target="_blank" rel="noopener noreferrer">Schedule a meeting ↗</a><button class="chat-reset" type="button">New chat</button></div>
       <form class="chat-form"><label class="chat-sr-only" for="chat-input">Your message</label><textarea id="chat-input" rows="2" maxlength="2000" placeholder="What would you like to know?" required></textarea><button class="chat-send" type="submit" aria-label="Send message"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 7-7 7 7M12 5v14"/></svg></button></form>
-      <p class="chat-footnote">AI answers from the portfolio. Check sources for details.<br>Chat memory expires after 1 hour of inactivity. Booking opens Google Calendar.</p>
+      <p class="chat-footnote">AI answers from the portfolio. Check sources for details.<br>Messages and responses are saved by Nafiz for review. Avoid sharing sensitive information. Booking opens Google Calendar.</p>
     </section>`;
   document.body.appendChild(widget);
   const panel = widget.querySelector('#chat-panel');
@@ -42,6 +42,17 @@
   const status = widget.querySelector('#chat-status');
   const send = widget.querySelector('.chat-send');
   const suggestions = widget.querySelector('.chat-suggestions');
+
+  function auditEvent(event) {
+    fetch(API + '/api/events', {
+      method: 'POST', keepalive: true,
+      headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': '1' },
+      body: JSON.stringify({ event, session_id: sessionId }),
+    }).catch(() => {});
+  }
+  widget.addEventListener('click', event => {
+    if (event.target.closest('.chat-booking-link, .chat-booking-button')) auditEvent('booking_opened');
+  });
 
   function setOpen(open) {
     panel.hidden = !open;
@@ -170,6 +181,7 @@
   }
   widget.querySelector('.chat-reset').addEventListener('click', () => {
     if (pending) return;
+    auditEvent('new_chat');
     sessionId = null;
     log.replaceChildren();
     message('assistant', 'A fresh conversation. What would you like to know about Nafiz?');

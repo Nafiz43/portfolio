@@ -4,3 +4,4 @@ __pycache__/
 .env
 server/.runtime/
 server/knowledge_graph.json
+server/.private/

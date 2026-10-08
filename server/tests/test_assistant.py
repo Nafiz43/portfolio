@@ -2,11 +2,14 @@ import asyncio
 import json
 import time
 import unittest
+import tempfile
+from pathlib import Path
 from unittest.mock import AsyncMock, patch
 
 import httpx
 from fastapi import HTTPException
 from server.app import app, Harness, graph, BOOKING_URL
+from server.audit import audit
 
 
 class GraphTests(unittest.TestCase):
@@ -33,6 +36,13 @@ class GraphTests(unittest.TestCase):
 
 
 class HarnessTests(unittest.IsolatedAsyncioTestCase):
+    async def asyncSetUp(self):
+        self.prompt_patch = patch("server.app.load_prompt", return_value=("Test configuration {{date}} {{context}}", "test-version"))
+        self.prompt_patch.start()
+
+    async def asyncTearDown(self):
+        self.prompt_patch.stop()
+
     def model(self, answer, ids=None, booking=False):
         result = {"answer": answer, "source_ids": ids or [], "offer_booking": booking}
         client = AsyncMock()
@@ -99,10 +109,15 @@ class HarnessTests(unittest.IsolatedAsyncioTestCase):
 
 class APITests(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
+        self.audit_temp = tempfile.TemporaryDirectory()
+        self.audit_patch = patch.object(audit, "directory", Path(self.audit_temp.name))
+        self.audit_patch.start()
         self.client = httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://test")
 
     async def asyncTearDown(self):
         await self.client.aclose()
+        self.audit_patch.stop()
+        self.audit_temp.cleanup()
 
     async def test_browser_cors_preflight(self):
         response = await self.client.options("/api/chat", headers={"Origin": "https://nafiz43.github.io",
