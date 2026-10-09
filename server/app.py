@@ -21,7 +21,7 @@ from pydantic import BaseModel, Field
 from server.knowledge import KnowledgeGraph, ROOT
 from server.audit import audit, AuditMiddleware, conversation_id
 from server.prompts import load_prompt
-from server.guardrails import inspect_input, refusal, scope_redirect, ungrounded_response, output_leaks_prompt
+from server.guardrails import inspect_input, refusal, scope_redirect, ungrounded_response, output_leaks_prompt, unsupported_embellishment
 
 MODEL = os.getenv("OLLAMA_MODEL", "qwen3:8b")
 OLLAMA = os.getenv("OLLAMA_URL", "http://127.0.0.1:11434").rstrip("/")
@@ -205,9 +205,23 @@ class Harness:
                 reason, answer = "out_of_scope", scope_redirect()
             elif scope == "unknown" or (scope == "portfolio" and not sources and not offer_booking):
                 reason, answer = "missing_evidence", ungrounded_response()
+            elif unsupported_embellishment(answer) and not offer_booking:
+                reason = "unsupported_embellishment"
+                specific = [n for n in nodes if n["type"] == "project" and n["label"].casefold() in message.casefold() and n["text"]]
+                if specific:
+                    evidence = specific[0]
+                    detail = evidence["text"][:1200]
+                    if detail.startswith(("Led ", "Developed ", "Spearheaded ")):
+                        detail = "Nafiz " + detail[0].lower() + detail[1:]
+                    answer = "Here’s the project with its feet on the ground and its head in the research:\n\n" + detail
+                    sources = [{"title": evidence["label"], "url": evidence["source"]}]
+                else:
+                    answer = ungrounded_response()
+                    sources = []
             if reason:
                 audit.model_event("guardrail_blocked", reason=reason, conversation_id=conversation_id(identifier))
-                sources = []
+                if reason != "unsupported_embellishment":
+                    sources = []
                 offer_booking = False
             # Booking facts are deterministic, not a language model's claim.
             if offer_booking:

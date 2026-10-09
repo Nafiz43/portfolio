@@ -23,7 +23,16 @@ def request(path, data=None, method=None, extra_headers=None):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--extended", action="store_true", help="Also exercise tone and input/output guardrails")
-    extended = parser.parse_args().extended
+    parser.add_argument("--tone-only", action="store_true", help="Check one playful explanation for unsupported embellishments")
+    args = parser.parse_args()
+    extended = args.extended
+    if args.tone_only:
+        from server.guardrails import unsupported_embellishment
+        result = request("/api/chat", {"message": "Explain RepoWise with a light, funny analogy."})
+        assert not unsupported_embellishment(result["answer"])
+        assert result["sources"]
+        print(result["answer"], flush=True)
+        return
     assert request("/api/health")["model_ready"]
     request("/api/chat", method="OPTIONS", extra_headers={
         "Access-Control-Request-Method": "POST", "Access-Control-Request-Headers": "content-type,ngrok-skip-browser-warning"})

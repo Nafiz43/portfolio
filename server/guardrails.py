@@ -39,3 +39,11 @@ def output_leaks_prompt(answer, template):
     # Detect long verbatim policy excerpts even if an input attack evades the rules.
     chunks = [line.strip() for line in template.splitlines() if len(line.strip()) >= 90 and "{{" not in line]
     return any(chunk.casefold() in answer.casefold() for chunk in chunks)
+
+
+def unsupported_embellishment(answer):
+    """Keep playful metaphors from introducing exaggerated capabilities."""
+    return bool(re.search(
+        r"\b(super[ -]smart|caffeine[ -]fueled|genius)\b|"
+        r"\b(read|scan|understand|analy[sz]e)\w*\b.{0,65}\b(all|every)\b.{0,35}\b(code|files?|repositories|chat logs)\b",
+        answer, re.I | re.S))
