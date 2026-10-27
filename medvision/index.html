@@ -63,6 +63,16 @@
 
 <section class="section pt-0">
   <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">See it in action</h2>
+    <video controls playsinline preload="metadata" style="width:100%;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.15)">
+      <source src="medvision_demo.mp4" type="video/mp4">
+    </video>
+    <p class="has-text-centered is-size-6 mt-2"><i>A live run: a plain-English question answered with a chart and its query, then an image search that returns similar past cases. Patient identifiers are hidden.</i></p>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Questions clinicians want to ask</h2>
     <div class="columns">
       <div class="column"><div class="box card-q"><h4>PATIENT CARE</h4><ul>
@@ -128,6 +138,7 @@
 <section class="section pt-0">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">How it works</h2>
+    <figure class="image mb-5"><img src="medvision_architecture.png" alt="MedVision architecture: institutional archive, indexing, stores, query engine and browser interface, all on premises"></figure>
     <div class="columns">
       <div class="column"><div class="box card-q"><h4>PREPARED ONCE, FROM THE ARCHIVE</h4><ul>
         <li>DICOM headers become a table of study and acquisition details.</li>
