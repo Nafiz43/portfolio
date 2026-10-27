@@ -44,6 +44,9 @@
         <a class="button is-dark is-rounded" href="mailto:nikhan@ucdavis.edu">
           <span class="icon"><i class="fas fa-envelope"></i></span><span>Contact</span>
         </a>
+        <a class="button is-dark is-rounded" href="medvision_demo.mp4" target="_blank">
+          <span class="icon"><i class="fas fa-video"></i></span><span>Video</span>
+        </a>
         <a class="button is-dark is-rounded" href="https://ai4h.cs.ucdavis.edu/" target="_blank">
           <span class="icon"><i class="fas fa-flask"></i></span><span>CS AI4Health</span>
         </a>
@@ -61,13 +64,13 @@
   </div>
 </section>
 
-<section class="section pt-0">
+<section class="section pt-0" id="video">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">See it in action</h2>
     <video controls playsinline preload="metadata" style="width:100%;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.15)">
       <source src="medvision_demo.mp4" type="video/mp4">
     </video>
-    <p class="has-text-centered is-size-6 mt-2"><i>A live run: a plain-English question answered with a chart and its query, then an image search that returns similar past cases. Patient identifiers are hidden.</i></p>
+    <p class="has-text-centered is-size-6 mt-2"><i>A live run: a plain-English question answered with a chart and its query, then an image search that returns similar past cases. Patient identifiers are hidden. <a href="medvision_demo.mp4" target="_blank">Open the video</a>.</i></p>
   </div>
 </section>
 
@@ -150,6 +153,22 @@
         <li>The database runs it. On an error, the assistant reads it and fixes the query.</li>
         <li>The answer and chart are built from the returned rows.</li>
       </ul></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Related work</h2>
+    <div class="content">
+      <p>Several open tools already make imaging archives easier to work with. Orthanc and the OHIF Viewer store and display DICOM studies, DIANA connects a hospital archive to clinical AI pipelines, and PACScrawler searches PACS and RIS together so researchers can assemble cohorts from imaging and reports. Retrieval-augmented generation has also been adapted to radiology text. MedVision differs in letting a clinician combine any DICOM header field with report findings and image similarity in a single plain-English question, with each answer traced back to the rows behind it.</p>
+      <ol class="is-size-6">
+        <li>Jodogne S. The Orthanc ecosystem for medical imaging. <i>J Digit Imaging</i>. 2018;31(3):341&ndash;352. <a href="https://doi.org/10.1007/s10278-018-0082-y" target="_blank">doi:10.1007/s10278-018-0082-y</a></li>
+        <li>Ziegler E, Urban T, Brown D, et al. Open Health Imaging Foundation Viewer: an extensible open-source framework for building web-based imaging applications to support cancer research. <i>JCO Clin Cancer Inform</i>. 2020;4:336&ndash;345. <a href="https://doi.org/10.1200/CCI.19.00131" target="_blank">doi:10.1200/CCI.19.00131</a></li>
+        <li>Yi T, Pan I, Collins S, et al. DICOM Image ANalysis and Archive (DIANA): an open-source system for clinical AI applications. <i>J Digit Imaging</i>. 2021;34(6):1405&ndash;1413. <a href="https://doi.org/10.1007/s10278-021-00488-5" target="_blank">doi:10.1007/s10278-021-00488-5</a></li>
+        <li>Cyriac J, Indrakanti AK, Wasserthal J, Yang S, Bach M, Stieltjes B, Heye T, Merkle EM, Segeroth M. Technical developments in radiology: enhancing research workflows with PACScrawler. <i>J Imaging Inform Med</i>. 2026. <a href="https://link.springer.com/article/10.1007/s10278-026-02130-8" target="_blank">doi:10.1007/s10278-026-02130-8</a></li>
+        <li>Weinert DA, Rauschecker AM. Enhancing large language models with retrieval-augmented generation: a radiology-specific approach. <i>Radiol Artif Intell</i>. 2025;7(3):e240313. <a href="https://doi.org/10.1148/ryai.240313" target="_blank">doi:10.1148/ryai.240313</a></li>
+      </ol>
     </div>
   </div>
 </section>
