@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MedVision: ask your imaging archive the way you would ask a colleague.">
+  <title>MedVision</title>
+  <link rel="icon" href="medvision_logo.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body { font-family: 'Noto Sans', sans-serif; font-size: 18px; }
+    .title, .subtitle { font-family: 'Google Sans', sans-serif; }
+    a { text-decoration: none; }
+    .logo { max-width: 520px; width: 100%; margin: 0 auto 1rem; display: block; }
+    .publication-authors { font-family: 'Google Sans', sans-serif; font-size: 1.2rem; }
+    .publication-authors a { color: #0A4BFF; }
+    .card-q { height: 100%; border-top: 4px solid #0A4BFF; }
+    .card-q h4 { color: #3D5570; font-weight: 700; letter-spacing: .04em; margin-bottom: .75rem; }
+    .card-q li { margin-bottom: .5rem; }
+    .flow { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .75rem; }
+    .flow .box { margin: 0; flex: 1 1 200px; text-align: center; }
+    .flow .arrow { color: #0A4BFF; font-size: 1.5rem; }
+    .risk td:first-child { font-weight: 600; color: #3D5570; width: 30%; }
+    footer.footer { padding: 2rem 1.5rem; }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <img class="logo" src="medvision_logo.png" alt="MedVision logo">
+      <h1 class="title is-2">Ask your imaging archive the way you would ask a colleague</h1>
+      <div class="publication-authors">
+        <a href="https://nafiz43.github.io/portfolio/" target="_blank">Nafiz Imtiaz Khan</a>,
+        <a href="https://cs.ucdavis.edu/directory/vladimir-filkov" target="_blank">Vladimir Filkov</a>,
+        <a href="https://health.ucdavis.edu/vascular/team/42868/roger-goldman-vascular-and-interventional-radiology-sacramento" target="_blank">Roger Eric Goldman</a>
+      </div>
+      <p class="mt-2">UC Davis Health &middot; Computer Science and Radiology</p>
+      <p class="mt-1"><span class="tag is-link is-light is-medium">Presented at the UC Davis Radiology Research Symposium 2026</span></p>
+      <div class="buttons is-centered mt-4">
+        <a class="button is-dark is-rounded" href="mailto:nikhan@ucdavis.edu">
+          <span class="icon"><i class="fas fa-envelope"></i></span><span>Contact</span>
+        </a>
+        <a class="button is-dark is-rounded" href="https://ai4h.cs.ucdavis.edu/" target="_blank">
+          <span class="icon"><i class="fas fa-flask"></i></span><span>CS AI4Health</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Overview</h2>
+    <div class="content has-text-justified">
+      <p>Hospitals keep years of imaging studies, DICOM headers and radiology reports, yet answering a simple clinical question about them still means opening studies one by one or filing a ticket with IT. MedVision lets clinicians ask that question in plain English, show it an image, or both, and get back an answer they can check: counts and charts, matching studies with their reports, and visually similar cases, each shown with the evidence behind it.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Questions clinicians want to ask</h2>
+    <div class="columns">
+      <div class="column"><div class="box card-q"><h4>PATIENT CARE</h4><ul>
+        <li>Was this lung nodule there 1, 3 or 5 years ago? Did it grow?</li>
+        <li>How many central lines has this patient had, left side and right side?</li>
+        <li>Was this liver lesion treated before? With what therapy?</li>
+      </ul></div></div>
+      <div class="column"><div class="box card-q"><h4>TEACHING</h4><ul>
+        <li>This patient has an aneurysm. Show me other patients with one like it.</li>
+        <li>Find past cases that look like this one.</li>
+      </ul></div></div>
+      <div class="column"><div class="box card-q"><h4>QUALITY</h4><ul>
+        <li>What radiation dose does each scanner deliver for the same study?</li>
+        <li>How many dialysis access interventions this year, and how many repeated within 90 days?</li>
+      </ul></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Why current tools fall short</h2>
+    <div class="content">
+      <ol>
+        <li><b>The search box decides what you can ask.</b> The question has to be rewritten to fit fixed fields and search syntax.</li>
+        <li><b>Only some details can be combined.</b> Findings plus a few acquisition fields, not any DICOM header with any report finding.</li>
+        <li><b>Analytics are limited.</b> Counts and trends beyond the built-in reports need an analyst.</li>
+        <li><b>You cannot search with an image.</b> There is no way to show the archive a picture and ask for cases like it.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">One unified solution</h2>
+    <div class="flow">
+      <div class="box"><b>Ask</b><br>A question in plain English, an image, or both</div>
+      <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+      <div class="box"><b>MedVision</b><br>reads the reports, the DICOM headers and the images of your archive</div>
+      <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+      <div class="box"><b>Answer</b><br>Counts and charts, matching studies with their reports, visually similar cases</div>
+    </div>
+    <p class="has-text-centered mt-4"><i>Every answer shows the evidence behind it.</i></p>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Built to be trusted</h2>
+    <table class="table is-fullwidth risk">
+      <thead><tr><th>Risk with AI models</th><th>How MedVision handles it</th></tr></thead>
+      <tbody>
+        <tr><td>Hallucination</td><td>Answers come from database rows, not from the model's memory.</td></tr>
+        <tr><td>Traceability</td><td>The query, the returned rows and each step are shown with the answer.</td></tr>
+        <tr><td>Audit trail</td><td>Every question asked is logged.</td></tr>
+        <tr><td>Data privacy</td><td>The whole system runs locally; patient data never leaves the institution.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">How it works</h2>
+    <div class="columns">
+      <div class="column"><div class="box card-q"><h4>PREPARED ONCE, FROM THE ARCHIVE</h4><ul>
+        <li>DICOM headers become a table of study and acquisition details.</li>
+        <li>Radiology reports are linked to each study by accession number.</li>
+        <li>Every image frame gets a numeric fingerprint for image search.</li>
+      </ul></div></div>
+      <div class="column"><div class="box card-q"><h4>ANSWERING A QUESTION</h4><ul>
+        <li>A local language model turns the question into a read-only database query.</li>
+        <li>The database runs it. On an error, the assistant reads it and fixes the query.</li>
+        <li>The answer and chart are built from the returned rows.</li>
+      </ul></div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>&copy; 2026 Nafiz Imtiaz Khan, UC Davis. Page template inspired by <a href="https://nerfies.github.io/" target="_blank">Nerfies</a>.</p>
+  </div>
+</footer>
+
+</body>
+</html>
