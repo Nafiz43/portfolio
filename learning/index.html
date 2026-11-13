@@ -1,0 +1,1440 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Study world models through flashcards, practical examples, and short self-checks.">
+  <meta name="theme-color" content="#f8f7fc">
+  <title>World Models Study Lab</title>
+  <style>
+:root {
+  color-scheme: light;
+  --background: #f8f7fc;
+  --paper: #fff;
+  --ink: #231d37;
+  --muted: #635c73;
+  --line: #e7e1f1;
+  --accent: #6640c6;
+  --accent-dark: #4f2baf;
+  --wash: #f0eafb;
+  font-family: Inter, "Helvetica Neue", system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--background);
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; min-width: 280px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:disabled { cursor: default; opacity: .48; }
+button, a { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+a { color: var(--accent-dark); }
+p, h1, h2, h3 { margin: 0; }
+
+.site-header { background: #fff; border-bottom: 1px solid var(--line); }
+.header-inner { min-height: 72px; max-width: 1160px; padding: 0 32px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.wordmark { display: flex; gap: 7px; align-items: center; font-weight: 740; letter-spacing: -.035em; white-space: nowrap; }
+.brand-light { color: var(--muted); font-weight: 500; }
+.brand-mark { width: 29px; height: 29px; margin-right: 3px; display: grid; place-items: center; position: relative; border-radius: 8px; background: var(--accent); }
+.brand-mark i { position: absolute; width: 12px; height: 12px; border: 1px solid #fff; border-radius: 2px; transform: rotate(45deg); }
+.brand-mark i:first-child { translate: 0 -4px; opacity: .45; }
+.brand-mark i:last-child { translate: 0 4px; opacity: .68; }
+.mode-switch { display: flex; align-items: center; gap: 3px; background: #f4f1fa; padding: 4px; border: 1px solid #eee9f6; border-radius: 11px; }
+.mode-switch button { padding: 7px 13px; border: 1px solid transparent; border-radius: 7px; color: var(--muted); background: transparent; font-size: .82rem; font-weight: 650; white-space: nowrap; }
+.mode-switch button:hover { color: var(--accent-dark); }
+.mode-switch button[aria-pressed="true"] { background: white; color: var(--accent-dark); border-color: var(--line); box-shadow: 0 1px 2px #2717420a; }
+
+.container { max-width: 1160px; margin: auto; padding: 0 32px 28px; }
+.intro { padding: 45px 0 28px; }
+.eyebrow { display: flex; align-items: center; gap: 8px; margin-bottom: 11px; color: var(--accent-dark); font-size: .7rem; font-weight: 760; letter-spacing: .13em; text-transform: uppercase; }
+.accent-dot { width: 8px; height: 8px; border-radius: 50%; background: #8a64e8; box-shadow: 0 0 0 3px #eae0fb; }
+h1 { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(3.05rem, 6vw, 5rem); line-height: .98; font-weight: 500; letter-spacing: -.067em; }
+h1 span { color: #7a51d8; }
+.subtitle { color: var(--muted); font-size: 1rem; line-height: 1.55; margin-top: 14px; max-width: 630px; }
+
+.progress-summary { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 30px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 17px 22px; margin-bottom: 28px; }
+.progress-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; }
+.progress-heading h2 { font-size: .9rem; font-weight: 730; }
+.progress-heading span { font-size: .76rem; font-weight: 670; color: var(--accent-dark); white-space: nowrap; }
+progress { display: block; width: 100%; height: 7px; border: 0; border-radius: 100px; appearance: none; background: var(--wash); }
+progress::-webkit-progress-bar { border-radius: 100px; background: var(--wash); }
+progress::-webkit-progress-value { border-radius: 100px; background: var(--accent); }
+progress::-moz-progress-bar { border-radius: 100px; background: var(--accent); }
+.progress-stats { display: grid; grid-template-columns: minmax(96px, 1fr) auto; gap: 22px; }
+.progress-stats > div { display: grid; gap: 3px; align-content: center; padding-left: 20px; border-left: 1px solid var(--line); }
+.progress-stats strong { font-size: 1.04rem; font-weight: 760; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.progress-stats span { color: var(--muted); font-size: .75rem; }
+
+.workspace { display: grid; grid-template-columns: 250px minmax(0, 1fr); align-items: start; gap: 24px; }
+.topics-panel { background: var(--paper); border: 1px solid var(--line); border-radius: 15px; padding: 17px 12px 12px; }
+.sidebar-heading { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin: 0 9px 12px; }
+.sidebar-heading h2 { font-size: .95rem; font-weight: 740; }
+.sidebar-heading > span { font-size: .72rem; color: var(--muted); white-space: nowrap; }
+#topics { display: grid; gap: 3px; }
+#topics button, #review-filter { width: 100%; display: grid; grid-template-columns: 17px minmax(0, 1fr) auto; align-items: center; gap: 7px; text-align: left; padding: 9px; min-height: 39px; background: transparent; border: 1px solid transparent; border-radius: 8px; font-size: .78rem; font-weight: 620; }
+#topics button:hover, #review-filter:hover { background: #f8f5fd; }
+#topics button[aria-pressed="true"], #review-filter[aria-pressed="true"] { background: #f0eafb; color: var(--accent-dark); border-color: #ebe1fa; }
+.topic-dot { width: 8px; height: 8px; justify-self: center; border-radius: 50%; background: var(--topic-color, var(--accent)); }
+.topic-total, #review-count { color: var(--muted); font-size: .7rem; font-variant-numeric: tabular-nums; }
+.topic-all { font-size: 1.08rem; line-height: 1; text-align: center; color: var(--accent); }
+.review-filter { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
+.review-icon { text-align: center; color: var(--accent-dark); font-size: 1rem; }
+
+.section-heading { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: 0 0 13px; min-height: 49px; }
+.section-heading h2 { font-size: clamp(1.12rem, 3vw, 1.39rem); line-height: 1.2; letter-spacing: -.035em; }
+.section-heading p { font-size: .81rem; line-height: 1.4; color: var(--muted); margin-top: 5px; }
+.position { flex: none; padding: 5px 10px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: var(--muted); font-size: .77rem; font-weight: 660; font-variant-numeric: tabular-nums; }
+
+.flashcard { isolation: isolate; overflow: hidden; position: relative; min-height: 325px; display: grid; grid-template-rows: 1fr auto; gap: 24px; padding: 23px 26px 19px; background: linear-gradient(120deg, #fbf9ff 16%, #f2ecfd 100%); border: 1px solid #ded0f5; border-radius: 17px; box-shadow: 0 6px 16px #5834a10c; }
+.flip-area { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; border: 0; background: transparent; border-radius: inherit; }
+.flip-area:focus-visible { outline-offset: -4px; }
+.card-content, .card-bottom { pointer-events: none; }
+.card-bottom a { pointer-events: auto; }
+.card-content { display: flex; flex-direction: column; align-items: flex-start; }
+.card-top { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 30px; }
+.card-topic { display: inline-block; background: #ebe1fc; color: var(--accent-dark); padding: 5px 9px; border-radius: 6px; font-size: .71rem; line-height: 1.35; font-weight: 690; }
+.card-face { color: #695792; font-size: .68rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 750; }
+.card-term { margin-bottom: 9px; color: var(--accent-dark); font-size: .82rem; font-weight: 720; }
+#card-live { width: min(100%, 550px); }
+.flashcard:not(.flipped) #card-live { width: min(77%, 485px); }
+#card-prompt { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(1.77rem, 3.45vw, 2.7rem); font-weight: 500; letter-spacing: -.045em; line-height: 1.1; text-wrap: balance; }
+.flashcard.flipped { background: linear-gradient(115deg, #fff 28%, #f5f0ff); }
+.flashcard.flipped .card-top { margin-bottom: 18px; }
+.flashcard.flipped #card-prompt { font-family: inherit; font-size: 1.03rem; letter-spacing: -.012em; font-weight: 720; line-height: 1.35; text-wrap: pretty; }
+.card-answer { margin-top: 9px; font-size: .94rem; line-height: 1.53; }
+.card-example { display: block; margin-top: 12px; padding-left: 11px; border-left: 2px solid #ba9bec; color: #524766; font-size: .84rem; }
+.card-example strong { color: var(--accent-dark); margin-right: 4px; }
+.card-bottom { display: flex; justify-content: space-between; align-items: center; gap: 10px; color: var(--accent-dark); font-size: .79rem; font-weight: 710; }
+.flip-hint { display: flex; align-items: center; gap: 7px; }
+.flip-hint > span:first-child { font-size: 1.13rem; line-height: 1; }
+.card-bottom a { text-underline-offset: 3px; }
+.card-art { width: 270px; height: 270px; position: absolute; right: -17px; top: 45px; z-index: -2; pointer-events: none; color: #b296e8; }
+.art-orbit { position: absolute; border: 1px solid #d7c5f5; border-radius: 50%; left: 50%; top: 50%; translate: -50% -50%; }
+.orbit-large { width: 234px; height: 234px; border-style: dashed; }
+.orbit-small { width: 174px; height: 174px; }
+.art-shape { position: absolute; width: 84px; height: 84px; left: 50%; top: 50%; margin: -42px; border: 1px solid #b99ae9; border-radius: 19px; background: #dfcdf9a0; rotate: 45deg; scale: 1 .68; }
+.shape-back { translate: 0 24px; }
+.shape-middle { translate: 0 0; }
+.shape-front { translate: 0 -24px; background: #ede3fb; }
+.art-dot { position: absolute; width: 7px; height: 7px; border-radius: 50%; background: #b08de9; box-shadow: 0 0 0 4px #e9dcfa; }
+.dot-a { left: 18%; top: 49%; }
+.dot-b { right: 15%; top: 22%; }
+.dot-c { right: 21%; bottom: 23%; width: 5px; height: 5px; }
+.flipped .card-art { opacity: .22; }
+
+.card-controls { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 9px; margin-top: 13px; }
+.card-navigation, .rating-actions, .result-actions { display: flex; flex-wrap: wrap; gap: 7px; }
+.secondary, .primary { border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); padding: 8px 13px; min-height: 37px; font-size: .8rem; font-weight: 680; }
+.secondary:not(:disabled):hover { background: var(--wash); }
+.primary { border-color: var(--accent); background: var(--accent); color: white; }
+.primary:not(:disabled):hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+.keyboard-hint { margin-top: 12px; color: var(--muted); font-size: .72rem; }
+.keyboard-hint > span { margin: 0 4px; }
+kbd { display: inline-block; min-width: 17px; padding: 1px 4px; border: 1px solid var(--line); border-radius: 4px; text-align: center; background: #fff; font-family: inherit; font-size: .66rem; }
+
+.empty-panel, .quiz-panel { padding: 24px 26px; background: #fff; border: 1px solid var(--line); border-radius: 16px; }
+.empty-panel h3, .quiz-panel h3 { font-size: 1.27rem; line-height: 1.4; letter-spacing: -.025em; }
+.empty-panel p, #result-summary { margin: 9px 0 16px; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+.quiz-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 13px; }
+#quiz-best { color: var(--muted); font-size: .75rem; }
+#quiz-options { margin: 15px 0 0; padding: 0; border: 0; display: grid; gap: 7px; min-width: 0; }
+.quiz-choice { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 9px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); font-size: .85rem; line-height: 1.4; cursor: pointer; }
+.quiz-choice input { accent-color: var(--accent); margin: 0; }
+.quiz-choice:has(:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.quiz-choice:has(:checked) { background: var(--wash); border-color: #cbb8ed; }
+.quiz-choice:has(:disabled) { cursor: default; }
+.quiz-choice.correct { background: #edf8f1; border-color: #a1c9ae; }
+.quiz-choice.incorrect { background: #fdf0eb; border-color: #e3b9a6; }
+.quiz-footer { display: flex; gap: 8px; margin-top: 13px; }
+.feedback { margin-top: 13px; padding: 10px 12px; border-radius: 8px; background: #edf8f1; color: #285d43; font-size: .85rem; line-height: 1.45; }
+.feedback.incorrect { background: #fdf0eb; color: #803923; }
+#missed-cards { padding-left: 19px; margin: 0 0 16px; color: var(--muted); font-size: .85rem; line-height: 1.6; }
+
+footer { margin-top: 22px; border-top: 1px solid var(--line); padding-top: 15px; display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; color: var(--muted); font-size: .76rem; }
+.sources summary { color: var(--accent-dark); font-weight: 680; cursor: pointer; }
+.sources ul { margin: 9px 0 0; padding-left: 17px; line-height: 1.6; }
+footer > p { text-align: right; flex: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@media (max-width: 850px) {
+  .workspace { grid-template-columns: 206px minmax(0, 1fr); gap: 16px; }
+  .header-inner, .container { padding-left: 22px; padding-right: 22px; }
+  .card-art { right: -58px; opacity: .65; }
+}
+
+@media (max-width: 650px) {
+  .header-inner, .container { padding-left: 16px; padding-right: 16px; }
+  .header-inner { min-height: 64px; gap: 8px; }
+  .brand-light { display: none; }
+  .wordmark { font-size: .86rem; gap: 4px; }
+  .mode-switch button { padding: 6px 8px; font-size: .71rem; }
+  .intro { padding: 30px 0 20px; }
+  .subtitle { font-size: .9rem; }
+  .progress-summary { grid-template-columns: 1fr; gap: 12px; padding: 13px; margin-bottom: 16px; }
+  .progress-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .progress-stats > div { padding: 0; border: 0; }
+  .workspace { grid-template-columns: 1fr; gap: 15px; }
+  .topics-panel { padding: 11px; }
+  .sidebar-heading { margin: 0 3px 6px; }
+  #topics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; }
+  #topics button, #review-filter { min-height: 35px; padding: 5px 4px; font-size: .72rem; gap: 3px; grid-template-columns: 14px minmax(0, 1fr) auto; }
+  .review-filter { padding-top: 4px; margin-top: 4px; }
+  .section-heading { margin-bottom: 8px; }
+  .flashcard { min-height: 274px; padding: 16px; gap: 18px; }
+  .card-top { margin-bottom: 24px; }
+  .card-art { right: -74px; top: 25px; scale: .8; opacity: .55; }
+  .flashcard:not(.flipped) #card-live { width: min(88%, 440px); }
+  .quiz-panel, .empty-panel { padding: 16px; }
+  footer { flex-wrap: wrap; }
+  footer > p { flex: auto; text-align: left; }
+}
+
+@media (max-width: 360px) {
+  .header-inner { flex-wrap: wrap; padding-top: 10px; padding-bottom: 10px; }
+  #topics { grid-template-columns: 1fr; }
+  .nav-label { display: none; }
+}
+
+.card-search { display: flex; gap: 7px; margin-bottom: 12px; }
+.card-search input { min-width: 0; flex: 1; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); padding: 8px 12px; font: inherit; font-size: .85rem; min-height: 37px; }
+.card-search input::placeholder { color: var(--muted); }
+.card-search input:disabled { opacity: .55; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="wordmark"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span> World Models <span class="brand-light">Study Lab</span></div>
+      <nav class="mode-switch" aria-label="Study mode">
+        <button type="button" id="study-mode" aria-pressed="true">Flashcards</button>
+        <button type="button" id="quiz-mode" aria-pressed="false">Self-check quiz</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow"><span class="accent-dot" aria-hidden="true"></span> Model-based learning</p>
+      <h1 id="page-title">World models<span>.</span></h1>
+      <p class="subtitle">Study how agents predict what happens next and use those predictions to decide what to do.</p>
+    </section>
+
+    <section class="progress-summary" aria-labelledby="progress-title">
+      <div class="progress-main">
+        <div class="progress-heading"><h2 id="progress-title">Your progress</h2><span id="progress-label"></span></div>
+        <progress id="progress-bar" value="0" aria-label="Cards mastered"></progress>
+      </div>
+      <div class="progress-stats">
+        <div><strong id="seen-count">0</strong><span>Cards seen</span></div>
+        <div><strong id="quiz-count">0</strong><span>Topic quizzes passed</span></div>
+      </div>
+    </section>
+
+    <div class="workspace">
+      <aside class="topics-panel" aria-labelledby="topics-title">
+        <div class="sidebar-heading"><h2 id="topics-title">Topics</h2><span id="topic-count"></span></div>
+        <nav id="topics" aria-label="Filter by topic"></nav>
+        <div class="review-filter">
+          <button type="button" id="review-filter" aria-pressed="false"><span class="review-icon" aria-hidden="true">↻</span><span>Review queue</span><span id="review-count">0</span></button>
+        </div>
+      </aside>
+
+      <section class="study-area" aria-labelledby="section-title">
+        <div class="section-heading">
+          <div><h2 id="section-title">All cards</h2><p id="section-caption">Recall the answer before flipping.</p></div>
+          <span id="position" class="position"></span>
+        </div>
+
+        <div id="study-view">
+          <div class="card-search">
+            <label class="sr-only" for="card-search">Search cards in this deck</label>
+            <input type="search" id="card-search" placeholder="Search cards in this deck" autocomplete="off">
+            <button type="button" id="clear-search" class="secondary" hidden>Clear</button>
+          </div>
+          <div id="empty-search" class="empty-panel" hidden>
+            <h3>No matching cards</h3>
+            <p>Try another search or select a different topic.</p>
+          </div>
+          <article id="flashcard" class="flashcard" aria-labelledby="card-prompt">
+            <div class="card-art" aria-hidden="true">
+              <div class="art-orbit orbit-large"></div><div class="art-orbit orbit-small"></div>
+              <div class="art-shape shape-back"></div><div class="art-shape shape-middle"></div><div class="art-shape shape-front"></div>
+              <i class="art-dot dot-a"></i><i class="art-dot dot-b"></i><i class="art-dot dot-c"></i>
+            </div>
+            <button type="button" id="flip-area" class="flip-area" aria-label="Flip card"></button>
+            <div class="card-content">
+              <div class="card-top"><span id="card-topic" class="card-topic"></span><span id="card-face" class="card-face">Question</span></div>
+              <p id="card-term" class="card-term"></p>
+              <div id="card-live" aria-live="polite" aria-atomic="true">
+                <h3 id="card-prompt"></h3>
+                <div id="card-answer" class="card-answer" hidden>
+                  <p id="answer-text"></p>
+                  <p class="card-example"><strong>Example</strong> <span id="example-text"></span></p>
+                </div>
+              </div>
+            </div>
+            <div class="card-bottom"><span class="flip-hint"><span aria-hidden="true">↺</span> <span id="flip-hint">Flip to reveal</span></span><a id="card-source" target="_blank" rel="noopener noreferrer" hidden>Read the source <span aria-hidden="true">↗</span></a></div>
+          </article>
+
+          <div id="empty-review" class="empty-panel" hidden>
+            <h3>You're caught up</h3>
+            <p>Cards marked “Review again” and cards linked to missed quiz questions will appear here.</p>
+            <button type="button" id="back-to-all" class="primary">Browse all cards</button>
+          </div>
+
+          <div id="card-controls" class="card-controls">
+            <div class="card-navigation" aria-label="Card navigation">
+              <button type="button" id="previous" class="secondary" aria-label="Previous card"><span aria-hidden="true">←</span><span class="nav-label"> Previous</span></button>
+              <button type="button" id="next" class="secondary" aria-label="Next card"><span class="nav-label">Next </span><span aria-hidden="true">→</span></button>
+            </div>
+            <div id="rating-actions" class="rating-actions" hidden>
+              <button type="button" id="review" class="secondary">Review again</button>
+              <button type="button" id="mastered" class="primary">Mark mastered</button>
+            </div>
+          </div>
+          <p id="keyboard-hint" class="keyboard-hint"><kbd>Space</kbd> flip <span aria-hidden="true">·</span> <kbd>←</kbd> <kbd>→</kbd> navigate</p>
+        </div>
+
+        <div id="quiz-view" hidden>
+          <div id="quiz-panel" class="quiz-panel">
+            <div id="quiz-question-view">
+              <div class="quiz-top"><span id="quiz-topic" class="card-topic"></span><span id="quiz-best"></span></div>
+              <h3 id="quiz-question" tabindex="-1"></h3>
+              <form id="quiz-form">
+                <fieldset id="quiz-options"><legend class="sr-only">Choose one answer</legend></fieldset>
+                <div class="quiz-footer">
+                  <button type="submit" id="check-answer" class="primary" disabled>Check answer</button>
+                  <button type="button" id="next-question" class="primary" hidden>Next question <span aria-hidden="true">→</span></button>
+                </div>
+              </form>
+              <div id="quiz-feedback" class="feedback" role="status" hidden></div>
+            </div>
+            <div id="quiz-results" hidden>
+              <h3 id="score-heading" tabindex="-1"></h3>
+              <p id="result-summary"></p>
+              <ul id="missed-cards" hidden></ul>
+              <div class="result-actions">
+                <button type="button" id="retry-quiz" class="primary">Try again</button>
+                <button type="button" id="return-to-study" class="secondary">Back to flashcards</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="sr-only" id="announcer" role="status"></p>
+      </section>
+    </div>
+
+    <footer>
+      <details class="sources"><summary>References</summary><ul id="sources-list"></ul></details>
+      <p id="storage-note">Progress is saved in this browser.</p>
+    </footer>
+  </main>
+  <script>
+"use strict";
+const topics = [
+  { id: "fundamentals", label: "Fundamentals", color: "#7051ca" },
+  { id: "architectures", label: "Architectures", color: "#426fc1" },
+  { id: "objectives", label: "Training objectives", color: "#a94f8a" },
+  { id: "dynamics", label: "Latent dynamics", color: "#287d72" },
+  { id: "planning", label: "Planning", color: "#a45f30" },
+  { id: "systems", label: "Representative systems", color: "#6f6596" },
+  { id: "ontology", label: "Ontology-based modeling", color: "#386f90" },
+  { id: "neurosymbolic", label: "Neuro-symbolic AI", color: "#8a526b" },
+  {"id": "video", "label": "Video world models", "color": "#536f9e"},
+  {"id": "robotics", "label": "Robotics and control", "color": "#31765a"},
+  {"id": "evaluation", "label": "Evaluation and data", "color": "#8b653a"},
+  {"id": "frontier", "label": "Recent research", "color": "#984d74"}
+];
+
+const cards = [
+  {
+    id: "definition", topic: "fundamentals", term: "World model",
+    question: "What makes a learned predictor a world model for control?",
+    answer: "It models how an environment evolves under candidate actions. Predictions may be future observations, latent states, or task-relevant quantities such as rewards. A controller can use them to reason about actions before executing them.",
+    example: "A robot can compare the predicted consequences of two pushes before moving its arm."
+  },
+  {
+    id: "pomdp", topic: "fundamentals", term: "Partial observability",
+    question: "Why might a single observation be insufficient to predict the next state?",
+    answer: "Different hidden states can produce the same observation. In a POMDP, a belief over hidden states summarizes the information in the action–observation history. A recurrent latent state can learn an approximate summary.",
+    example: "One frame reveals a ball’s position but may leave its velocity and direction ambiguous."
+  },
+  {
+    id: "actions", topic: "fundamentals", term: "Action conditioning",
+    question: "What does conditioning on an action add to a video predictor?",
+    answer: "It lets you query a different predicted future for each proposed action. To learn reliable consequences, the data must cover relevant actions in relevant states. Logged actions alone may leave alternative outcomes unidentified.",
+    example: "Footage of drivers always braking at an intersection gives little evidence about what happens if they accelerate there."
+  },
+  {
+    id: "state-abstraction", topic: "fundamentals", term: "State abstraction",
+    question: "What should a useful latent state preserve?",
+    answer: "It should retain the history-dependent information needed to predict outcomes relevant to the task. Compression is useful when it removes nuisance variation while preserving distinctions that change future rewards or decisions.",
+    example: "A grasping model can ignore wall texture, but it needs information about object pose and grip."
+  },
+  {
+    id: "offline-coverage", topic: "fundamentals", term: "Offline coverage",
+    question: "Why can an offline world model predict logged trajectories well and still fail as a planner?",
+    answer: "Logged trajectories test actions the behavior policy actually chose. The planner can query different actions in the same states, where the learned transition may extrapolate. Evaluate coverage at the state–action pairs the planner visits.",
+    example: "A model trained on gentle turns can score sharp turns confidently despite having few examples at the same speed."
+  },
+  {"id": "fundamentals-transition-kernel", "topic": "fundamentals", "term": "Transition kernel", "question": "What does a transition kernel describe in a controlled stochastic system?", "answer": "It assigns a distribution over successor states for each current state and action. A deterministic transition is the special case in which all probability mass lies on one successor.", "example": "On ice, one steering command can yield several possible headings."},
+  {"id": "fundamentals-observation-model", "topic": "fundamentals", "term": "Observation model", "question": "How does an observation model differ from a transition kernel?", "answer": "It describes how sensor readings arise from the hidden state. The transition kernel describes how the hidden state changes under an action.", "example": "A wheel encoder can be noisy even when the vehicle motion is deterministic."},
+  {"id": "fundamentals-belief-update", "topic": "fundamentals", "term": "Belief update", "question": "What are the two steps of a Bayesian belief update in a POMDP?", "answer": "First propagate the current belief through the action-conditioned transition. Then reweight the predicted states by the likelihood of the new observation and normalize.", "example": "A weak sensor reading can favor two locations, while a strong reading sharply favors one."},
+  {"id": "fundamentals-markov-sufficiency", "topic": "fundamentals", "term": "Markov sufficiency", "question": "When does a proposed state satisfy the controlled Markov property?", "answer": "Once the current state and action are given, earlier history supplies no further information about the next-state distribution. A useful latent state approximates this property for quantities the task needs.", "example": "Adding velocity can turn a position-only representation of a simple pendulum into a Markov state."},
+  {"id": "fundamentals-open-loop-and-closed-loop", "topic": "fundamentals", "term": "Open-loop and closed-loop", "question": "How do open-loop prediction and closed-loop control differ in their use of feedback?", "answer": "An open-loop rollout uses proposed actions and its own predicted states. A closed-loop controller repeatedly conditions on new observations before deciding what to do.", "example": "A fixed steering sequence cannot correct a gust mid-course, while a feedback policy can."},
+  {"id": "fundamentals-policy-versus-dynamics", "topic": "fundamentals", "term": "Policy versus dynamics", "question": "Which distribution does a policy model, and which distribution does a world model?", "answer": "A policy assigns actions given observations or an inferred state. A world model assigns outcomes given state and action. They can be trained separately or as components of one agent.", "example": "One model picks a push. The other predicts what the push will do."},
+  {"id": "fundamentals-generative-capacity", "topic": "fundamentals", "term": "Generative capacity", "question": "Why can a reward-predictive dynamics model support control without rendering future frames?", "answer": "Planning only needs enough predicted information to rank actions for its objective. Reward, continuation, and value predictions can suffice for some tasks even when the latent cannot reproduce the scene.", "example": "MuZero ranks moves using reward, policy, and value predictions.", "source": "muzero"},
+  {"id": "fundamentals-counterfactual-identification", "topic": "fundamentals", "term": "Counterfactual identification", "question": "Why can an action-conditioned model learn a correlation that reverses under intervention?", "answer": "Logged actions may depend on hidden factors that also influence the outcome. Conditioning on an action in those logs can then differ from intervening to set that action.", "example": "An operator slows down mainly on unstable terrain. The logs may associate slow speeds with instability."},
+  {"id": "fundamentals-behavior-policy", "topic": "fundamentals", "term": "Behavior policy", "question": "What does the behavior policy determine in an offline dataset?", "answer": "It influences which states and actions appear and how often they co-occur. Those frequencies define where one can directly check a learned transition against observed outcomes.", "example": "Expert demonstrations may cover successful recovery actions poorly if the experts rarely make mistakes."},
+  {"id": "fundamentals-on-policy-distribution-shift", "topic": "fundamentals", "term": "On-policy distribution shift", "question": "Why does a learned policy change the world model’s data distribution?", "answer": "Its actions change which states it reaches. Evaluating one-step predictions under the original collection policy can miss systematic errors under the learned policy’s visitation distribution.", "example": "A faster controller reaches contact states absent from conservative demonstrations."},
+  {"id": "fundamentals-temporal-resolution", "topic": "fundamentals", "term": "Temporal resolution", "question": "How does the sampling interval affect what an action-conditioned transition learns?", "answer": "It defines the physical duration represented by one model step. A larger interval shortens sequence length but may hide fast events. The recorded action must match what was applied across the interval.", "example": "A collision between camera frames can look like a discontinuous position jump."},
+  {"id": "fundamentals-terminal-and-truncated-episodes", "topic": "fundamentals", "term": "Terminal and truncated episodes", "question": "Why distinguish environment termination from a time-limit truncation?", "answer": "True termination ends the modeled return. A time limit imposed by data collection can stop observations while the underlying process continues, so it may still permit value bootstrapping.", "example": "A robot dropping an object and a recorder reaching a 60-second limit imply different continuation targets."},
+  {"id": "fundamentals-reward-specification", "topic": "fundamentals", "term": "Reward specification", "question": "What is the difference between learning dynamics and learning rewards?", "answer": "Dynamics specify how state changes. Rewards specify the preference over outcomes. Separating them can allow the same dynamics to support several tasks if the state preserves each task’s relevant information.", "example": "The same maze dynamics can support navigating to either of two destinations."},
+  {"id": "fundamentals-model-based-versus-model-free", "topic": "fundamentals", "term": "Model-based versus model-free", "question": "What makes a method model-based even if it selects actions with a policy at test time?", "answer": "The learned transition is used during learning or decision-making. An actor trained on imagined experience can later execute without an explicit online search.", "example": "Dreamer trains its actor on latent rollouts and then acts with that actor.", "source": "dreamer"},
+  {"id": "fundamentals-state-action-coverage", "topic": "fundamentals", "term": "State-action coverage", "question": "Why is broad state coverage alone insufficient for evaluating a controller trained offline?", "answer": "Transitions must be supported for the combinations of state and action the controller uses. Many observations of a state under one action reveal little about alternatives.", "example": "Many recordings of a stopped arm do not show how that arm responds to fast acceleration at the same position."},
+  {"id": "fundamentals-predictive-state", "topic": "fundamentals", "term": "Predictive state", "question": "How can a representation summarize history without reconstructing the hidden physical state?", "answer": "It can retain enough information to predict distributions of selected future tests under candidate actions. Distinct physical states may share a representation when they give the same predictions for those tests.", "example": "A door controller may only need to predict whether pushing and pulling will succeed."},
+  {
+    id: "model-parts", topic: "architectures", term: "Encoder, transition, heads",
+    question: "What are the basic components of a latent world model?",
+    answer: "An encoder or inference network estimates a state from observations and history. A transition predicts the next state given the current state and action. Prediction heads read out quantities such as reward, continuation, value, or reconstructed observations.",
+    example: "During a rollout, the transition and reward head can score actions without decoding pixels."
+  },
+  {
+    id: "rssm", topic: "architectures", term: "Recurrent state-space model",
+    question: "Why does an RSSM combine deterministic and stochastic state?",
+    answer: "The recurrent deterministic state carries history forward. The stochastic state lets the model represent alternative latent outcomes. Inference uses the current observation to update the stochastic state, while imagination samples it from the transition prior.",
+    example: "A deterministic state remembers an object went behind a screen. The stochastic component can represent alternative hidden configurations."
+  },
+  {
+    id: "token-model", topic: "architectures", term: "Token-based dynamics",
+    question: "How can a transformer serve as a world model?",
+    answer: "A tokenizer maps observations to discrete tokens. An autoregressive transformer can then predict future tokens from past tokens and actions. Generated tokens can be decoded to observations or consumed by task heads.",
+    example: "The transition can model interactions across image regions, with inference cost tied to the number of tokens generated."
+  },
+  {
+    id: "jepa", topic: "architectures", term: "Joint-embedding prediction",
+    question: "What does a JEPA-style model predict?",
+    answer: "A predictor maps context embeddings to target embeddings produced by a target encoder. The loss is computed in representation space, which allows the model to focus on predictable structure without a pixel decoder.",
+    example: "A video JEPA can predict embeddings of masked spatiotemporal regions from the visible context."
+  },
+  {
+    id: "object-centric", topic: "architectures", term: "Object-centric dynamics",
+    question: "What inductive bias does a graph transition add to an object-centric world model?",
+    answer: "It represents objects as nodes and computes their updates from shared interaction functions. With permutation-equivariant aggregation, changing node order only permutes the outputs. Generalization still depends on object discovery, edge semantics, and training coverage.",
+    example: "A learned collision update can be reused for different object pairs. A slot that tracks the wrong object can still derail the rollout.",
+    source: "cswm"
+  },
+  {"id": "architectures-deterministic-residual-transition", "topic": "architectures", "term": "Deterministic residual transition", "question": "Why predict a state increment in a continuous dynamics model?", "answer": "Predicting the change gives the transition an identity shortcut, which can simplify short-step dynamics. It helps when consecutive states are close and may offer less benefit around discontinuities.", "example": "Predict the change in velocity over 20 ms and add it to the current velocity."},
+  {"id": "architectures-factorized-stochastic-state", "topic": "architectures", "term": "Factorized stochastic state", "question": "Why use several categorical latent variables instead of one categorical code?", "answer": "A product of small categorical variables can represent many joint configurations with a manageable number of logits. Dependencies can still enter through the shared conditioning state.", "example": "Two variables with four classes each represent 16 joint configurations with eight logits.", "source": "dreamer"},
+  {"id": "architectures-autoregressive-spatial-ordering", "topic": "architectures", "term": "Autoregressive spatial ordering", "question": "Why does token order matter in a visual autoregressive transition?", "answer": "The order determines which tokens are available when each new token is predicted. It also affects sequential decoding cost and how easily the model represents nearby spatial dependencies.", "example": "Predicting a frame patch by patch conditions later patches on earlier generated patches."},
+  {"id": "architectures-continuous-latent-diffusion", "topic": "architectures", "term": "Continuous latent diffusion", "question": "Where can diffusion operate in a video world model?", "answer": "It can denoise pixels or denoise a continuous latent tensor that a decoder maps to video. Latent-space diffusion can reduce spatial compute, while a lossy codec can discard details that matter for control.", "example": "A compact video latent may lose the narrow gap a robot needs to avoid."},
+  {"id": "architectures-cross-attention-conditioning", "topic": "architectures", "term": "Cross-attention conditioning", "question": "How can a transition use actions through cross-attention?", "answer": "State or video tokens act as queries, and embedded action tokens serve as keys and values. Temporal alignment or masks determine which actions each predicted state can access.", "example": "A predictor can attend to the relevant gripper commands when predicting future hand-object contact."},
+  {"id": "architectures-memory-bottleneck", "topic": "architectures", "term": "Memory bottleneck", "question": "What trade-off does a fixed-size recurrent state make against attention over history?", "answer": "Recurrence compresses history into bounded memory and supports incremental updates. History attention can revisit earlier observations directly, within the context window, at additional compute and memory cost.", "example": "An object that vanishes for many frames tests whether a recurrent state retains its identity."},
+  {"id": "architectures-spatial-feature-maps", "topic": "architectures", "term": "Spatial feature maps", "question": "Why retain spatial patch features rather than one pooled embedding for visual planning?", "answer": "Patch features preserve where changes occurred and can represent goal details that pooling suppresses. They increase state size and may become sensitive to viewpoint or correspondence errors.", "example": "Two images contain the same blocks arranged at different positions.", "source": "dinowm"},
+  {"id": "architectures-object-slot-binding", "topic": "architectures", "term": "Object slot binding", "question": "Why must object-centric encoders preserve slot identity over time?", "answer": "A transition often assumes that each latent slot refers to the same entity across steps. Slot swaps can turn simple motion into apparent teleportation unless the model matches entities or is designed to handle permutations.", "example": "Two identical objects crossing can exchange slot assignments."},
+  {"id": "architectures-typed-message-passing", "topic": "architectures", "term": "Typed message passing", "question": "What do typed edges contribute to a graph world model?", "answer": "Edge types allow interaction updates to depend on relation semantics. Shared parameters can generalize within a relation, while distinct types let the model treat contacts and persistent links differently.", "example": "A hinge constrains two objects continuously, while collision edges activate only near contact.", "source": "cswm"},
+  {"id": "architectures-graph-locality", "topic": "architectures", "term": "Graph locality", "question": "What is the receptive field after K standard message-passing layers?", "answer": "Each node can incorporate information from nodes reachable through up to K message-passing hops, subject to edge direction and aggregation. Long-range effects may need extra layers or a different connectivity scheme.", "example": "With two directed layers, a node can receive a signal from a predecessor two edges away."},
+  {"id": "architectures-hybrid-physics-and-residuals", "topic": "architectures", "term": "Hybrid physics and residuals", "question": "What does a learned residual add to a known simulator?", "answer": "It corrects errors in a nominal dynamics model, preserving the simulator’s useful structure while learning effects it approximates poorly. Constrain or test the residual under distribution shift.", "example": "A rigid-body simulator supplies motion. A residual captures unmodeled friction on a surface."},
+  {"id": "architectures-multimodal-observation-fusion", "topic": "architectures", "term": "Multimodal observation fusion", "question": "Why align timestamps when fusing vision and touch in a transition?", "answer": "Asynchronous sensors can describe different physical states. Aligning to a common clock or modeling delays helps the latent associate observed contact with the action that caused it.", "example": "Touch may register a collision several video frames before the processed frame arrives."},
+  {"id": "architectures-discrete-continuous-hybrids", "topic": "architectures", "term": "Discrete-continuous hybrids", "question": "Why combine a discrete mode with a continuous state in contact dynamics?", "answer": "A mode can represent which transition regime is active, while continuous coordinates represent configuration within that regime. A switch can explain dynamics that change abruptly at contact.", "example": "A sliding box can switch between free motion and contact with a wall."},
+  {"id": "architectures-hierarchical-dynamics", "topic": "architectures", "term": "Hierarchical dynamics", "question": "What is the purpose of a slower temporal level in a hierarchical world model?", "answer": "A slower level can summarize outcomes over many primitive steps, making long-horizon search cheaper. A faster level still models details and executes or validates transitions proposed at the slower scale.", "example": "A planner selects a room-to-room subgoal, then models local navigation at finer resolution."},
+  {"id": "architectures-action-interfaces", "topic": "architectures", "term": "Action interfaces", "question": "Why embed action units and conventions consistently across embodiments?", "answer": "The same numeric input may mean different velocities, positions, or gripper commands on different robots. Explicit conventions or embodiment conditioning reduce accidental aliasing.", "example": "A value of 1 can mean a normalized motor command on one robot and one radian per second on another."},
+  {"id": "architectures-joint-versus-separate-heads", "topic": "architectures", "term": "Joint versus separate heads", "question": "What is the trade-off in sharing an encoder across reconstruction, reward, and continuation heads?", "answer": "Sharing can reuse common state information. If the heads compete for finite capacity or produce conflicting gradients, the representation can emphasize targets that are easier to optimize.", "example": "Pixel loss from a textured background can dominate a sparse task-reward signal.", "source": "dreamer"},
+  {
+    id: "elbo", topic: "objectives", term: "Variational objective",
+    question: "What are the two main terms in a variational latent dynamics objective?",
+    answer: "The reconstruction or prediction term rewards accurate observed targets. The KL term aligns an observation-conditioned posterior with a dynamics prior, so the prior can provide useful states when future observations are unavailable.",
+    example: "An RSSM can add reward and continuation prediction losses alongside observation reconstruction and latent KL."
+  },
+  {
+    id: "embedding-loss", topic: "objectives", term: "Representation collapse",
+    question: "Why can embedding prediction collapse, and how can training discourage it?",
+    answer: "If both branches learn freely from a similarity loss, constant embeddings can make prediction error vanish. Methods use different safeguards, such as stop-gradient with a slowly updated target encoder or explicit variance and covariance regularization.",
+    example: "With a momentum target encoder, gradients from the prediction loss flow through the context branch, while the target weights update by an exponential moving average."
+  },
+  {
+    id: "task-loss", topic: "objectives", term: "Task-directed supervision",
+    question: "When would you train a model to predict reward and value without reconstructing observations?",
+    answer: "When the latent is meant for a particular planning objective, reward and value targets can focus capacity on decision-relevant distinctions. A model trained this way may discard information a different task would need.",
+    example: "MuZero also predicts policy targets derived from search, alongside reward and value."
+  },
+  {
+    id: "multi-step", topic: "objectives", term: "Multi-step supervision",
+    question: "Why train on multi-step rollouts as well as one-step predictions?",
+    answer: "A transition that works with observation-corrected inputs can drift when it repeatedly consumes its own predictions. Multi-step training directly penalizes errors along open-loop trajectories over the training horizon.",
+    example: "PlaNet proposed latent overshooting, which compares a multi-step latent prior with an observation-conditioned posterior."
+  },
+  {
+    id: "contrastive-dynamics", topic: "objectives", term: "Contrastive latent transitions",
+    question: "How can contrastive learning train a transition without a pixel decoder?",
+    answer: "Bring the action-conditioned prediction close to the encoding of the actual successor and push it away from sampled alternatives. Negative sampling shapes what the representation distinguishes. Semantically equivalent negatives can penalize useful invariance.",
+    example: "A shuffled successor can provide a negative. If it encodes the same configuration as the positive, it is a poor contrast.",
+    source: "cswm"
+  },
+  {"id": "objectives-teacher-forcing", "topic": "objectives", "term": "Teacher forcing", "question": "Why can teacher-forced next-step training underestimate rollout error?", "answer": "It conditions each prediction on observed states or tokens. During open-loop rollout the model conditions on its own outputs, which may fall outside the training distribution.", "example": "A video decoder trained on clean history must later cope with its own slightly misplaced objects."},
+  {"id": "objectives-free-nats", "topic": "objectives", "term": "Free nats", "question": "What is the practical role of a free-nats threshold in latent KL training?", "answer": "Clipping a KL penalty below a threshold removes pressure to shrink it further in that region. This can give the stochastic state room to encode information when the predictor could otherwise ignore it.", "example": "A latent posterior can encode a brief contact event without incurring an additional KL gradient below the threshold.", "source": "dreamer"},
+  {"id": "objectives-kl-balancing", "topic": "objectives", "term": "KL balancing", "question": "Why stop gradients on opposite sides of the KL in dynamics and representation losses?", "answer": "A dynamics term can train the prior toward a fixed posterior, while a representation term can train the posterior toward a fixed prior. Separate weights allow the two effects to be balanced.", "example": "The model can put stronger pressure on the prior to catch up to the inferred state.", "source": "dreamer"},
+  {"id": "objectives-continuation-prediction", "topic": "objectives", "term": "Continuation prediction", "question": "Why predict continuation in addition to reward?", "answer": "The model needs to know whether to bootstrap future value after a simulated step. A continuation probability can scale the effective discount when termination is uncertain.", "example": "A predicted task failure can end a rollout even if the immediate reward alone is zero.", "source": "dreamer"},
+  {"id": "objectives-balanced-target-scales", "topic": "objectives", "term": "Balanced target scales", "question": "Why normalize targets in a multi-domain world model?", "answer": "Large-magnitude targets can dominate the same loss or gradient budget. Scaling can make training more stable across domains while preserving a way to recover meaningful predictions.", "example": "Rewards of order 100 in one game should not automatically outweigh unit-scale reward targets in another."},
+  {"id": "objectives-symlog-targets", "topic": "objectives", "term": "Symlog targets", "question": "What does the symmetric logarithm do to signed targets?", "answer": "It maps x to sign(x) log(1 + |x|), compressing large magnitudes while keeping the sign and behaving nearly linearly near zero. Symexp reverses the transform.", "example": "A reward target of −100 has compressed value near −4.62.", "source": "dreamer"},
+  {"id": "objectives-value-equivalent-models", "topic": "objectives", "term": "Value-equivalent models", "question": "What does it mean for a model to preserve Bellman updates relevant to a planner?", "answer": "It can match the expected reward-plus-value backup for selected policies and value functions despite using different internal transitions. Equivalence depends on the chosen backup class.", "example": "Two states may differ in appearance yet yield the same one-step backups for all task-relevant actions."},
+  {"id": "objectives-horizon-weighting", "topic": "objectives", "term": "Horizon weighting", "question": "Why weight prediction loss differently at different rollout horizons?", "answer": "Short steps often have better supervision, while later errors matter for planning and can dominate gradients if unweighted. Weights should reflect the task horizon and the meaning of late-step uncertainty.", "example": "Give extra weight to steps around an expected contact event when contact controls success."},
+  {"id": "objectives-inverse-dynamics-loss", "topic": "objectives", "term": "Inverse dynamics loss", "question": "What signal does inverse dynamics supervision provide to a visual encoder?", "answer": "Predicting the applied action from successive states encourages features that reveal controllable changes. It can miss action-independent variables that still matter for predicting the future.", "example": "A background vehicle moving independently may matter for navigation but not for inferring the robot’s steering command."},
+  {"id": "objectives-predictive-sufficiency", "topic": "objectives", "term": "Predictive sufficiency", "question": "How can an encoder trained for reward prediction discard useful transition information?", "answer": "Several states can share the same immediate reward yet differ in successor distributions or delayed outcomes. Auxiliary dynamics or value targets can distinguish them.", "example": "Both routes initially yield zero reward, but only one leads to a goal."},
+  {"id": "objectives-negative-sampling-bias", "topic": "objectives", "term": "Negative sampling bias", "question": "Why can in-batch negatives teach shortcuts in a contrastive transition objective?", "answer": "Negatives can differ from positives in lighting, camera, or episode ID more consistently than in dynamics. A model can then solve the contrastive task using nuisance features.", "example": "Sample harder negatives from the same episode and compare with cross-episode sampling.", "source": "cswm"},
+  {"id": "objectives-representation-regularization", "topic": "objectives", "term": "Representation regularization", "question": "What does a distribution-shaping regularizer add to embedding prediction?", "answer": "It penalizes a degenerate aggregate embedding distribution, so a constant output cannot minimize the combined objective. It does not by itself ensure the remaining variation captures useful state.", "example": "LeJEPA uses SIGReg alongside prediction to encourage isotropic Gaussian embeddings.", "source": "lejepa"},
+  {"id": "objectives-latent-feature-target-drift", "topic": "objectives", "term": "Latent feature target drift", "question": "Why can a learned target encoder destabilize transition training?", "answer": "When the target encoder changes rapidly, a fixed physical state has a moving representation. The predictor must learn dynamics while chasing a changing coordinate system.", "example": "Freezing a pretrained encoder makes successor targets stable during transition training.", "source": "dinowm"},
+  {"id": "objectives-probabilistic-scoring", "topic": "objectives", "term": "Probabilistic scoring", "question": "Why use held-out negative log likelihood to evaluate a probabilistic transition?", "answer": "It rewards models that assign high density or mass to observed successors, penalizing confident mistakes. It can compare predictions on the same representation and likelihood convention.", "example": "A narrow Gaussian is strongly penalized when it repeatedly misses the observed next velocity."},
+  {"id": "objectives-sequence-masking", "topic": "objectives", "term": "Sequence masking", "question": "Why mask contiguous spacetime regions during video representation learning?", "answer": "Large structured masks make local interpolation less sufficient and encourage learning information shared across space and time. Too little visible context can leave target features difficult to predict.", "example": "Predict an occluded moving object from its earlier position and visible surroundings.", "source": "vjepa"},
+  {"id": "objectives-loss-versus-control", "topic": "objectives", "term": "Loss versus control", "question": "Why ablate individual losses using closed-loop performance as well as prediction error?", "answer": "Lower loss can reflect improvements on frequent but task-irrelevant targets. Closed-loop tests reveal whether the change helps action ranking, correction after feedback, and task completion.", "example": "Better reconstruction of shadows can reduce visual error without improving grasp success.", "source": "worldarena"},
+  {
+    id: "prior-posterior", topic: "dynamics", term: "Filtering and imagination",
+    question: "When do you use the transition prior versus the posterior?",
+    answer: "Use the posterior when a new observation can correct the latent state. Use the transition prior to advance hypothetical futures, because their observations have yet to be seen.",
+    example: "In an RSSM rollout, the posterior initializes the current state. Each imagined step then uses the prior and a proposed action."
+  },
+  {
+    id: "multimodal", topic: "dynamics", term: "Stochastic dynamics",
+    question: "Why can squared-error prediction produce an implausible future?",
+    answer: "The squared-error optimum is the conditional mean. When several distinct futures are plausible, their mean can lie between modes and describe an unlikely outcome. A distributional model can represent those alternatives.",
+    example: "A ball may bounce left or right after striking an edge. The average trajectory could run straight through it."
+  },
+  {
+    id: "uncertainty", topic: "dynamics", term: "Uncertainty",
+    question: "How do aleatoric and epistemic uncertainty differ in a learned transition?",
+    answer: "Aleatoric uncertainty comes from variability remaining under the model’s conditioning information. Epistemic uncertainty reflects uncertainty about the learned model and can shrink with informative data. An ensemble’s disagreement can serve as a proxy for the latter.",
+    example: "Random wind gusts and a robot’s lack of experience with slippery floors are different sources of uncertainty."
+  },
+  {
+    id: "compounding", topic: "dynamics", term: "Compounding error",
+    question: "Why can one-step accuracy overstate the quality of a long rollout?",
+    answer: "Small errors alter the model’s future inputs. Repeated transitions can then enter latent regions the model rarely saw during training. Evaluate open-loop rollouts at the horizons the planner actually uses.",
+    example: "A model that slightly underpredicts braking distance can drift into impossible positions over repeated steps."
+  },
+  {
+    id: "latent-aliasing", topic: "dynamics", term: "Latent state aliasing",
+    question: "How can you detect when an encoder has merged states that matter for control?",
+    answer: "Find histories mapped to nearby latents, apply the same action, and compare their observed successor or reward distributions. Systematic differences indicate that the representation has discarded information the transition needs.",
+    example: "Two visually identical doors require different actions if one is locked. Earlier observations could distinguish the cases."
+  },
+  {"id": "dynamics-process-and-observation-noise", "topic": "dynamics", "term": "Process and observation noise", "question": "How do process noise and measurement noise affect a filter differently?", "answer": "Process noise changes the underlying state as it evolves. Measurement noise changes the evidence about that state. A filter accounts for both when deciding how strongly to trust a new reading.", "example": "A gust changes a drone’s true pose. A blurred camera frame changes how well it can be measured."},
+  {"id": "dynamics-local-stability", "topic": "dynamics", "term": "Local stability", "question": "What can a transition Jacobian tell you about rollout error near a trajectory?", "answer": "It describes first-order propagation of small state perturbations. Repeated Jacobian products can amplify or damp errors depending on the path and directions of perturbation.", "example": "A small position error near a wall can grow rapidly if it changes which contact regime the model predicts."},
+  {"id": "dynamics-persistent-latent-variables", "topic": "dynamics", "term": "Persistent latent variables", "question": "Why sample some stochastic factors once per trajectory instead of at every step?", "answer": "Persistent factors represent uncertainty that remains correlated across time. Independent resampling can make simulated dynamics change properties unrealistically from one step to the next.", "example": "Sample floor friction for an episode instead of redrawing it at every wheel update."},
+  {"id": "dynamics-distributional-rollouts", "topic": "dynamics", "term": "Distributional rollouts", "question": "Why is rolling out only the mean state generally different from averaging sampled rollouts?", "answer": "Nonlinear dynamics and rewards do not generally commute with expectation. A mean state can also be physically implausible when uncertainty is multimodal.", "example": "Averaging two trajectories passing on opposite sides of an obstacle can put the mean inside it.", "source": "pets"},
+  {"id": "dynamics-state-dependent-variance", "topic": "dynamics", "term": "State-dependent variance", "question": "What is heteroscedasticity in a learned dynamics model?", "answer": "The conditional uncertainty varies with the state or action. A model can learn different transition variances for predictable and uncertain regions of the state space.", "example": "Predicting the effect of a small push is easier on a flat surface than near a tipping edge.", "source": "pets"},
+  {"id": "dynamics-ensemble-particle-semantics", "topic": "dynamics", "term": "Ensemble particle semantics", "question": "Why might one keep an ensemble member fixed for each rollout particle?", "answer": "It represents a consistent hypothesis about dynamics across the rollout. Changing members each step mixes hypotheses and can hide systematic model differences over time.", "example": "One particle can follow a consistently low-friction model through a long turn.", "source": "pets"},
+  {"id": "dynamics-calibration-under-shift", "topic": "dynamics", "term": "Calibration under shift", "question": "Why does calibrated uncertainty on held-out logged trajectories not guarantee calibrated uncertainty during planning?", "answer": "The planner can query unusual states and actions that are underrepresented in the calibration split. Its selection can also concentrate on errors that produce high predicted returns.", "example": "Report empirical interval coverage by action novelty and rollout step, alongside overall coverage."},
+  {"id": "dynamics-multistep-latent-alignment", "topic": "dynamics", "term": "Multistep latent alignment", "question": "Why can a latent error measured against observation encodings be hard to interpret?", "answer": "Latent distance depends on the encoder and its scaling. A small distance may hide a task-relevant change, while a large distance may reflect appearance with little effect on control.", "example": "A goal embedding might react more strongly to lighting than to whether a small object moved."},
+  {"id": "dynamics-temporal-abstraction", "topic": "dynamics", "term": "Temporal abstraction", "question": "When can a K-step transition help with rollout drift?", "answer": "It can bypass intermediate prediction errors when K-step outcomes are learnable from the supplied action sequence. It can also discard information needed to check intermediate costs or constraints.", "example": "A transition predicting the state after five steps may skip a collision on step three."},
+  {"id": "dynamics-latency-as-state", "topic": "dynamics", "term": "Latency as state", "question": "When does delayed actuation make the command queue part of the state?", "answer": "If future motion depends on earlier commands that are still pending, the current physical state and newly issued command are insufficient. Including the queue makes the transition more nearly Markov.", "example": "A command issued 100 ms ago may be the one applied during the next camera frame."},
+  {"id": "dynamics-dynamics-discontinuities", "topic": "dynamics", "term": "Dynamics discontinuities", "question": "Why are smooth regression models challenged by contact transitions?", "answer": "A small input change can switch contact mode and cause a large change in successor velocity. A smooth average can blur the boundary and be wrong for both modes.", "example": "A barely touching gripper and a grasping gripper can produce very different object motion."},
+  {"id": "dynamics-latent-distribution-drift", "topic": "dynamics", "term": "Latent distribution drift", "question": "What is a direct check for whether imagined states leave the training manifold?", "answer": "Compare rollout latents with latents inferred from held-out real trajectories under matched actions. Inspect density proxies or nearest-neighbor distance by horizon and relate them to downstream failures.", "example": "A model may drift away only after turning into a corridor that was rarely visited."},
+  {"id": "dynamics-reversibility", "topic": "dynamics", "term": "Reversibility", "question": "Why does accurately predicting forward dynamics not guarantee a useful inverse model?", "answer": "Different state-action pairs can map to the same successor, and some transitions are physically irreversible. Inverse inference may require multiple hypotheses or extra information.", "example": "Several different pushes can bring a block to the same position after friction stops it."},
+  {"id": "dynamics-transition-support", "topic": "dynamics", "term": "Transition support", "question": "Why can averaging adjacent actions be unsafe near a mode boundary?", "answer": "Even if actions have similar numeric values, their effects can be qualitatively different near contact or constraints. Interpolation should be checked in outcome space.", "example": "A small grip-force increase can cross the threshold between slipping and holding."},
+  {"id": "dynamics-state-reset-distribution", "topic": "dynamics", "term": "State reset distribution", "question": "Why evaluate dynamics from both common and unusual initial states?", "answer": "Initialization determines which errors a rollout exposes. Starting only from frequently visited states may miss bad dynamics in recovery or unusual configurations.", "example": "Test a walking model from both upright positions and near-fall poses."},
+  {"id": "dynamics-latent-state-interventions", "topic": "dynamics", "term": "Latent state interventions", "question": "What evidence supports interpreting a latent coordinate as a physical quantity?", "answer": "A probe shows the quantity is recoverable, but controlled edits and matched rollouts test whether the model uses it consistently. Coordinate entanglement can make isolated edits unrealistic.", "example": "Increase a putative velocity coordinate while holding pose fixed and test whether future displacement changes as expected."},
+  {
+    id: "mpc", topic: "planning", term: "Model predictive control",
+    question: "What makes model predictive control receding-horizon?",
+    answer: "The planner scores candidate action sequences over a finite horizon, executes the first action from the selected sequence, then replans from the next observation. Each replan can correct errors in the previous prediction.",
+    example: "A navigation planner may optimize ten actions ahead while applying only the next steering command."
+  },
+  {
+    id: "cem", topic: "planning", term: "Cross-entropy method",
+    question: "How does CEM search over continuous action sequences?",
+    answer: "Sample sequences from a proposal distribution, score their predicted returns, and refit the proposal to the best-scoring samples. Repeat for a few iterations and select an action sequence from the refined search.",
+    example: "PlaNet uses CEM to search action sequences with its learned latent dynamics."
+  },
+  {
+    id: "imagination", topic: "planning", term: "Learning in imagination",
+    question: "How does an imagination-trained policy use the model?",
+    answer: "The actor proposes actions in latent rollouts. Predicted rewards and a critic’s value estimates supply learning targets. Once trained, the actor can select actions directly from the inferred state at decision time.",
+    example: "DreamerV3 trains an actor and critic on imagined trajectories and acts with the learned policy."
+  },
+  {
+    id: "model-exploitation", topic: "planning", term: "Model exploitation",
+    question: "How can a planner exploit a learned model’s errors?",
+    answer: "Searching over many actions can favor candidates whose returns are overestimated, especially outside the training distribution. Shorter rollouts, uncertainty-aware scoring, and targeted data collection can reduce this effect.",
+    example: "A planner may repeatedly choose a maneuver the model predicts will produce a reward that never occurs in the real environment."
+  },
+  {
+    id: "value-bootstrap", topic: "planning", term: "Terminal value",
+    question: "Why add a terminal value estimate to a short-horizon planner?",
+    answer: "Score predicted rewards through the rollout horizon and add a discounted value estimate at its final state. The estimate can capture delayed payoff while limiting transition error. An inaccurate critic can still rank the candidate sequences poorly.",
+    example: "A short rollout can favor moving toward a distant charging station when the final state has higher estimated value."
+  },
+  {"id": "planning-random-shooting", "topic": "planning", "term": "Random shooting", "question": "What baseline should you compare against an iterative action optimizer?", "answer": "Random shooting samples a fixed budget of candidate action sequences and picks the best according to the model. Equalize rollout budgets when comparing it with CEM or other iterative methods.", "example": "With 256 rollout evaluations, compare one batch of 256 with four CEM batches of 64."},
+  {"id": "planning-warm-started-mpc", "topic": "planning", "term": "Warm-started MPC", "question": "Why shift the previous MPC solution to initialize the next planning step?", "answer": "Adjacent replans often share much of the same future. Shifting the old sequence forward reuses useful search work while leaving room to react to new evidence.", "example": "Drop the executed action and append a default action before sampling new candidates."},
+  {"id": "planning-gradient-based-planning", "topic": "planning", "term": "Gradient-based planning", "question": "When is backpropagating through a learned rollout practical for choosing actions?", "answer": "It requires differentiable transitions and an objective with informative gradients. The method can struggle with discrete actions, contact discontinuities, or local optima.", "example": "Optimize smooth continuous motor commands directly and compare with a sampling-based search."},
+  {"id": "planning-tree-search-priors", "topic": "planning", "term": "Tree search priors", "question": "How does a learned policy prior help Monte Carlo tree search?", "answer": "It biases exploration toward promising actions before many rollouts are available. The tree can still revise those preferences as backed-up values provide evidence.", "example": "Search can initially expand a policy-favored move, then favor a different move after exploring the consequences.", "source": "muzero"},
+  {"id": "planning-planning-versus-acting-budget", "topic": "planning", "term": "Planning versus acting budget", "question": "Why report planner runtime in addition to environment steps?", "answer": "A method can be data-efficient yet take too long to choose actions in a closed loop. Wall-clock latency includes encoding, rollout generation, optimization, and communication.", "example": "A planner that needs 500 ms may miss deadlines on a system controlled at 20 Hz."},
+  {"id": "planning-risk-sensitive-scoring", "topic": "planning", "term": "Risk-sensitive scoring", "question": "When can maximizing expected return select a poor plan?", "answer": "The mean can hide low-probability severe outcomes. A lower quantile, conditional value at risk, or explicit chance constraint can give those outcomes appropriate weight.", "example": "A fast route with occasional irreversible failure can lose to a slightly slower, reliable route."},
+  {"id": "planning-chance-constraints", "topic": "planning", "term": "Chance constraints", "question": "What does a chance constraint ask a probabilistic planner to enforce?", "answer": "It bounds the predicted probability of violating a condition. Its real-world value depends on model calibration, how joint events are estimated, and the amount of rollout sampling.", "example": "A planner limits estimated collision probability across a trajectory, rather than setting a bound on average clearance."},
+  {"id": "planning-goal-feature-distance", "topic": "planning", "term": "Goal feature distance", "question": "What makes an embedding distance useful as an MPC objective?", "answer": "It should decrease as the state approaches the task goal and remain sensitive to distinctions that determine success. Irrelevant feature changes or feature aliasing can mislead optimization.", "example": "A block goal should reward correct block position more than matching the background illumination.", "source": "dinowm"},
+  {"id": "planning-goal-progress-shaping", "topic": "planning", "term": "Goal progress shaping", "question": "Why can a terminal-only goal cost be difficult for short-horizon search?", "answer": "Many trajectories may have similar terminal scores when the goal is far beyond the rollout horizon. Intermediate progress measures or reachable subgoals can provide a useful ranking.", "example": "A maze goal around a corner is easier to approach if a nearby doorway is a subgoal.", "source": "planning-limits"},
+  {"id": "planning-action-proposal-policies", "topic": "planning", "term": "Action proposal policies", "question": "How can a learned policy and a world model cooperate at decision time?", "answer": "The policy proposes a small set of plausible actions or short sequences. The model evaluates their consequences and reranks them. This can be cheaper than searching the full action space.", "example": "Compare the policy’s first candidate with the top candidate after model reranking.", "source": "planning-limits"},
+  {"id": "planning-planning-under-a-belief", "topic": "planning", "term": "Planning under a belief", "question": "Why plan over multiple hidden-state hypotheses when observations are ambiguous?", "answer": "A plan that works under one inferred state can fail under another plausible state. Scoring plans over a belief exposes sensitivity and can favor information-gathering actions.", "example": "Move the camera to see which side of a divider contains the object before committing to a grasp."},
+  {"id": "planning-contingent-plans", "topic": "planning", "term": "Contingent plans", "question": "When is an observation-dependent action tree preferable to a fixed action sequence?", "answer": "If early actions produce informative observations, a contingent plan can choose a different later action for each outcome. An open-loop sequence commits to all actions in advance.", "example": "Inspect whether a route is blocked, then continue or detour depending on the observation."},
+  {"id": "planning-multi-fidelity-planning", "topic": "planning", "term": "Multi-fidelity planning", "question": "Why use a cheap model to shortlist actions before a more accurate simulator?", "answer": "The cheap model can evaluate many candidates. The slower model can refine the ranking or check constraints on the shortlist. A candidate discarded too early cannot be recovered downstream.", "example": "Score 1,000 plans with a latent model, then verify the top 20 with geometry."},
+  {"id": "planning-short-branched-rollouts", "topic": "planning", "term": "Short branched rollouts", "question": "Why start imagined rollouts from replay states in MBPO?", "answer": "Starting from observed states and rolling out only a few steps limits compounding model bias while supplying synthetic transitions for policy learning.", "example": "Seed synthetic samples from diverse real states instead of rolling forward an entire simulated episode.", "source": "mbpo"},
+  {"id": "planning-optimizer-s-curse", "topic": "planning", "term": "Optimizer’s curse", "question": "Why can increasing the search budget worsen true returns with an imperfect model?", "answer": "More candidates give search more chances to find favorable prediction errors. Compare true returns and the predicted-versus-real gap as a function of search budget.", "example": "The maximum predicted return rises with more samples while observed success falls."},
+  {"id": "planning-replanning-frequency", "topic": "planning", "term": "Replanning frequency", "question": "How does executing several planned actions before replanning change MPC behavior?", "answer": "It reduces inference cost but extends the time the controller runs without correcting its state estimate. Tune the interval against disturbance rate, latency, and control bandwidth.", "example": "An arm can replan slowly during free movement and more often near contact."},
+  {
+    id: "ha-schmidhuber", topic: "systems", term: "World Models · 2018",
+    question: "How did Ha and Schmidhuber divide their system into V, M, and C?",
+    answer: "V is a variational autoencoder for visual compression. M is a mixture-density recurrent network that predicts the next latent given the history and action. C is a compact controller that reads visual and recurrent features.",
+    example: "The Doom experiment trained the controller inside the learned simulator before transferring it to the game.",
+    source: "world-models"
+  },
+  {
+    id: "planet-dreamer", topic: "systems", term: "PlaNet and DreamerV3",
+    question: "How do PlaNet and DreamerV3 turn latent predictions into actions?",
+    answer: "PlaNet optimizes action sequences online with CEM and replans after each step. DreamerV3 uses imagined trajectories to train an actor and critic, then deploys the actor to select actions.",
+    example: "Both learn latent dynamics from interaction data. Their action-selection mechanisms use the model at different stages.",
+    source: "dreamer"
+  },
+  {
+    id: "muzero", topic: "systems", term: "MuZero · 2020",
+    question: "What does MuZero’s learned model supply to tree search?",
+    answer: "A representation network maps history to a root hidden state. A dynamics network predicts a successor hidden state and reward for an action. A prediction network supplies policy and value estimates at the latent nodes.",
+    example: "Monte Carlo tree search uses these quantities to explore action branches without reconstructing future observations.",
+    source: "muzero"
+  },
+  {
+    id: "vjepa", topic: "systems", term: "V-JEPA 2 · 2025",
+    question: "Which stage makes V-JEPA 2 usable for action-conditioned robot planning?",
+    answer: "V-JEPA 2 first learns representations from video through masked latent prediction. The V-JEPA 2-AC post-training stage uses robot trajectories with actions to learn action-conditioned latent dynamics for planning.",
+    example: "The planner can score predicted latent outcomes against a goal image represented in the same feature space.",
+    source: "vjepa"
+  },
+  {
+    id: "pets-ensemble", topic: "systems", term: "PETS · 2018",
+    question: "How does PETS represent uncertainty during planning?",
+    answer: "PETS trains an ensemble of probabilistic dynamics models and propagates sampled particles through them. Each model predicts a distribution, while differences across models reflect disagreement about the dynamics. MPC uses those rollouts to score candidate actions.",
+    example: "For an unfamiliar motion, the particles can spread because individual predictions are noisy and ensemble members disagree.",
+    source: "pets"
+  },
+  {"id": "systems-td-mpc2", "topic": "systems", "term": "TD-MPC2", "question": "How does TD-MPC2 use a decoder-free model for continuous control?", "answer": "It learns latent transitions and task-relevant quantities, then combines local trajectory optimization with learned values and a policy prior. It does not require reconstructing visual observations for planning.", "example": "A short imagined trajectory is scored using rewards and a learned terminal value.", "source": "tdmpc2"},
+  {"id": "systems-iris", "topic": "systems", "term": "IRIS", "question": "What does IRIS model as a sequence in Atari?", "answer": "It tokenizes observations and uses an autoregressive transformer to model experience involving visual tokens and actions, with reward and termination prediction for imagined learning.", "example": "The agent can learn from synthetic game trajectories produced by the transformer.", "source": "iris"},
+  {"id": "systems-diamond", "topic": "systems", "term": "DIAMOND", "question": "What modeling decision distinguishes DIAMOND from token-autoregressive Atari world models?", "answer": "DIAMOND models visual observations using diffusion. The authors motivate the choice with game details that can be lost when observations are compressed into a small discrete token representation.", "example": "A small visual cue can change the optimal action even if it occupies very few pixels.", "source": "diamond"},
+  {"id": "systems-gamengen", "topic": "systems", "term": "GameNGen", "question": "What did GameNGen learn from recorded gameplay?", "answer": "A diffusion model predicts the next game frame from past frames and actions recorded from an RL player. Generated frames are fed back during interactive simulation.", "example": "The Doom demonstration renders the outcome of player inputs through the learned model.", "source": "gamengen"},
+  {"id": "systems-genie", "topic": "systems", "term": "Genie", "question": "How did the original Genie obtain a control interface from unlabeled video?", "answer": "A latent action model inferred compact action codes from frame transitions. An autoregressive model used those codes to generate the next visual tokens, letting users select latent controls.", "example": "Repeatedly choose a learned code to move within a generated 2D environment.", "source": "genie"},
+  {"id": "systems-genie-3", "topic": "systems", "term": "Genie 3", "question": "What capability did DeepMind demonstrate with Genie 3?", "answer": "The technical announcement describes real-time, interactively controlled 3D environments generated from text prompts. This is a demonstration of interactive simulation, with fidelity and physical accuracy depending on the scenario.", "example": "Move a viewpoint through a generated scene and inspect whether revisited content stays consistent.", "source": "genie3"},
+  {"id": "systems-genie-4", "topic": "systems", "term": "Genie 4", "question": "What evaluation questions follow from the Genie 4 announcement?", "answer": "DeepMind reports improved realism and real-time interaction. To assess utility for control, independently measure action fidelity, object persistence, and task success under interventions.", "example": "A visually convincing clip can still score poorly if a controlled object responds inconsistently to commands.", "source": "genie4"},
+  {"id": "systems-dino-wm", "topic": "systems", "term": "DINO-WM", "question": "How does DINO-WM convert a goal image into an action search objective?", "answer": "It predicts action-conditioned futures in pretrained DINOv2 patch features and scores them against features of the goal image. Action sequences are optimized at test time.", "example": "In a pushing task, the desired object arrangement is supplied as an image.", "source": "dinowm"},
+  {"id": "systems-original-dreamer", "topic": "systems", "term": "Original Dreamer", "question": "What step did the original Dreamer add to the line of latent planning from pixels?", "answer": "It learned an actor and critic from latent imagination, letting the actor amortize action selection over training. This differs from optimizing candidate sequences from scratch at each environment step.", "example": "Once trained, the actor maps the inferred state directly to actions.", "source": "dreamer1"},
+  {"id": "systems-leworldmodel", "topic": "systems", "term": "LeWorldModel", "question": "What are the two training terms in LeWorldModel?", "answer": "The model uses a next-embedding prediction loss and a regularizer encouraging an isotropic Gaussian embedding distribution. The two terms jointly train the encoder and predictor from pixels.", "example": "The regularizer keeps a constant encoder from being a trivial optimum.", "source": "lewm"},
+  {"id": "systems-v-jepa-2-1", "topic": "systems", "term": "V-JEPA 2.1", "question": "What two supervision changes target denser representations in V-JEPA 2.1?", "answer": "Its dense predictive loss uses visible and masked tokens, and deep self-supervision applies learning signals to intermediate encoder layers. The report also describes unified image and video tokenization.", "example": "Dense representations can preserve the position of an object needed for robot grasping.", "source": "vjepa21"},
+  {"id": "systems-cosmos-platform", "topic": "systems", "term": "Cosmos platform", "question": "What does the original Cosmos platform provide besides pretrained models?", "answer": "The platform describes video curation, video tokenizers, and examples of adapting foundation models to downstream physical AI uses. It is a suite of tools and models with different interfaces.", "example": "A video generation model can be post-trained for a particular simulation domain.", "source": "cosmos"},
+  {"id": "systems-cosmos-predict2-5", "topic": "systems", "term": "Cosmos-Predict2.5", "question": "How does the Cosmos-Predict2.5 report describe its generation interface?", "answer": "It describes a single flow-based model for text-to-world, image-to-world, and video-to-world generation, with richer text grounding from a physical AI vision-language model.", "example": "Start generation from a text description or condition on existing visual context.", "source": "cosmos25"},
+  {"id": "systems-mopo", "topic": "systems", "term": "MOPO", "question": "How does MOPO discourage an offline policy from relying on uncertain model rollouts?", "answer": "It subtracts a model uncertainty penalty from imagined rewards. The policy is trained against the modified rewards, making apparently attractive but poorly supported transitions less desirable.", "example": "A synthetic transition with high predicted reward can be downgraded when its dynamics estimate is unreliable.", "source": "mopo"},
+  {"id": "systems-morel", "topic": "systems", "term": "MOReL", "question": "How does MOReL encode unfamiliar dynamics differently from a graded reward penalty?", "answer": "Its pessimistic MDP treats designated unknown state-action regions as transitions to an absorbing low-value state. The resulting policy has an incentive to remain in supported regions.", "example": "An action judged unknown ends the modeled trajectory in a penalty state.", "source": "morel"},
+  {"id": "systems-worldcoder", "topic": "systems", "term": "WorldCoder", "question": "What form does WorldCoder give its learned world model?", "answer": "It uses an LLM to write executable code for the environment model and revises it using interaction evidence. A planner can then test candidate actions against the resulting program.", "example": "A newly observed transition can reveal a missing condition in the generated state-update logic.", "source": "worldcoder"},
+  {
+    id: "ontology-axioms", topic: "ontology", term: "Ontology and instances",
+    question: "What does an ontology contribute beyond a list of graph triples?",
+    answer: "An ontology gives classes and relations explicit semantics through axioms. Instance data records claims about particular entities. A reasoner can combine those claims with the axioms to derive additional facts.",
+    example: "If Branch is a subclass of Vessel, an instance typed as Branch is also inferred to be a Vessel.",
+    source: "owl"
+  },
+  {
+    id: "ontology-direction", topic: "ontology", term: "Direction and reachability",
+    question: "How do you encode immediate connections and multihop reachability?",
+    answer: "Keep direct adjacency separate from reachability. Compute directed reachability by graph traversal or define a transitive superproperty when the domain semantics warrant it. Keep direction explicit, especially when choosing which neighbors to pass to a model.",
+    example: "In a directed vessel phantom A → B → C, B is an immediate successor of A, and C is reachable from A in two hops.",
+    source: "owl"
+  },
+  {
+    id: "ontology-open-world", topic: "ontology", term: "Open-world semantics",
+    question: "If an OWL knowledge base contains no assertion that A connects to B, what can you conclude?",
+    answer: "The connection can be unknown. Under open-world semantics, a missing assertion does not entail its negation. Use explicit negative information or a separately justified completeness assumption when the task requires deciding absence.",
+    example: "A graph constructed from one partially observed frame may omit a connection that is present in the environment.",
+    source: "owl"
+  },
+  {
+    id: "ontology-validation", topic: "ontology", term: "Entailment and validation",
+    question: "When do OWL reasoning and SHACL validation answer different questions?",
+    answer: "OWL reasoning asks what follows from axioms and assertions. SHACL checks a supplied RDF graph against shapes, such as required properties or cardinalities. A missing required value can violate a shape even when the ontology is logically consistent.",
+    example: "If the graph supplied to SHACL lacks a required identifier, a minimum-count shape can flag that record.",
+    source: "shacl"
+  },
+  {
+    id: "ontology-conditioning", topic: "ontology", term: "Conditioning on a domain graph",
+    question: "How can an ontology inform a learned transition without becoming the transition itself?",
+    answer: "Ground the current observation to candidate entities, encode a relevant subgraph, and condition the action-dependent transition on that context. The graph supplies stable relations. The model still learns how states change after actions.",
+    example: "A navigation model can use outgoing connections from a grounded node while learning how steering changes the agent’s position."
+  },
+  {
+    id: "ontology-temporal", topic: "ontology", term: "Static structure and changing facts",
+    question: "Why separate an ontology’s stable relations from time-varying state?",
+    answer: "The same relation vocabulary can describe many states, but individual assertions can change after an action. Keep the stable schema and topology separate from time-indexed facts, and use an explicit transition mechanism to update those facts.",
+    example: "Two rooms can remain connected by a doorway while the door’s open state changes from one timestep to the next."
+  },
+  {
+    id: "ontology-ablation", topic: "ontology", term: "Graph ablations",
+    question: "How can you test whether a model uses domain relations rather than simple degree cues?",
+    answer: "Compare the true graph with a no-graph baseline, degree-only features, and degree-preserving rewiring where feasible. Preserve directed in- and out-degrees for directed graphs. Fit preprocessing on training data and hold out graphs or entities when testing transfer.",
+    example: "If performance also improves with rewired edges, graph exposure or preserved degree may explain part of the gain."
+  },
+  {"id": "ontology-tbox-and-abox", "topic": "ontology", "term": "TBox and ABox", "question": "What is the distinction between TBox and ABox statements?", "answer": "TBox statements describe classes, relations, and schema-level axioms. ABox statements make claims about named individuals. The distinction helps separate stable modeling assumptions from observations that change.", "example": "Sensor is a subclass of Device is schema knowledge. sensor7 is a Sensor is an assertion.", "source": "owl"},
+  {"id": "ontology-rdf-triples", "topic": "ontology", "term": "RDF triples", "question": "What do the subject, predicate, and object of an RDF triple represent?", "answer": "The subject names a resource, the predicate gives the property, and the object is another resource or a literal value. Graph edges and typed attributes can both be expressed as triples.", "example": "roomA connectedTo roomB is a relation. roomA hasName “Workshop” records a literal value.", "source": "rdf"},
+  {"id": "ontology-domain-and-range", "topic": "ontology", "term": "Domain and range", "question": "What does declaring an OWL property’s domain do when the property appears in a triple?", "answer": "The reasoner can infer that the triple’s subject belongs to the domain class. Domain axioms are semantic implications. Use a validation shape if your aim is to flag missing or unexpected explicit types.", "example": "If contains has domain Container, asserting x contains y can entail that x is a Container.", "source": "owl"},
+  {"id": "ontology-inverse-properties", "topic": "ontology", "term": "Inverse properties", "question": "When is an inverse property useful for traversal and inference?", "answer": "It states that one relation reverses another. A reasoner can then derive facts in the opposite direction without treating the original relation as symmetric.", "example": "If parentOf(A, B), then childOf(B, A).", "source": "owl"},
+  {"id": "ontology-property-chains", "topic": "ontology", "term": "Property chains", "question": "What does a property-chain axiom let an ontology infer?", "answer": "It can infer a relation from the composition of other relations under the stated chain. Declare the exact semantics carefully because the inferred edge will be available to downstream queries.", "example": "If a sensor is mounted on a robot and the robot is in a room, infer the sensor is in that room if the domain supports that chain.", "source": "owl"},
+  {"id": "ontology-cardinality-and-identity", "topic": "ontology", "term": "Cardinality and identity", "question": "Why can an OWL maximum cardinality restriction lead to an identity inference?", "answer": "OWL does not generally assume different names denote different individuals. If two names fill a property restricted to at most one value, a reasoner may infer that they denote the same individual.", "example": "Two identifiers for the only allowed controller can be reconciled unless asserted distinct.", "source": "owl"},
+  {"id": "ontology-disjoint-classes", "topic": "ontology", "term": "Disjoint classes", "question": "How can a disjointness axiom help catch contradictory assertions?", "answer": "It declares that no individual can belong to both classes. Asserting both memberships for one individual can then make the knowledge base inconsistent.", "example": "An object cannot simultaneously occupy two explicitly disjoint discrete states at the same time index.", "source": "owl"},
+  {"id": "ontology-existential-restrictions", "topic": "ontology", "term": "Existential restrictions", "question": "Why can an ontology entail that a relation has a filler without naming it?", "answer": "An existential restriction asserts that at least one filler satisfying a condition exists. It need not identify a named individual in the graph.", "example": "Every robot has some power source does not name the source of robot7.", "source": "owl"},
+  {"id": "ontology-sparql-paths", "topic": "ontology", "term": "SPARQL paths", "question": "What is the difference between a path query and materializing inferred edges?", "answer": "A path query traverses relations at query time. Materialization stores derived edges for later reuse. Materialized data needs maintenance when source assertions change.", "example": "Query a directed chain with a property path, or store a separately named reaches relation.", "source": "sparql"},
+  {"id": "ontology-provenance", "topic": "ontology", "term": "Provenance", "question": "Why record the source of each graph assertion?", "answer": "It lets a system distinguish curated rules, sensor observations, and model guesses. Provenance helps trace errors, resolve conflicts, and restrict which facts a planner may trust.", "example": "A human-verified connection and a low-confidence detected connection can have different provenance.", "source": "prov"},
+  {"id": "ontology-temporal-reification", "topic": "ontology", "term": "Temporal reification", "question": "How can a graph represent the time and confidence of an assertion?", "answer": "Introduce an event or assertion resource that records its participants and qualifiers. This allows multiple measurements about the same entities to coexist without collapsing their time context.", "example": "An OccupancyObservation node links a robot, a room, a timestamp, and a confidence score."},
+  {"id": "ontology-graph-direction-ablation", "topic": "ontology", "term": "Graph direction ablation", "question": "What can upstream-versus-downstream context reveal in a directed ontology?", "answer": "It tests whether predictive signal depends on the direction of relations from the grounded entity. Match hop budget and context size so direction is easier to isolate.", "example": "Compare predecessor and successor subgraphs around a node using the same encoder and training split."},
+  {"id": "ontology-subgraph-selection", "topic": "ontology", "term": "Subgraph selection", "question": "Why compare local subgraphs against the whole ontology under a fixed model budget?", "answer": "Local selection can concentrate relevant evidence and reduce noise. A whole-graph comparison helps show whether the gain comes from retrieval, graph capacity, or stable domain cues.", "example": "Control the number of encoded nodes when comparing a two-hop neighborhood with the whole graph."},
+  {"id": "ontology-relation-label-ablation", "topic": "ontology", "term": "Relation-label ablation", "question": "How do you test whether edge labels add value beyond the unlabeled topology?", "answer": "Preserve endpoints and perturb or remove edge types, while keeping the rest of the model and data fixed. This probes label semantics separately from connectivity.", "example": "Compare typed “contains” and “touches” edges against a single generic edge type."},
+  {"id": "ontology-graph-leakage", "topic": "ontology", "term": "Graph leakage", "question": "How can a domain graph leak the target during model evaluation?", "answer": "Edges or inferred facts constructed from later events or test labels can expose the answer. Build features from information available at the decision time and audit transitive or derived links.", "example": "A graph assembled from a completed trajectory can accidentally reveal the future location being predicted."},
+  {"id": "ontology-schema-evolution", "topic": "ontology", "term": "Schema evolution", "question": "Why version an ontology used by a trained model?", "answer": "Changing relation meanings or identifiers can change inputs even when graph size stays the same. Version the schema, mapping rules, and derived features together so experiments can be reproduced.", "example": "A new definition of “adjacent” may change every neighborhood retrieved for the same node."},
+  {
+    id: "ns-interface", topic: "neurosymbolic", term: "Neural and symbolic interfaces",
+    question: "What makes a world-model pipeline neuro-symbolic?",
+    answer: "It couples a learned neural component with explicit symbols and symbolic inference or search. The interface may map perceptual features to predicates, feed symbolic constraints into learning, or use a neural model to score candidates from a symbolic planner.",
+    example: "A vision model estimates whether objects are graspable. A planner reasons over grasp, move, and place preconditions."
+  },
+  {
+    id: "ns-grounding", topic: "neurosymbolic", term: "Symbol grounding",
+    question: "Where can a neuro-symbolic system fail even when its rules are correct?",
+    answer: "The learned grounding can assign a predicate to the wrong entity or infer it from unreliable evidence. Symbolic conclusions inherit these errors. Carrying multiple hypotheses or calibrated confidence can prevent a premature commitment.",
+    example: "A detector assigns a key to the wrong box. A valid rule then suggests opening the wrong box."
+  },
+  {
+    id: "ns-constraints", topic: "neurosymbolic", term: "Hard and soft constraints",
+    question: "When should a planner use a hard symbolic constraint rather than a penalty?",
+    answer: "Use a hard constraint for a reliable invariant over the planner’s representation. Use a soft penalty or uncertainty-aware scoring for fallible rules and noisy predicates. A hard constraint only guarantees compliance with the encoded condition on the supplied state.",
+    example: "Known action preconditions can prune candidates. An uncertain vision estimate of whether a region is occupied can be scored probabilistically."
+  },
+  {
+    id: "ns-actions", topic: "neurosymbolic", term: "Symbolic action models",
+    question: "What do action schemas add to a graph of current facts?",
+    answer: "Action schemas specify when a parameterized action is applicable and which facts it changes. A symbolic planner chains these state updates to reach a goal. Learned perception or dynamics can provide predicate estimates and feasibility checks.",
+    example: "PICK requires an accessible object and an empty gripper. Its effects include holding the object and ceasing to have an empty gripper.",
+    source: "pddlstream"
+  },
+  {
+    id: "ns-probabilistic", topic: "neurosymbolic", term: "DeepProbLog · 2018",
+    question: "How does DeepProbLog combine perception and logical inference?",
+    answer: "A neural predicate supplies probabilities for alternatives in a probabilistic logic program. Inference computes a query’s probability across possible worlds. The query loss can train the neural component through the inference computation.",
+    example: "Digit classifiers provide probabilities for two images. A logic program combines them to answer a query about their sum.",
+    source: "deepproblog"
+  },
+  {
+    id: "ns-hybrid-planning", topic: "neurosymbolic", term: "Symbolic plans and continuous feasibility",
+    question: "Why couple a symbolic planner with continuous feasibility checks?",
+    answer: "A discrete plan can meet logical preconditions and still require an unreachable grasp or a colliding motion. A hybrid planner can use symbolic search for action sequences and continuous samplers or learned predictors to propose and check their parameters.",
+    example: "PDDLStream integrates symbolic planning with black-box samplers. A learned grasp sampler can supply candidate poses for a geometric check.",
+    source: "pddlstream"
+  },
+  {
+    id: "ns-evaluation", topic: "neurosymbolic", term: "Evaluating a hybrid system",
+    question: "How can you tell whether gains come from perception, symbolic reasoning, or both?",
+    answer: "Measure grounding accuracy and calibration, rule or constraint violations, and end-task success. Compare a matched neural baseline, a hybrid with predicted predicates, and a hybrid with oracle predicates. Hold out combinations to test compositional transfer.",
+    example: "A large gap between predicted and oracle grounding points to the perception interface as a bottleneck, even when end-task success alone hides it."
+  },
+  {"id": "neurosymbolic-probabilistic-versus-fuzzy-truth", "topic": "neurosymbolic", "term": "Probabilistic versus fuzzy truth", "question": "How does the probability of a predicate differ from a fuzzy truth value?", "answer": "Probability expresses uncertainty about a proposition under a model. A fuzzy degree expresses graded membership or satisfaction. The numeric values can look similar while obeying different rules of combination.", "example": "There can be an 80% chance that a binary sensor is on, or a distance can partly satisfy the concept “near.”"},
+  {"id": "neurosymbolic-differentiable-rule-losses", "topic": "neurosymbolic", "term": "Differentiable rule losses", "question": "What can a soft logical loss enforce during neural training?", "answer": "It can penalize predicted outputs that violate a differentiable relaxation of a rule. Its weight trades off against data fit. Exact validity requires a separate guarantee or inference step.", "example": "Penalize predictions that assign a grasp to an object that the same model marks absent."},
+  {"id": "neurosymbolic-constraint-projection", "topic": "neurosymbolic", "term": "Constraint projection", "question": "How does projecting predictions onto a feasible set differ from training with a penalty?", "answer": "Projection modifies an output to satisfy the specified constraints at inference time, subject to finding a feasible solution. A training penalty only encourages feasibility statistically.", "example": "Reassign duplicate object identities after prediction using a matching solver."},
+  {"id": "neurosymbolic-constrained-decoding", "topic": "neurosymbolic", "term": "Constrained decoding", "question": "What can a grammar guarantee when an LLM generates a formal world model?", "answer": "It can constrain token sequences to valid syntax. It cannot by itself verify whether the generated transition rules match the intended environment.", "example": "A well-formed PDDL operator can still omit a necessary precondition.", "source": "formal-eval"},
+  {"id": "neurosymbolic-symbolic-trace-fidelity", "topic": "neurosymbolic", "term": "Symbolic trace fidelity", "question": "Why can a correct symbolic trace still give a misleading explanation of a hybrid decision?", "answer": "The trace explains how the supplied facts led to a result. It may hide uncertainty or mistakes in how the neural component obtained those facts, or fail to reflect scoring performed outside the trace.", "example": "A proof shows why a plan follows after accepting “door open,” but the visual evidence for that predicate was weak."},
+  {"id": "neurosymbolic-executable-world-models", "topic": "neurosymbolic", "term": "Executable world models", "question": "Why is passing a syntax and execution check insufficient for a generated world model?", "answer": "Such checks show that the representation runs under the chosen formalism. Compare transition structure and downstream behavior with references, observations, or invariants to assess semantic fidelity.", "example": "Two executable game models can disagree about which moves are possible.", "source": "formal-eval"},
+  {"id": "neurosymbolic-closed-loop-repair", "topic": "neurosymbolic", "term": "Closed-loop repair", "question": "How can discrepancies between predicted and observed transitions improve a symbolic model?", "answer": "A failed prediction provides a counterexample to the current rules. Localize the violated precondition or effect, revise the candidate rule, and regression-test prior transitions.", "example": "If pushing a locked door unexpectedly fails, add the missing lock precondition and replay known cases.", "source": "worldcoder"},
+  {"id": "neurosymbolic-state-abstraction-for-symbols", "topic": "neurosymbolic", "term": "State abstraction for symbols", "question": "What should a set of learned predicates preserve for symbolic planning?", "answer": "It should distinguish concrete states with different applicable actions or goal-relevant effects, or expose uncertainty about those distinctions. Coarse predicates can collapse states that need different plans.", "example": "“Graspable” may need qualifiers for gripper geometry or approach direction."},
+  {"id": "neurosymbolic-frame-problem", "topic": "neurosymbolic", "term": "Frame problem", "question": "Why are persistence assumptions needed in a symbolic transition system?", "answer": "A planner needs to know which facts stay true after each action. Explicit change effects plus persistence conventions avoid repeating every unaffected fact in every action schema.", "example": "Moving one object changes its location while the locations of untouched objects persist."},
+  {"id": "neurosymbolic-conditional-effects", "topic": "neurosymbolic", "term": "Conditional effects", "question": "When does an action schema need conditional effects?", "answer": "When the same action has different consequences depending on facts present in the current state. Explicit conditions retain those distinctions in the symbolic transition.", "example": "Pressing a button toggles a powered device, but leaves an unpowered device unchanged."},
+  {"id": "neurosymbolic-nonmonotonic-reasoning", "topic": "neurosymbolic", "term": "Nonmonotonic reasoning", "question": "Why might a reasoning system retract a conclusion after seeing new evidence?", "answer": "Default assumptions can support tentative conclusions that are withdrawn when exceptions become known. This is useful in partially observed settings where the agent acts before all facts are available.", "example": "Assume an unmarked door is usable until an obstruction is observed."},
+  {"id": "neurosymbolic-multiple-hypothesis-grounding", "topic": "neurosymbolic", "term": "Multiple hypothesis grounding", "question": "What does a symbolic planner gain from a belief over grounded predicates?", "answer": "It can compare plans over several plausible symbolic states instead of committing to the highest-scoring interpretation. Correlations between predicates may matter for the result.", "example": "Two detections could correspond to the same object. A belief model can represent that dependency."},
+  {"id": "neurosymbolic-learned-heuristics", "topic": "neurosymbolic", "term": "Learned heuristics", "question": "How can a neural heuristic accelerate symbolic search while preserving a symbolic feasibility test?", "answer": "Use the heuristic to order or prioritize nodes, then test legal successors using exact rules. Guarantees such as optimality may require admissible heuristics or a search design that compensates for learned bias.", "example": "A neural model estimates remaining steps, while a symbolic checker verifies preconditions."},
+  {"id": "neurosymbolic-perception-to-planning-contracts", "topic": "neurosymbolic", "term": "Perception-to-planning contracts", "question": "What belongs in the interface between a detector and a planner?", "answer": "Specify predicate meanings, entity identity, timestamps, confidence interpretation, and how to handle unknown values. A precise interface makes assumptions and downstream failure modes testable.", "example": "The planner can require a recent graspability estimate and treat stale estimates as unknown."},
+  {"id": "neurosymbolic-compositional-splits", "topic": "neurosymbolic", "term": "Compositional splits", "question": "How do you test whether a hybrid model can compose familiar rules in unfamiliar combinations?", "answer": "Hold out combinations of known objects, relations, or action sequences while keeping their components in training. Compare against random splits and check for leakage through aliases.", "example": "Train on placing cups on tables and books on shelves, then test books on tables."},
+  {"id": "neurosymbolic-proc2pddl", "topic": "neurosymbolic", "term": "PROC2PDDL", "question": "What does PROC2PDDL supervise?", "answer": "It pairs open-domain procedural text with expert-annotated PDDL representations. It tests whether a model can extract formal action preconditions and effects from natural-language procedures.", "example": "Convert an instruction about opening a container into predicates and an operator description.", "source": "proc2pddl"},
+  {"id": "video-passive-versus-interactive-video", "topic": "video", "term": "Passive versus interactive video", "question": "What does an interactive world model require beyond plausible video continuation?", "answer": "The generated future must respond to controls at the right times, with persistent consequences. Unconditional video plausibility gives no assurance that the model can distinguish interventions.", "example": "Give identical histories opposite steering commands and compare motion in the two outcomes.", "source": "genie"},
+  {"id": "video-video-tokenizers", "topic": "video", "term": "Video tokenizers", "question": "Why inspect a video tokenizer before training dynamics on its codes?", "answer": "The tokenizer sets the reconstruction ceiling and determines what information the dynamics can access. Evaluate whether its reconstructions retain small task-critical objects and motion cues.", "example": "A token codec can score well on generic distortion while erasing a tiny Atari projectile.", "source": "diamond"},
+  {"id": "video-temporal-compression", "topic": "video", "term": "Temporal compression", "question": "How can temporal compression complicate action alignment?", "answer": "One latent time cell may summarize several raw frames. The predictor must condition that cell on the relevant action window and respect the order of actions within it when order matters.", "example": "A block that compresses four frames should account for both opening and closing commands inside that block."},
+  {"id": "video-codebook-perplexity", "topic": "video", "term": "Codebook perplexity", "question": "What can low codebook perplexity tell you about a discrete video tokenizer?", "answer": "It indicates that relatively few codes carry most of the token mass. Compare usage across data regimes and inspect reconstruction, since concentrated usage can reflect either redundancy in the data or underused capacity.", "example": "A rare interaction may be poorly represented even if background tokens are used efficiently."},
+  {"id": "video-diffusion-conditioning", "topic": "video", "term": "Diffusion conditioning", "question": "How does a conditional diffusion simulator model several futures from the same history?", "answer": "It denoises a random sample while conditioning on past observations and proposed actions. Changing the initial noise can yield different futures while keeping the conditioning fixed.", "example": "Sample several trajectories under one push to see whether slipping and sticking are both represented.", "source": "diamond"},
+  {"id": "video-denoising-budget", "topic": "video", "term": "Denoising budget", "question": "Why report sampling steps when benchmarking a diffusion world model?", "answer": "Sampling steps affect wall-clock latency and often affect fidelity. Compare both outputs and runtime under the same hardware, resolution, and rollout setup.", "example": "A model can meet a real-time frame budget with four denoising steps and miss it with forty.", "source": "gamengen"},
+  {"id": "video-flow-matching", "topic": "video", "term": "Flow matching", "question": "What does a flow-matching model learn for generation?", "answer": "It learns a time-dependent vector field that transports samples from a simple base distribution toward the target distribution. At inference it numerically integrates this field, optionally conditioned on context.", "example": "Start with noise and integrate a conditional field to generate a video latent.", "source": "cosmos25"},
+  {"id": "video-autoregressive-windowing", "topic": "video", "term": "Autoregressive windowing", "question": "Why does rolling history limit long-term consistency in video simulators?", "answer": "Once a frame leaves the window, details visible only there may no longer condition the next prediction. Persistent state or memory can retain selected information beyond the window.", "example": "An object can reappear with a different color after the camera looks away for a long time."},
+  {"id": "video-frame-prediction-versus-segment-prediction", "topic": "video", "term": "Frame prediction versus segment prediction", "question": "What is a trade-off between framewise generation and generating chunks?", "answer": "Framewise generation can respond to each new action, but errors can accumulate rapidly. Chunk generation can coordinate motion within the chunk but must know or handle future actions over its duration.", "example": "Compare one-frame interaction against eight-frame blocks with a fixed action proposal."},
+  {"id": "video-keyframe-conditioning", "topic": "video", "term": "Keyframe conditioning", "question": "How can keyframes help a video simulator maintain coherence?", "answer": "A keyframe can provide a stable visual anchor for identity and layout. If it is stale or only shows one viewpoint, it may fail to represent recent changes or hidden geometry.", "example": "Reusing the initial frame can help preserve a room’s layout but miss a moved chair."},
+  {"id": "video-noise-augmentation", "topic": "video", "term": "Noise augmentation", "question": "Why corrupt conditioning frames during training for iterative simulation?", "answer": "At inference the model often sees imperfect generated history. Training on perturbed context can improve recovery from moderate errors, provided the noise resembles useful failure cases.", "example": "Add noise to recent frames so small prediction errors do not immediately derail the next generation.", "source": "gamengen"},
+  {"id": "video-latent-controls", "topic": "video", "term": "Latent controls", "question": "What can a latent action inferred from video accidentally encode?", "answer": "It can represent any compact explanation of the visual change, including camera motion, external events, or changes in lighting. Separating controllable effects requires assumptions, data, or validation.", "example": "A learned code may correlate with the camera panning instead of an object moving.", "source": "wild-actions"},
+  {"id": "video-action-disentanglement-test", "topic": "video", "term": "Action disentanglement test", "question": "How can you test whether a latent action transfers between scenes?", "answer": "Apply the same code to different matched states and compare the intended physical effect. Control for camera, initial state, and whether the action is feasible.", "example": "A “move left” code should have similar directional effects across backgrounds.", "source": "genie"},
+  {"id": "video-counterfactual-video-pairs", "topic": "video", "term": "Counterfactual video pairs", "question": "What makes a paired intervention test stronger than comparing arbitrary generated videos?", "answer": "It holds history and other inputs fixed and varies one action. Differences can then be attributed to the specified change within the simulator and compared against controlled real effects where available.", "example": "Fork the same scene at the moment just before the same object receives two different pushes."},
+  {"id": "video-long-term-object-permanence", "topic": "video", "term": "Long-term object permanence", "question": "How would you test whether a simulator remembers unseen objects?", "answer": "Create a sequence in which an object leaves view and later returns. Score identity, pose, and state changes expected from events during the gap.", "example": "Put an object in a box, move the box out of view, and check whether the object remains inside after revisiting."},
+  {"id": "video-camera-motion-confounds", "topic": "video", "term": "Camera motion confounds", "question": "Why can a video predictor misinterpret viewpoint changes as world dynamics?", "answer": "Images conflate object motion, ego-motion, and projection. Camera conditioning, multiview supervision, or explicit geometry can help separate these effects.", "example": "A stationary table shifts left in the frame when the camera pans right."},
+  {"id": "video-interactive-throughput", "topic": "video", "term": "Interactive throughput", "question": "What metric captures practical throughput in an interactive simulator?", "answer": "Measure end-to-end input-to-frame latency and its variability, alongside sustained frames per second. Batch generation throughput can hide delays experienced by a user or controller.", "example": "Thirty frames generated at once each second are different from one new frame every 33 ms."},
+  {"id": "video-simulation-as-a-data-engine", "topic": "video", "term": "Simulation as a data engine", "question": "What must be checked before using generated trajectories as supervision?", "answer": "Verify action-label alignment, physical validity, and diversity relative to real data. Evaluate downstream performance with matched real-data and augmentation controls.", "example": "A generated grasp trajectory is useful only if the annotated action and observed outcome agree.", "source": "worldarena"},
+  {"id": "robotics-world-action-models", "topic": "robotics", "term": "World-action models", "question": "How can a world-action model differ from a world model plus a separate online planner?", "answer": "It can learn future prediction and action generation jointly, sharing representations or a predictor. This may amortize decisions, while still using transition supervision during training.", "example": "A policy action head can learn from a backbone also trained to predict future visual features.", "source": "jepa-wam"},
+  {"id": "robotics-vision-language-action-policy", "topic": "robotics", "term": "Vision-language-action policy", "question": "What is the primary output of a vision-language-action policy?", "answer": "It outputs robot actions conditioned on observations and instructions. A prediction model can complement it by scoring consequences or by supplying auxiliary supervision.", "example": "Given “put the mug on the tray,” the policy proposes a motion sequence for the arm.", "source": "jepa-wam"},
+  {"id": "robotics-action-chunks", "topic": "robotics", "term": "Action chunks", "question": "Why predict a chunk of robot actions together?", "answer": "Joint prediction can produce temporally coherent commands and amortize inference overhead. Executing too much of a chunk without feedback can reduce robustness to disturbances.", "example": "Predict eight commands, execute two, observe again, and update the remaining plan.", "source": "diffusion-policy"},
+  {"id": "robotics-diffusion-policy-versus-simulator", "topic": "robotics", "term": "Diffusion policy versus simulator", "question": "How can you tell whether a diffusion model is a policy or a world model?", "answer": "Inspect its output. A diffusion policy generates actions conditioned on observations. A diffusion simulator generates outcomes conditioned on actions and context.", "example": "The policy outputs gripper poses, while the simulator predicts how the object moves.", "source": "diffusion-policy"},
+  {"id": "robotics-coordinate-frames", "topic": "robotics", "term": "Coordinate frames", "question": "Why specify whether robot action deltas use camera, base, or tool coordinates?", "answer": "The same vector has different physical meaning in different frames. Transforming observations and actions consistently is necessary for transferable dynamics and correct execution.", "example": "Positive tool-frame z can point sideways relative to gravity after rotating a wrist."},
+  {"id": "robotics-demonstration-synchronization", "topic": "robotics", "term": "Demonstration synchronization", "question": "Why align robot telemetry and video before learning a transition?", "answer": "Timing offsets can pair the visual effect of one action with a different command. Estimate clock offsets and account for camera, actuator, and logging delays.", "example": "A “close gripper” command can be paired with an opening frame if streams drift out of sync."},
+  {"id": "robotics-proprioception", "topic": "robotics", "term": "Proprioception", "question": "What does proprioception add to a visual world model?", "answer": "Joint angles, velocities, or gripper state give direct evidence about the robot that may be ambiguous or occluded in images. Sensor fusion must handle different rates and calibration.", "example": "Joint encoders can distinguish arm poses that project similarly in one camera."},
+  {"id": "robotics-tactile-forecasting", "topic": "robotics", "term": "Tactile forecasting", "question": "When can touch improve a learned transition?", "answer": "Contact signals can reveal forces, slip, and material interaction before visible motion changes. A model can use touch as input or predict it as a task-relevant target.", "example": "A tactile slip signal can distinguish a secure grasp from one that is about to fail.", "source": "worldarena2"},
+  {"id": "robotics-demonstration-coverage", "topic": "robotics", "term": "Demonstration coverage", "question": "Why include failures and recoveries in robot world-model training data?", "answer": "Successful demonstrations concentrate on favorable states. Recovery data expose how actions work after perturbations, which matters when a closed-loop policy makes mistakes.", "example": "Train the model on off-center grasps and correction attempts as well as centered grasps."},
+  {"id": "robotics-embodiment-transfer", "topic": "robotics", "term": "Embodiment transfer", "question": "Why does visual generalization alone not establish cross-robot control transfer?", "answer": "Robots can differ in kinematics, actuation, timing, and action representations. A model needs an interface mapping or conditioning that respects these differences.", "example": "A camera feature transfers across two arms while a joint command does not."},
+  {"id": "robotics-goal-ambiguity", "topic": "robotics", "term": "Goal ambiguity", "question": "What problem arises when one instruction corresponds to many acceptable physical outcomes?", "answer": "A single target image can penalize valid solutions that look different. Represent acceptable goals through object relations, multiple examples, or a task classifier where appropriate.", "example": "Several distinct placements can satisfy “put the block in the bin.”"},
+  {"id": "robotics-camera-domain-shift", "topic": "robotics", "term": "Camera domain shift", "question": "How should you test a goal-conditioned visual planner across viewpoints?", "answer": "Hold out camera configurations and compare the same physical goals across viewpoints. Test whether goal distances track state changes rather than visual alignment.", "example": "Rearrange a camera while keeping the goal arrangement and robot workspace fixed.", "source": "dinowm"},
+  {"id": "robotics-sim-to-real-gap", "topic": "robotics", "term": "Sim-to-real gap", "question": "Why can a policy succeed in a learned simulator and fail on hardware?", "answer": "The simulated transition may omit friction, sensing latency, actuator limits, or rare disturbances that matter under the policy. Evaluate on matched real tasks and inspect systematic discrepancies.", "example": "A grasp learned on ideal rigid objects may fail with deformable materials."},
+  {"id": "robotics-model-conditioned-recovery", "topic": "robotics", "term": "Model-conditioned recovery", "question": "What experiment isolates a world model’s contribution to recovery?", "answer": "Introduce the same controlled perturbations across policies and compare a shared base controller with and without model-based replanning. Measure recovery latency and final success.", "example": "Displace an object after the first action and test whether replanning improves the grasp."},
+  {"id": "robotics-action-reranking-with-a-fallback", "topic": "robotics", "term": "Action reranking with a fallback", "question": "Why keep a baseline policy action when reranking candidates with a world model?", "answer": "The baseline is a meaningful comparison and can serve as a fallback when the world model lacks support. Test whether reranking actually improves decisions where it intervenes.", "example": "Keep the policy’s top proposal when the candidate scores are too close or uncertain.", "source": "planning-limits"},
+  {"id": "robotics-subgoal-chaining", "topic": "robotics", "term": "Subgoal chaining", "question": "Why split a long manipulation task into shorter observable subgoals?", "answer": "Short rollouts can reliably rank nearby outcomes while failing to distinguish distant goals. A high-level planner or learned subgoal generator can guide the sequence of local decisions.", "example": "Reach the handle, open the drawer, then place the object.", "source": "planning-limits"},
+  {"id": "robotics-language-grounding-checks", "topic": "robotics", "term": "Language grounding checks", "question": "How can you distinguish an instruction-following error from a dynamics error?", "answer": "Hold the physical scene fixed and vary the requested goal. Check goal selection separately from predicted action effects and execution.", "example": "In the same scene, ask for the red cube and the blue cube, then compare which object is targeted."},
+  {"id": "robotics-collision-checking", "topic": "robotics", "term": "Collision checking", "question": "Why combine a learned action proposal with a geometric feasibility checker?", "answer": "Proposals can be fast and multimodal but may include physically impossible or colliding motions. A checker can reject candidates under its geometry and calibration assumptions.", "example": "Reject a promising grasp pose when the approach path intersects a known shelf.", "source": "pddlstream"},
+  {"id": "evaluation-one-step-versus-rollout-metrics", "topic": "evaluation", "term": "One-step versus rollout metrics", "question": "Why report accuracy as a function of rollout horizon?", "answer": "A single pooled score hides where useful prediction breaks down. Horizon curves show the effect of repeated model feedback and help choose realistic planning lengths.", "example": "Report object pose error at horizons 1, 5, and 20 under matched actions."},
+  {"id": "evaluation-return-ranking", "topic": "evaluation", "term": "Return ranking", "question": "How can you evaluate a world model’s ability to choose between plans?", "answer": "Collect candidate plans from the same initial states and compare predicted versus realized returns or success. Use rank correlation or top-choice regret alongside calibration.", "example": "A model can have biased return estimates yet correctly rank the best maneuver."},
+  {"id": "evaluation-action-sensitivity", "topic": "evaluation", "term": "Action sensitivity", "question": "What control exposes a simulator that ignores action inputs?", "answer": "Compare performance with correct, shuffled, and omitted actions under otherwise matched histories. Also test known interventions, since some outcomes are largely independent of action.", "example": "In navigation, randomly permuting steering should sharply reduce directional prediction quality."},
+  {"id": "evaluation-holdout-by-trajectory", "topic": "evaluation", "term": "Holdout by trajectory", "question": "Why split by full trajectories or collection sessions instead of individual frames?", "answer": "Adjacent frames share background and motion and can be nearly duplicates. Random frame splitting leaks correlated examples and can inflate generalization estimates.", "example": "Keep all frames from one robot rollout in the same split."},
+  {"id": "evaluation-grouped-generalization", "topic": "evaluation", "term": "Grouped generalization", "question": "How should you define a split for claims about novel objects or environments?", "answer": "Hold out the unit of novelty and check for near duplicates or shared assets across splits. A random split mainly measures performance on familiar conditions.", "example": "Hold out object families when claiming generalization to unseen object geometry."},
+  {"id": "evaluation-matched-compute", "topic": "evaluation", "term": "Matched compute", "question": "What should stay fixed when comparing two world-model planners?", "answer": "Match the environment data and task setup, and report model and planning compute. For fair planner ablations, also match action bounds, horizon, candidate budget, and feedback frequency where appropriate.", "example": "Equalizing only the training episodes can hide a 100-fold difference in planning evaluations."},
+  {"id": "evaluation-oracle-dynamics-baseline", "topic": "evaluation", "term": "Oracle dynamics baseline", "question": "What can a planner with access to a true simulator help diagnose?", "answer": "It estimates how well the planner can do when transition error is removed. If it still fails, search, horizon, reward design, or representation may be limiting.", "example": "Run the same five-step planner with learned dynamics and with the simulator’s exact dynamics.", "source": "planning-limits"},
+  {"id": "evaluation-reward-head-ablation", "topic": "evaluation", "term": "Reward-head ablation", "question": "How can you tell whether a policy fails because of dynamics or reward prediction?", "answer": "Where possible, substitute a trusted reward computation or a trusted transition and measure the changes separately. Also compare predictions on matched states and actions.", "example": "Recompute reward from simulator state during evaluation while keeping the learned transition for candidate generation."},
+  {"id": "evaluation-bootstrap-uncertainty", "topic": "evaluation", "term": "Bootstrap uncertainty", "question": "What should you resample to compute confidence intervals over correlated evaluations?", "answer": "Resample independent units appropriate to the inference, such as trials, tasks, or seeds. Use paired resampling when methods share the same evaluation units.", "example": "Resampling thousands of frames from ten episodes does not create thousands of independent trials."},
+  {"id": "evaluation-success-and-intervention", "topic": "evaluation", "term": "Success and intervention", "question": "Why report intervention counts along with task success?", "answer": "Human or safety-controller interventions can rescue episodes and inflate apparent autonomy. Report success with and without intervention, plus its frequency and type.", "example": "Two systems may both finish 90% of tasks while one needs frequent manual corrections."},
+  {"id": "evaluation-calibration-curves", "topic": "evaluation", "term": "Calibration curves", "question": "How do you test calibration for predicted task success?", "answer": "Group predictions by confidence and compare them with observed success frequencies. Report proper scoring rules and sample counts, especially for rare conditions.", "example": "Predictions near 0.8 should succeed about 80% of the time in a well-calibrated test regime."},
+  {"id": "evaluation-counterfactual-evaluation", "topic": "evaluation", "term": "Counterfactual evaluation", "question": "What extra data do you need to verify a hypothetical action’s outcome?", "answer": "You need an intervention, randomized trial, or reliable simulator that can compare alternate actions from equivalent states. A single logged trajectory only shows one realized path.", "example": "Reset the simulator to the same state and execute both a left push and a right push."},
+  {"id": "evaluation-perceptual-versus-functional-metrics", "topic": "evaluation", "term": "Perceptual versus functional metrics", "question": "Why separate visual quality from usefulness for control?", "answer": "Perceptual measures score appearance or distributional similarity. Functional evaluation tests whether the model supports tasks such as action planning, policy evaluation, or data generation.", "example": "A smooth video can show the wrong reaction to an action.", "source": "worldarena"},
+  {"id": "evaluation-worldarena-benchmark-roles", "topic": "evaluation", "term": "WorldArena benchmark roles", "question": "Which three uses of world models does the original WorldArena evaluate?", "answer": "It assesses use as a data engine, policy evaluator, and action planner in addition to perceptual quality. Performance can differ across these functions.", "example": "A strong synthetic data generator can still rank policies poorly.", "source": "worldarena"},
+  {"id": "evaluation-offline-policy-ranking", "topic": "evaluation", "term": "Offline policy ranking", "question": "How should you validate a simulator used to select among policies?", "answer": "Evaluate several distinct policies in the simulator and in the real or trusted environment. Compare ranking agreement and decision regret, and include policies outside the model’s training distribution.", "example": "Check whether the best simulated policy is among the strongest policies on hardware."},
+  {"id": "evaluation-adversarial-stress-cases", "topic": "evaluation", "term": "Adversarial stress cases", "question": "What failure modes can targeted stress tests reveal that average metrics miss?", "answer": "They can expose errors at contact boundaries, delayed feedback, rare state-action combinations, and observation ambiguities. Report these cases separately from the overall average.", "example": "A controller can work reliably except when a moving object is temporarily occluded."},
+  {"id": "evaluation-uncertainty-versus-coverage", "topic": "evaluation", "term": "Uncertainty versus coverage", "question": "Why report abstention coverage with selective prediction accuracy?", "answer": "A system can improve accuracy simply by making predictions on fewer cases. Plot accuracy or risk against retained coverage so the trade-off is explicit.", "example": "Compare planners at the same fraction of episodes where they choose to act."},
+  {"id": "evaluation-reproducible-planning-results", "topic": "evaluation", "term": "Reproducible planning results", "question": "Which configuration details matter when reproducing a closed-loop world-model result?", "answer": "Report model checkpoint, environment version, observation and action preprocessing, objective, planning horizon, candidate count, seeds, and actual runtime.", "example": "Changing action normalization alone can invalidate a planner comparison."},
+  {"id": "frontier-frozen-versus-end-to-end-jepa", "topic": "frontier", "term": "Frozen versus end-to-end JEPA", "question": "How does a frozen-feature world model differ from an end-to-end JEPA world model?", "answer": "A frozen model learns dynamics in an existing representation. An end-to-end model can adapt features to the transition task, but must prevent collapse and maintain stable learning.", "example": "Compare DINO-WM’s pretrained features with LeWorldModel’s jointly trained encoder.", "source": "lewm"},
+  {"id": "frontier-sigreg-versus-target-ema", "topic": "frontier", "term": "SIGReg versus target EMA", "question": "What distinguishes distribution regularization from using a momentum target encoder?", "answer": "Distribution regularization directly constrains how embeddings vary over the data. A momentum target encoder instead changes target-update dynamics and reduces rapid feedback between branches.", "example": "LeWorldModel shapes latent distributions while many earlier JEPAs use an EMA target.", "source": "lewm"},
+  {"id": "frontier-adaptive-latent-prefixes", "topic": "frontier", "term": "Adaptive latent prefixes", "question": "What makes the latent capacity adaptive in ALeWM?", "answer": "It learns a sequence-conditioned distribution over prefix lengths and predicts the full next embedding from a sampled prefix. The training setup puts pressure on earlier coordinates to carry useful predictive information.", "example": "A simple trajectory can be represented using fewer active coordinates than a harder one.", "source": "alewm"},
+  {"id": "frontier-mixsigreg", "topic": "frontier", "term": "MixSIGReg", "question": "How does MixSIGReg differ from applying one isotropic Gaussian regularizer to a full embedding?", "answer": "It uses a mixture tied to masked prefix lengths, with Gaussian active coordinates and zeros outside the active prefix. Earlier coordinates are active more often, creating a structured variance profile.", "example": "The first block is retained in every permitted prefix, while later blocks appear less frequently.", "source": "alewm"},
+  {"id": "frontier-dense-predictive-supervision", "topic": "frontier", "term": "Dense predictive supervision", "question": "Why predict visible tokens as well as masked tokens in V-JEPA 2.1?", "answer": "The added dense supervision gives the encoder and predictor a learning signal at more spatial and temporal locations. The report evaluates this design on tasks needing dense visual features.", "example": "Spatially aligned features can help localize an object in a robot’s workspace.", "source": "vjepa21"},
+  {"id": "frontier-intermediate-layer-supervision", "topic": "frontier", "term": "Intermediate-layer supervision", "question": "What does deep self-supervision add to V-JEPA 2.1 training?", "answer": "It applies self-supervised learning objectives at multiple intermediate encoder layers. This gives features earlier in the network direct learning signals.", "example": "A dense downstream probe can benefit when intermediate layers retain geometry and local information.", "source": "vjepa21"},
+  {"id": "frontier-in-the-wild-latent-action-alignment", "topic": "frontier", "term": "In-the-wild latent action alignment", "question": "How did the 2026 latent-action study connect video-only training to known action commands?", "answer": "It learned latent action representations from unlabeled video and then trained a controller to map known actions into those latents. This mapping makes the pretrained dynamics usable for planning.", "example": "Map a robot’s control command into the code expected by a transition learned from video.", "source": "wild-actions"},
+  {"id": "frontier-continuous-latent-actions", "topic": "frontier", "term": "Continuous latent actions", "question": "Why did the in-the-wild latent-action study investigate constrained continuous codes?", "answer": "Diverse video can contain effects too varied for a small discrete vocabulary. Continuous codes provide more flexibility, while constraints discourage using unrestricted codes to copy arbitrary future information.", "example": "A continuous code can express both direction and magnitude of apparent movement.", "source": "wild-actions"},
+  {"id": "frontier-plannable-range", "topic": "frontier", "term": "Plannable range", "question": "What distinction does the Planning Limits preprint make between prediction horizon and useful planning range?", "answer": "Prediction horizon is how far the planner simulates. Useful planning range is how far away goals can be while the predicted trajectories still rank actions reliably. These ranges depend on the task and goal representation.", "example": "A five-step rollout can give little guidance for a goal dozens of actions away.", "source": "planning-limits"},
+  {"id": "frontier-perfect-model-horizon-test", "topic": "frontier", "term": "Perfect-model horizon test", "question": "Why did the Planning Limits study compare with an actual simulator?", "answer": "It tested whether limited goal reach was entirely caused by learned prediction error. A short-horizon planner could still struggle with distant targets even when its transition predictions were exact.", "example": "Hold rollout length fixed and move the target progressively farther away.", "source": "planning-limits"},
+  {"id": "frontier-latent-energy-action-planning", "topic": "frontier", "term": "Latent energy action planning", "question": "How does the LEAP preprint refine action search through a frozen world model?", "answer": "It initializes candidate actions with a proposal, optimizes through autoregressive latent dynamics, and scores latent agreement alongside a decoded state descriptor. It projects optimized actions into the admissible range.", "example": "A plan can be penalized when goal embeddings match but the decoded terminal descriptor disagrees.", "source": "leap"},
+  {"id": "frontier-shared-transition-and-action-predictor", "topic": "frontier", "term": "Shared transition and action predictor", "question": "What does JEPA-WAM’s shared predictor accomplish?", "answer": "It lets future-latent supervision shape features also used for continuous action generation. The paper’s model operates in a pretrained V-JEPA space and predicts spatially structured current and future targets.", "example": "A policy uses predictive features that retain patch-level correspondences rather than rendering frames.", "source": "jepa-wam"},
+  {"id": "frontier-worldarena-2-0-modalities", "topic": "frontier", "term": "WorldArena 2.0 modalities", "question": "How did WorldArena 2.0 extend modality coverage?", "answer": "It added visuotactile evaluation so models can be tested on multimodal perception and prediction. Touch can expose interaction details missing from an RGB stream.", "example": "Test whether a model captures a grasp’s contact and slip patterns.", "source": "worldarena2"},
+  {"id": "frontier-worldarena-2-0-interaction", "topic": "frontier", "term": "WorldArena 2.0 interaction", "question": "How does the 2.0 benchmark extend evaluation beyond offline world-model use?", "answer": "It adds evaluation of models as interactive environments for policy optimization and extends testing across simulated and real robotic platforms.", "example": "Train or improve a policy through model interactions, then evaluate on a trusted environment.", "source": "worldarena2"},
+  {"id": "frontier-concept-grounded-world-models", "topic": "frontier", "term": "Concept-grounded world models", "question": "How does the October 2026 CGWM preprint use temporal logic?", "answer": "It uses explicit temporal knowledge to constrain concept representations and dynamics learned from observations. The approach also uses differentiable reasoning to search for actions satisfying a goal.", "example": "A temporal rule can describe when a concept is allowed to change across steps.", "source": "cgwms"},
+  {"id": "frontier-scope-of-concept-grounded-evidence", "topic": "frontier", "term": "Scope of concept-grounded evidence", "question": "What should you check before generalizing the CGWM results to an open physical domain?", "answer": "Check whether the target domain has sufficiently complete and correct temporal knowledge and whether concepts are recoverable from sensors. The reported experiments use two game environments.", "example": "In robotics, unknown contacts and noisy state estimates may violate assumptions that hold in a game.", "source": "cgwms"},
+  {"id": "frontier-formal-model-validity", "topic": "frontier", "term": "Formal model validity", "question": "Which evaluation dimensions did the November 2026 formal-world-model preprint distinguish?", "answer": "It separated mechanical validity, structural agreement with a reference, and semantic criteria. A generated model can be executable yet differ substantially from the intended decision problem.", "example": "A game model can pass format checks but implement different observation or action relations.", "source": "formal-eval"},
+  {"id": "frontier-reference-relative-structure", "topic": "frontier", "term": "Reference-relative structure", "question": "Why can exact agreement with one authored model be too narrow a test of semantic adequacy?", "answer": "Several formalizations may preserve the same decisions while using different symbols or abstractions. Structure comparisons are informative when paired with invariants and behavioral tests.", "example": "Two models can rename states or factor a state differently while supporting the same legal plans.", "source": "formal-eval"}
+];
+
+const quizzes = {
+  fundamentals: [
+    {
+      card: "pomdp", question: "Two identical camera frames show a ball. In one it is moving left and in the other it is moving right. What should help distinguish the futures?",
+      choices: ["A larger reward head", "A history-conditioned state estimate", "A higher-resolution copy of the current frame", "A shorter prediction horizon"], correct: 1,
+      why: "Recent frames can reveal velocity. A state that summarizes history can carry that information into the transition."
+    },
+    {
+      card: "actions", question: "Your demonstrations always turn left at a junction. What is the main obstacle to predicting the effect of turning right there?",
+      choices: ["The reward is necessarily sparse", "The observations contain too many pixels", "The data lack coverage of that action in that context", "The model must predict an absolute time index"], correct: 2,
+      why: "Action conditioning makes the right turn query possible, but it cannot supply evidence for its outcome."
+    }
+  ],
+  architectures: [
+    {
+      card: "rssm", question: "An RSSM has encoded the current frame and must imagine the next four steps. Where do the future stochastic states come from?",
+      choices: ["The action-conditioned transition prior", "An observation-conditioned posterior at every step", "The reward head", "A fixed prior independent of actions and history"], correct: 0,
+      why: "The transition prior uses recurrent context and actions. The posterior can correct the state only when a real observation arrives."
+    },
+    {
+      card: "jepa", question: "Which target distinguishes a JEPA-style masked prediction objective from masked pixel reconstruction?",
+      choices: ["The action taken by a demonstrator", "A rendered frame at higher resolution", "The cumulative task reward", "An embedding of the masked region"], correct: 3,
+      why: "The predictor estimates a target representation produced by an encoder. Its loss is computed in embedding space."
+    }
+  ],
+  objectives: [
+    {
+      card: "elbo", question: "In a variational state-space model, which term directly aligns the observation-conditioned latent posterior with the transition prior?",
+      choices: ["Reward prediction error", "Pixel likelihood", "KL divergence between the latent distributions", "Value bootstrapping error"], correct: 2,
+      why: "The KL term brings the posterior and prior together, helping the prior support rollouts without future observations."
+    },
+    {
+      card: "multi-step", question: "A model has low one-step error with observation-corrected latents, but its imagined trajectories drift after five steps. Which objective most directly addresses this gap?",
+      choices: ["Higher weight on the reward at the first step", "Supervision on multi-step open-loop rollouts", "Single-frame autoencoding", "Weight decay on the observation decoder"], correct: 1,
+      why: "Training against multi-step targets exposes errors that arise when the transition consumes its own predictions."
+    }
+  ],
+  dynamics: [
+    {
+      card: "multimodal", question: "A deterministic model trained with squared error predicts a trajectory halfway between two plausible paths. What explains this?",
+      choices: ["It estimates a conditional mean between modes", "It is required to sample an unlikely mode", "It exactly recovers the hidden state", "Its planning horizon is necessarily too short"], correct: 0,
+      why: "The conditional mean minimizes expected squared error and may lie in a low-probability region."
+    },
+    {
+      card: "compounding", question: "Which evaluation best tests whether a model can support a planner with a 10-step horizon?",
+      choices: ["One-step reconstruction with a fresh observation at every step", "Training loss on shuffled frames", "Encoder parameter count", "Ten-step action-conditioned rollouts without observation corrections"], correct: 3,
+      why: "Open-loop evaluation exposes error accumulation at the horizon the planner actually queries."
+    }
+  ],
+  planning: [
+    {
+      card: "mpc", question: "A planner picks a 12-step action sequence. What does receding-horizon MPC do with that sequence?",
+      choices: ["Executes all 12 actions before observing again", "Executes its first action and replans after observing", "Retrains the model before applying any action", "Uses only the sequence’s last action"], correct: 1,
+      why: "Replanning incorporates the latest observation, so the controller can react to disturbances and prediction errors."
+    },
+    {
+      card: "cem", question: "A planner has scored 100 sampled action sequences. What does a CEM iteration do next?",
+      choices: ["Backpropagates through all real environment transitions", "Refits its sampling distribution using the lowest-return sequences", "Refits its sampling distribution using the highest-return sequences", "Updates the observation encoder from reconstruction error"], correct: 2,
+      why: "CEM fits the proposal to the elite samples, shifting later search toward promising action sequences."
+    }
+  ],
+  systems: [
+    {
+      card: "muzero", question: "Which predictions does MuZero supply to its search tree?",
+      choices: ["Future frames, optical flow, and depth", "Action logits alone", "Reward, policy, and value", "Reward and reconstructed game rules"], correct: 2,
+      why: "The latent transition supplies reward, and the prediction head supplies policy and value for tree search."
+    },
+    {
+      card: "planet-dreamer", question: "Which system uses online CEM over latent action sequences as its main action selector?",
+      choices: ["PlaNet", "DreamerV3", "MuZero", "The VAE component of World Models"], correct: 0,
+      why: "PlaNet replans with CEM at decision time. DreamerV3 learns an actor using imagined trajectories."
+    }
+  ],
+  ontology: [
+    {
+      card: "ontology-open-world", question: "An OWL graph has no triple stating that a robot occupies region R. What follows from the missing triple alone?",
+      choices: ["The robot is outside R", "The robot must occupy some other known region", "Its occupancy of R is unknown", "The ontology is inconsistent"], correct: 2,
+      why: "OWL uses open-world semantics. Absence of an assertion leaves room for it to be true in a model of the knowledge base."
+    },
+    {
+      card: "ontology-direction", question: "You have directed edges A → B and B → C. Which relation lets you include C in A’s two-hop downstream context without adding a direct A → C edge?",
+      choices: ["Directed reachability", "Undirected degree", "Class membership", "A symmetric adjacency relation"], correct: 0,
+      why: "Reachability follows the directed path through B while preserving the distinction between direct and indirect connections."
+    },
+    {
+      card: "ontology-ablation", question: "You want to test whether performance gains depend on the specific directed edges rather than node degree. Which control best isolates this question?",
+      choices: ["Replace the graph with a fully connected graph", "Remove both the graph and the action inputs", "Add edges randomly without controlling degree", "Rewire edges while preserving each node’s in- and out-degree"], correct: 3,
+      why: "Directed degree-preserving rewiring retains local edge counts while perturbing which nodes are connected."
+    }
+  ],
+  neurosymbolic: [
+    {
+      card: "ns-grounding", question: "A planner produces a logically valid pick sequence, but the visual model assigned the target predicate to the wrong object. What failed?",
+      choices: ["Discounting of future rewards", "Grounding the predicate in observations", "The planner’s logical inference", "The search depth"], correct: 1,
+      why: "The symbolic reasoning operated on the supplied predicates. The error entered when perception attached a predicate to the wrong entity."
+    },
+    {
+      card: "ns-probabilistic", question: "Two image classifiers give uncertain digit labels. In a DeepProbLog addition task, how should the program compute the probability of a proposed sum?",
+      choices: ["Add the two most likely digits and treat the result as certain", "Replace the logic program with a new classifier", "Combine probability mass from the digit assignments that imply the sum", "Average the classifier’s logits across both images"], correct: 2,
+      why: "Probabilistic inference accounts for the possible assignments that satisfy the arithmetic rule and produce the queried sum."
+    },
+    {
+      card: "ns-hybrid-planning", question: "A discrete pick-and-place plan satisfies all symbolic preconditions, but every proposed grasp collides with a shelf. Which addition addresses that gap?",
+      choices: ["A continuous feasibility check for grasp and motion candidates", "More symbolic search depth", "A higher discount factor", "A larger ontology of object categories"], correct: 0,
+      why: "Symbolic validity leaves geometric feasibility unresolved. A continuous checker can reject colliding grasps and motions."
+    }
+  ],
+  video: [
+    {"card": "video-passive-versus-interactive-video", "question": "Your simulator outputs convincing clips for two opposite steering commands. What evidence would best establish action control?", "choices": ["Higher average frame quality", "More varied initial scenes", "Correct opposite responses from the same initial history", "Lower reconstruction loss on background pixels"], "correct": 2, "why": "A matched-history intervention isolates the effect of the command."},
+    {"card": "video-video-tokenizers", "question": "A small status icon disappears after tokenization. What should you investigate first?", "choices": ["Whether codec reconstructions preserve task-critical details", "Whether the policy uses more search candidates", "Whether the reward discount is too low", "Whether the action labels should be shuffled"], "correct": 0, "why": "The dynamics cannot recover visual evidence the tokenizer consistently discards."},
+    {"card": "video-long-term-object-permanence", "question": "Which test directly measures whether a simulator retains object state outside its immediate view?", "choices": ["Compare image quality for adjacent frames", "Count distinct background textures", "Measure average video brightness", "Occlude or leave an object, then revisit it and verify its state"], "correct": 3, "why": "A revisit test reveals whether the model maintains identity and state beyond recent observations."}
+  ],
+  robotics: [
+    {"card": "robotics-coordinate-frames", "question": "Two robots receive the same three numbers but move in different directions. What should you verify first?", "choices": ["Whether their video frame rates match exactly", "The units and coordinate frames of their action vectors", "The number of visual encoder parameters", "The image tokenizer codebook size"], "correct": 1, "why": "Action vectors have meaning only relative to an embodiment and reference frame."},
+    {"card": "robotics-action-chunks", "question": "A robot executes a full 16-step chunk after every observation and fails under small disturbances. Which change directly increases feedback?", "choices": ["Predict a longer chunk and execute it all", "Drop proprioception", "Execute fewer steps before observing and replanning", "Measure only one-step pixel error"], "correct": 2, "why": "Shortening the executed prefix makes the controller react sooner."},
+    {"card": "robotics-subgoal-chaining", "question": "A local model ranks actions well near a drawer handle, but fails to solve an entire drawer task. What is a natural extension?", "choices": ["Plan with reachable intermediate subgoals", "Replace all sensory inputs with one reward bit", "Train only on successful final frames", "Remove action conditioning"], "correct": 0, "why": "Intermediate goals bring action ranking within the range where the world model is useful."}
+  ],
+  evaluation: [
+    {"card": "evaluation-holdout-by-trajectory", "question": "A validation split randomly assigns consecutive frames from each trial to train or test. What is the main concern?", "choices": ["The model cannot learn deterministic dynamics", "The action space becomes continuous", "Near-duplicate observations can cross the split", "The evaluation necessarily uses a new domain"], "correct": 2, "why": "Full trajectory or session splits keep correlated observations together."},
+    {"card": "evaluation-oracle-dynamics-baseline", "question": "A learned planner and an otherwise identical planner with perfect dynamics both fail at a distant goal. What does this suggest?", "choices": ["The encoder necessarily reconstructs pixels poorly", "The horizon, search, or objective may be limiting", "The learned transition must be well calibrated", "More model parameters are guaranteed to fix it"], "correct": 1, "why": "The oracle comparison removes transition error while keeping planning constraints."},
+    {"card": "evaluation-perceptual-versus-functional-metrics", "question": "Which result directly shows that a visually realistic simulator is useful for selecting actions?", "choices": ["Its generated videos have high fidelity", "Its output resolution is larger", "Human raters prefer its images", "Its top-ranked actions achieve higher realized returns"], "correct": 3, "why": "Realized returns directly test the usefulness of the model’s action ranking."}
+  ],
+  frontier: [
+    {"card": "frontier-frozen-versus-end-to-end-jepa", "question": "Which issue must an end-to-end latent predictor address that a predictor trained on fixed embeddings avoids during dynamics training?", "choices": ["The representation itself can collapse or drift", "Future states no longer depend on actions", "Test-time goals become fully observable", "Planning requires pixel reconstruction"], "correct": 0, "why": "Updating the encoder jointly changes the target space and introduces collapse risks."},
+    {"card": "frontier-worldarena-2-0-modalities", "question": "Which additional sensory modality does WorldArena 2.0 emphasize alongside vision?", "choices": ["Audio transcripts", "Touch", "GPS logs", "Speech synthesis"], "correct": 1, "why": "The benchmark extends to visuotactile prediction and evaluation."},
+    {"card": "frontier-formal-model-validity", "question": "An LLM generates an executable game model. Which check most directly tests whether it captured the intended decision problem?", "choices": ["Confirm the file parses twice", "Count the number of action names", "Check that the code has comments", "Compare predicted legal actions and outcomes on controlled scenarios"], "correct": 3, "why": "Behavioral tests can expose semantic errors that mechanical validity misses."}
+  ]
+};
+
+const sources = [
+  { id: "world-models", label: "World Models", author: "Ha & Schmidhuber, 2018", url: "https://arxiv.org/abs/1803.10122" },
+  { id: "planet", label: "Learning Latent Dynamics for Planning from Pixels", author: "Hafner et al., 2019", url: "https://proceedings.mlr.press/v97/hafner19a.html" },
+  { id: "muzero", label: "Mastering Atari, Go, Chess and Shogi by Planning with a Learned Model", author: "Schrittwieser et al., 2020", url: "https://www.nature.com/articles/s41586-020-03051-4" },
+  { id: "ijepa", label: "Self-Supervised Learning From Images With a Joint-Embedding Predictive Architecture", author: "Assran et al., 2023", url: "https://openaccess.thecvf.com/content/CVPR2023/html/Assran_Self-Supervised_Learning_From_Images_With_a_Joint-Embedding_Predictive_Architecture_CVPR_2023_paper.html" },
+  { id: "dreamer", label: "Mastering diverse control tasks through world models", author: "Hafner et al., 2025", url: "https://www.nature.com/articles/s41586-025-08744-2" },
+  { id: "vjepa", label: "V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning", author: "Assran et al., 2025", url: "https://arxiv.org/abs/2506.09985" },
+  { id: "cswm", label: "Contrastive Learning of Structured World Models", author: "Kipf et al., 2020", url: "https://arxiv.org/abs/1911.12247" },
+  { id: "pets", label: "Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models", author: "Chua et al., 2018", url: "https://arxiv.org/abs/1805.12114" },
+  { id: "owl", label: "OWL 2 Web Ontology Language Primer", author: "W3C, 2012", url: "https://www.w3.org/TR/owl2-primer/" },
+  { id: "shacl", label: "Shapes Constraint Language (SHACL)", author: "W3C, 2017", url: "https://www.w3.org/TR/shacl/" },
+  { id: "deepproblog", label: "DeepProbLog: Neural Probabilistic Logic Programming", author: "Manhaeve et al., 2018", url: "https://proceedings.neurips.cc/paper/2018/hash/dc5d637ed5e62c36ecb73b654b05ba2a-Abstract.html" },
+  { id: "pddlstream", label: "PDDLStream: Integrating Symbolic Planners and Blackbox Samplers via Optimistic Adaptive Planning", author: "Garrett et al., 2020", url: "https://ojs.aaai.org/index.php/ICAPS/article/view/6739" },
+  {"id": "dinowm", "label": "DINO-WM: World Models on Pre-trained Visual Features Enable Zero-shot Planning", "author": "Zhou et al., 2024", "url": "https://arxiv.org/abs/2411.04983"},
+  {"id": "lejepa", "label": "LeJEPA: Provable and Scalable Self-Supervised Learning Without the Heuristics", "author": "Balestriero & LeCun, 2025", "url": "https://arxiv.org/abs/2511.08544"},
+  {"id": "mbpo", "label": "When to Trust Your Model: Model-Based Policy Optimization", "author": "Janner et al., 2019", "url": "https://arxiv.org/abs/1906.08253"},
+  {"id": "tdmpc2", "label": "TD-MPC2: Scalable, Robust World Models for Continuous Control", "author": "Hansen et al., 2024", "url": "https://arxiv.org/abs/2310.16828"},
+  {"id": "iris", "label": "Transformers Are Sample-Efficient World Models", "author": "Micheli et al., 2023", "url": "https://arxiv.org/abs/2209.00588"},
+  {"id": "diamond", "label": "Diffusion for World Modeling: Visual Details Matter in Atari", "author": "Alonso et al., 2024", "url": "https://arxiv.org/abs/2405.12399"},
+  {"id": "gamengen", "label": "Diffusion Models Are Real-Time Game Engines", "author": "Valevski et al., 2024", "url": "https://arxiv.org/abs/2408.14837"},
+  {"id": "genie", "label": "Genie: Generative Interactive Environments", "author": "Bruce et al., 2024", "url": "https://proceedings.mlr.press/v235/bruce24a.html"},
+  {"id": "genie3", "label": "Genie 3: A New Frontier for World Models", "author": "Google DeepMind, 2025 technical announcement", "url": "https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/"},
+  {"id": "genie4", "label": "Genie 4: A New Generation of World Simulation", "author": "Google DeepMind, 2026 technical announcement", "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/"},
+  {"id": "dreamer1", "label": "Dream to Control: Learning Behaviors by Latent Imagination", "author": "Hafner et al., 2020", "url": "https://arxiv.org/abs/1912.01603"},
+  {"id": "lewm", "label": "LeWorldModel: Stable End-to-End Joint-Embedding Predictive Architecture from Pixels", "author": "Maes et al., 2026", "url": "https://arxiv.org/abs/2603.19312"},
+  {"id": "vjepa21", "label": "V-JEPA 2.1: Unlocking Dense Features in Video Self-Supervised Learning", "author": "Mur-Labadia et al., 2026", "url": "https://arxiv.org/abs/2603.14482"},
+  {"id": "cosmos", "label": "Cosmos World Foundation Model Platform for Physical AI", "author": "NVIDIA, 2025", "url": "https://arxiv.org/abs/2501.03575"},
+  {"id": "cosmos25", "label": "World Simulation with Video Foundation Models for Physical AI", "author": "NVIDIA, 2025", "url": "https://arxiv.org/abs/2511.00062"},
+  {"id": "mopo", "label": "MOPO: Model-Based Offline Policy Optimization", "author": "Yu et al., 2020", "url": "https://arxiv.org/abs/2005.13239"},
+  {"id": "morel", "label": "MOReL: Model-Based Offline Reinforcement Learning", "author": "Kidambi et al., 2020", "url": "https://arxiv.org/abs/2005.05951"},
+  {"id": "worldcoder", "label": "WorldCoder, a Model-Based LLM Agent: Building World Models by Writing Code and Interacting with the Environment", "author": "Tang et al., 2024", "url": "https://arxiv.org/abs/2402.12275"},
+  {"id": "rdf", "label": "RDF 1.1 Concepts and Abstract Syntax", "author": "W3C, 2014", "url": "https://www.w3.org/TR/rdf-concepts/"},
+  {"id": "sparql", "label": "SPARQL 1.1 Query Language", "author": "W3C, 2013", "url": "https://www.w3.org/TR/sparql11-query/"},
+  {"id": "prov", "label": "PROV-O: The PROV Ontology", "author": "W3C, 2013", "url": "https://www.w3.org/TR/prov-o/"},
+  {"id": "proc2pddl", "label": "PROC2PDDL: Open-Domain Planning Representations from Texts", "author": "Zhang et al., 2024", "url": "https://arxiv.org/abs/2403.00092"},
+  {"id": "wild-actions", "label": "Learning Latent Action World Models In The Wild", "author": "Garrido et al., 2026 preprint", "url": "https://arxiv.org/abs/2601.05230"},
+  {"id": "diffusion-policy", "label": "Diffusion Policy: Visuomotor Policy Learning via Action Diffusion", "author": "Chi et al., 2023", "url": "https://arxiv.org/abs/2303.04137"},
+  {"id": "worldarena", "label": "WorldArena: A Unified Benchmark for Evaluating Perception and Functional Utility of Embodied World Models", "author": "Shang et al., 2026 preprint", "url": "https://arxiv.org/abs/2602.08971"},
+  {"id": "worldarena2", "label": "WorldArena 2.0: Extending Embodied World Model Benchmarking on Modality, Functionality and Platform", "author": "Shang et al., 2026 preprint", "url": "https://arxiv.org/abs/2605.17912"},
+  {"id": "planning-limits", "label": "The Planning Limits of Latent World Models", "author": "Alrasheed et al., 2026 preprint", "url": "https://arxiv.org/abs/2609.39235"},
+  {"id": "alewm", "label": "Adaptive Latent Capacity for World Models", "author": "Achituve et al., 2026 preprint", "url": "https://arxiv.org/abs/2609.32921"},
+  {"id": "leap", "label": "Latent Energy Action Planning with World Models", "author": "Pham & Bera, 2026 preprint", "url": "https://arxiv.org/abs/2609.03294"},
+  {"id": "jepa-wam", "label": "JEPA-WAM: Learning Vision-Language-Action Policies with Joint-Embedding World Modeling", "author": "Lin et al., 2026 preprint", "url": "https://arxiv.org/abs/2608.09381"},
+  {"id": "cgwms", "label": "Neurosymbolic Learning of Interpretable World Models", "author": "Andreoni et al., 2026 preprint", "url": "https://arxiv.org/abs/2610.19955"},
+  {"id": "formal-eval", "label": "Evaluating LLM-Generated World Models for Neuro-Symbolic Reasoning", "author": "Djaffal et al., 2026 preprint", "url": "https://arxiv.org/abs/2611.14419"}
+];
+
+
+const byId = id => document.getElementById(id);
+const byCard = Object.fromEntries(cards.map(card => [card.id, card]));
+const byTopic = Object.fromEntries(topics.map(topic => [topic.id, topic]));
+const bySource = Object.fromEntries(sources.map(source => [source.id, source]));
+const storageKey = "world-models-study.v1";
+let storageAvailable = true;
+const progress = loadProgress();
+
+let mode = "study";
+let filter = progress.filter;
+let currentCardId = progress.card;
+let flipped = false;
+let query = "";
+let quiz;
+const searchField = byId("card-search");
+const clearSearch = byId("clear-search");
+const searchable = new Map(cards.map(card => [card.id, [
+  card.term, card.question, card.answer, byTopic[card.topic].label, bySource[card.source]?.label ?? ""
+].join(" ").toLowerCase()]));
+
+
+const topicButtons = new Map();
+const studyFilters = [{ id: "all", label: "All cards" }, ...topics];
+const topicList = byId("topics");
+byId("topic-count").textContent = topics.length + " topics";
+
+for (const topic of studyFilters) {
+  const button = document.createElement("button");
+  button.type = "button";
+  const icon = document.createElement("span");
+  icon.setAttribute("aria-hidden", "true");
+  if (topic.color) {
+    icon.className = "topic-dot";
+    icon.style.setProperty("--topic-color", topic.color);
+  } else {
+    icon.className = "topic-all";
+    icon.textContent = "▦";
+  }
+  const label = document.createElement("span");
+  label.textContent = topic.label;
+  const count = document.createElement("span");
+  count.className = "topic-total";
+  button.append(icon, label, count);
+  button.addEventListener("click", () => selectFilter(topic.id));
+  topicButtons.set(topic.id, { button, count });
+  topicList.append(button);
+}
+
+for (const source of sources) {
+  const item = document.createElement("li");
+  const link = document.createElement("a");
+  link.href = source.url;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = source.label;
+  item.append(link, document.createTextNode(" · " + source.author));
+  byId("sources-list").append(item);
+}
+
+byId("study-mode").addEventListener("click", () => changeMode("study"));
+byId("quiz-mode").addEventListener("click", () => changeMode("quiz"));
+byId("review-filter").addEventListener("click", () => openStudy("review"));
+byId("back-to-all").addEventListener("click", () => {
+  selectFilter("all");
+  byId("flip-area").focus();
+});
+searchField.addEventListener("input", () => updateSearch(searchField.value));
+clearSearch.addEventListener("click", () => {
+  searchField.value = "";
+  updateSearch("");
+  searchField.focus();
+});
+byId("flip-area").addEventListener("click", flipCard);
+byId("previous").addEventListener("click", () => moveCard(-1));
+byId("next").addEventListener("click", () => moveCard(1));
+byId("review").addEventListener("click", () => rateCard("review"));
+byId("mastered").addEventListener("click", () => rateCard("mastered"));
+byId("quiz-form").addEventListener("change", () => { byId("check-answer").disabled = false; });
+byId("quiz-form").addEventListener("submit", checkAnswer);
+byId("next-question").addEventListener("click", advanceQuiz);
+byId("retry-quiz").addEventListener("click", () => {
+  startQuiz(quiz.topic);
+  render();
+  byId("quiz-question").focus();
+});
+byId("return-to-study").addEventListener("click", () => {
+  openStudy(quiz.topic);
+  byId("flip-area").focus();
+});
+
+document.addEventListener("keydown", event => {
+  if (mode !== "study" || !currentCardId || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+  const interactive = event.target.closest("button, a, input, select, textarea, summary, [contenteditable]");
+  if (interactive && (interactive !== byId("flip-area") || event.key === " ")) return;
+  switch (event.key) {
+    case " ":
+      event.preventDefault();
+      flipCard();
+      break;
+    case "ArrowLeft":
+      event.preventDefault();
+      moveCard(-1);
+      break;
+    case "ArrowRight":
+      event.preventDefault();
+      moveCard(1);
+      break;
+  }
+});
+
+render();
+
+function loadProgress() {
+  const result = { seen: {}, ratings: {}, scores: {}, filter: "all", card: cards[0].id };
+  let raw;
+  try {
+    raw = localStorage.getItem(storageKey);
+  } catch {
+    storageAvailable = false;
+    return result;
+  }
+  if (!raw) return result;
+  let saved;
+  try {
+    saved = JSON.parse(raw);
+  } catch {
+    return result;
+  }
+  if (!saved || typeof saved !== "object") return result;
+  for (const card of cards) {
+    if (saved.seen?.[card.id] === true) result.seen[card.id] = true;
+    const rating = saved.ratings?.[card.id];
+    if (rating === "mastered" || rating === "review") result.ratings[card.id] = rating;
+  }
+  for (const topic of topics) {
+    const score = saved.scores?.[topic.id];
+    if (Number.isInteger(score) && score >= 0 && score <= quizzes[topic.id].length) result.scores[topic.id] = score;
+  }
+  if (["all", "review"].includes(saved.filter) || Object.hasOwn(byTopic, saved.filter)) result.filter = saved.filter;
+  if (Object.hasOwn(byCard, saved.card)) result.card = saved.card;
+  return result;
+}
+
+function saveProgress() {
+  if (!storageAvailable) return;
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(progress));
+  } catch {
+    storageAvailable = false;
+  }
+}
+
+function deckFor(activeFilter) {
+  if (activeFilter === "all") return cards;
+  if (activeFilter === "review") return cards.filter(card => progress.ratings[card.id] === "review");
+  return cards.filter(card => card.topic === activeFilter);
+}
+
+function studyDeck() {
+  const deck = deckFor(filter);
+  if (!query) return deck;
+  const terms = query.split(/\s+/);
+  return deck.filter(card => terms.every(term => searchable.get(card.id).includes(term)));
+}
+
+function updateSearch(value) {
+  query = value.trim().toLowerCase();
+  flipped = false;
+  render();
+}
+
+function changeMode(nextMode) {
+  if (mode === nextMode) return;
+  mode = nextMode;
+  if (mode === "quiz") {
+    const topic = byTopic[filter]?.id ?? byCard[currentCardId]?.topic ?? topics[0].id;
+    if (quiz?.topic !== topic) startQuiz(topic);
+  }
+  render();
+}
+
+function selectFilter(nextFilter) {
+  if (mode === "quiz") {
+    if (quiz.topic !== nextFilter) startQuiz(nextFilter);
+  } else if (nextFilter !== filter) {
+    filter = nextFilter;
+    currentCardId = null;
+    flipped = false;
+  }
+  render();
+}
+
+function openStudy(nextFilter, cardId = null) {
+  mode = "study";
+  filter = nextFilter;
+  currentCardId = cardId;
+  flipped = false;
+  if (cardId || nextFilter === "review") {
+    query = "";
+    searchField.value = "";
+  }
+  render();
+}
+
+function render() {
+  const isStudy = mode === "study";
+  byId("study-view").hidden = !isStudy;
+  byId("quiz-view").hidden = isStudy;
+  byId("study-mode").setAttribute("aria-pressed", String(isStudy));
+  byId("quiz-mode").setAttribute("aria-pressed", String(!isStudy));
+  for (const [id, { button, count }] of topicButtons) {
+    button.hidden = !isStudy && id === "all";
+    button.setAttribute("aria-pressed", String(id === (isStudy ? filter : quiz.topic)));
+    const deck = deckFor(id);
+    count.textContent = isStudy
+      ? deck.length
+      : Object.hasOwn(progress.scores, id) ? progress.scores[id] + "/" + quizzes[id].length : "";
+  }
+  byId("review-filter").setAttribute("aria-pressed", String(isStudy && filter === "review"));
+  byId("review-count").textContent = deckFor("review").length;
+  if (isStudy) renderCard();
+  else renderQuiz();
+  renderProgress();
+}
+
+function renderProgress() {
+  const mastered = Object.values(progress.ratings).filter(rating => rating === "mastered").length;
+  const passed = topics.filter(topic => progress.scores[topic.id] === quizzes[topic.id].length).length;
+  byId("progress-label").textContent = mastered + " / " + cards.length + " mastered";
+  byId("progress-bar").max = cards.length;
+  byId("progress-bar").value = mastered;
+  byId("seen-count").textContent = Object.keys(progress.seen).length;
+  byId("quiz-count").textContent = passed + " / " + topics.length;
+  byId("storage-note").textContent = storageAvailable
+    ? "Progress is saved in this browser."
+    : "Progress is available for this session.";
+}
+
+function renderCard() {
+  const deck = studyDeck();
+  let index = deck.findIndex(card => card.id === currentCardId);
+  if (index < 0) index = 0;
+  const card = deck[index];
+  currentCardId = card?.id ?? null;
+  if (!query && (progress.card !== currentCardId || progress.filter !== filter)) {
+    progress.card = currentCardId;
+    progress.filter = filter;
+    saveProgress();
+  }
+
+  byId("section-title").textContent = byTopic[filter]?.label ?? (filter === "review" ? "Review queue" : "All cards");
+  byId("section-caption").textContent = "Recall the answer before flipping.";
+  byId("position").textContent = card ? (index + 1) + " / " + deck.length : "0 / 0";
+  byId("flashcard").hidden = !card;
+  clearSearch.hidden = !searchField.value;
+  byId("empty-search").hidden = !!card || !query;
+  byId("empty-review").hidden = !!card || !!query;
+  searchField.disabled = filter === "review" && deckFor("review").length === 0;
+  byId("card-controls").hidden = !card;
+  byId("keyboard-hint").hidden = !card;
+  if (!card) return;
+
+  byId("previous").disabled = index === 0;
+  byId("next").disabled = index === deck.length - 1;
+  byId("card-topic").textContent = byTopic[card.topic].label;
+  byId("card-term").textContent = card.term;
+  byId("card-prompt").textContent = card.question;
+  byId("answer-text").textContent = card.answer;
+  byId("example-text").textContent = card.example;
+  const sourceLink = byId("card-source");
+  sourceLink.hidden = !flipped || !card.source;
+  if (card.source) sourceLink.href = bySource[card.source].url;
+  else sourceLink.removeAttribute("href");
+  byId("flashcard").classList.toggle("flipped", flipped);
+  byId("flip-area").setAttribute("aria-label", flipped ? "Hide answer" : "Reveal answer");
+  byId("flip-area").setAttribute("aria-expanded", String(flipped));
+  byId("flip-area").setAttribute("aria-controls", "card-answer");
+  byId("card-face").textContent = flipped ? "Answer" : "Question";
+  byId("flip-hint").textContent = flipped ? "Flip to question" : "Flip to reveal";
+  byId("card-answer").hidden = !flipped;
+  byId("rating-actions").hidden = !flipped;
+  byId("mastered").textContent = progress.ratings[card.id] === "mastered" ? "Keep mastered" : "Mark mastered";
+}
+
+function flipCard() {
+  if (!currentCardId) return;
+  flipped = !flipped;
+  if (flipped && !progress.seen[currentCardId]) {
+    progress.seen[currentCardId] = true;
+    saveProgress();
+  }
+  render();
+}
+
+function moveCard(delta) {
+  const deck = studyDeck();
+  const index = deck.findIndex(card => card.id === currentCardId);
+  const next = deck[index + delta];
+  if (!next) return;
+  const wasNavigation = [byId("previous"), byId("next")].includes(document.activeElement);
+  currentCardId = next.id;
+  flipped = false;
+  render();
+  if (wasNavigation && document.activeElement.disabled) byId("flip-area").focus();
+}
+
+function rateCard(rating) {
+  const card = byCard[currentCardId];
+  if (!card || !flipped) return;
+  const before = studyDeck();
+  const index = before.indexOf(card);
+  progress.ratings[card.id] = rating;
+  const after = studyDeck();
+  const retained = after.includes(card);
+  currentCardId = (retained ? after[(index + 1) % after.length] : after[index] ?? after.at(-1))?.id ?? null;
+  flipped = false;
+  saveProgress();
+  render();
+  byId("announcer").textContent = card.term + (rating === "mastered" ? " marked mastered." : " added to review.");
+  const focusTarget = currentCardId ? byId("flip-area") : query ? searchField : byId("back-to-all");
+  focusTarget.focus();
+}
+
+function startQuiz(topic) {
+  quiz = { topic, index: 0, submitted: null, correct: 0, missed: [], done: false };
+}
+
+function renderQuiz() {
+  const topic = byTopic[quiz.topic];
+  const questions = quizzes[quiz.topic];
+  const item = questions[quiz.index];
+  byId("section-title").textContent = topic.label;
+  byId("section-caption").textContent = "Answer every question correctly to pass this topic.";
+  byId("position").textContent = quiz.done ? "Complete" : (quiz.index + 1) + " / " + questions.length;
+  byId("quiz-question-view").hidden = quiz.done;
+  byId("quiz-results").hidden = !quiz.done;
+  if (quiz.done) {
+    renderResults(questions.length);
+    return;
+  }
+
+  byId("quiz-topic").textContent = topic.label;
+  const best = progress.scores[topic.id];
+  byId("quiz-best").textContent = best === undefined ? "" : "Best " + best + " / " + questions.length;
+  byId("quiz-question").textContent = item.question;
+  const optionGroup = byId("quiz-options");
+  const legend = optionGroup.querySelector("legend");
+  optionGroup.replaceChildren(legend);
+  for (const [index, choice] of item.choices.entries()) {
+    const label = document.createElement("label");
+    label.className = "quiz-choice";
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = "answer";
+    input.value = index;
+    input.disabled = quiz.submitted !== null;
+    input.checked = quiz.submitted === index;
+    label.append(input, document.createTextNode(choice));
+    if (quiz.submitted !== null && index === item.correct) label.classList.add("correct");
+    if (quiz.submitted === index && index !== item.correct) label.classList.add("incorrect");
+    optionGroup.append(label);
+  }
+  const answered = quiz.submitted !== null;
+  byId("check-answer").hidden = answered;
+  byId("check-answer").disabled = true;
+  byId("next-question").hidden = !answered;
+  byId("next-question").textContent = quiz.index === questions.length - 1 ? "See results →" : "Next question →";
+  const feedback = byId("quiz-feedback");
+  feedback.hidden = !answered;
+  feedback.classList.toggle("incorrect", answered && quiz.submitted !== item.correct);
+  const explanation = quiz.submitted === item.correct
+    ? "Correct. " + item.why
+    : "Correct answer: " + item.choices[item.correct] + ". " + item.why;
+  feedback.textContent = answered ? explanation : "";
+}
+
+function checkAnswer(event) {
+  event.preventDefault();
+  if (quiz.submitted !== null) return;
+  const selected = new FormData(event.currentTarget).get("answer");
+  if (selected === null) return;
+  const item = quizzes[quiz.topic][quiz.index];
+  quiz.submitted = Number(selected);
+  if (quiz.submitted === item.correct) {
+    quiz.correct += 1;
+  } else {
+    quiz.missed.push(item.card);
+    progress.ratings[item.card] = "review";
+    saveProgress();
+  }
+  render();
+  byId("next-question").focus();
+}
+
+function advanceQuiz() {
+  if (quiz.submitted === null) return;
+  if (quiz.index + 1 === quizzes[quiz.topic].length) {
+    quiz.done = true;
+    progress.scores[quiz.topic] = Math.max(quiz.correct, progress.scores[quiz.topic] ?? 0);
+    saveProgress();
+  } else {
+    quiz.index += 1;
+    quiz.submitted = null;
+  }
+  render();
+  byId(quiz.done ? "score-heading" : "quiz-question").focus();
+}
+
+function renderResults(total) {
+  byId("score-heading").textContent = quiz.correct + " / " + total + " correct";
+  byId("result-summary").textContent = quiz.correct === total
+    ? "Topic passed. Your best score has been saved."
+    : "The cards below were added to your review queue.";
+  const list = byId("missed-cards");
+  list.hidden = quiz.missed.length === 0;
+  list.replaceChildren();
+  for (const id of new Set(quiz.missed)) {
+    const item = document.createElement("li");
+    const link = document.createElement("a");
+    link.href = "#section-title";
+    link.textContent = byCard[id].term;
+    link.addEventListener("click", event => {
+      event.preventDefault();
+      openStudy(byCard[id].topic, id);
+      byId("flip-area").focus();
+    });
+    item.append(link);
+    list.append(item);
+  }
+}
+  </script>
+</body>
+</html>
