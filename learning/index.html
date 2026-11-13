@@ -3,9 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Study world models through flashcards, practical examples, and short self-checks.">
+  <meta name="description" content="Study world models and causal inference with flashcards, quizzes, and an interactive simulation.">
   <meta name="theme-color" content="#f8f7fc">
-  <title>World Models Study Lab</title>
+  <title>Learning Hub · World Models and Causal Inference</title>
+  <script>
+    (() => {
+      let preference;
+      try { preference = localStorage.getItem("world-models-theme"); } catch {}
+      const dark = preference === "dark" || (preference !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
+      document.documentElement.dataset.theme = dark ? "dark" : "light";
+    })();
+  </script>
   <style>
 :root {
   color-scheme: light;
@@ -17,9 +25,71 @@
   --accent: #6640c6;
   --accent-dark: #4f2baf;
   --wash: #f0eafb;
+  --switch: #f4f1fa;
+  --title-accent: #7a51d8;
+  --hover: #f8f5fd;
+  --selected-line: #cbb8ed;
+  --card-start: #fbf9ff;
+  --card-end: #f2ecfd;
+  --card-line: #ded0f5;
+  --answer-end: #f5f0ff;
+  --topic-fill: #ebe1fc;
+  --card-muted: #695792;
+  --card-detail: #ba9bec;
+  --art-orbit: #d7c5f5;
+  --art-line: #b99ae9;
+  --art-fill: #dfcdf9a0;
+  --art-front: #ede3fb;
+  --art-dot: #b08de9;
+  --art-halo: #e9dcfa;
+  --primary-ink: #fff;
+  --accent-hover: #4f2baf;
+  --correct-fill: #edf8f1;
+  --correct-line: #a1c9ae;
+  --correct-ink: #285d43;
+  --incorrect-fill: #fdf0eb;
+  --incorrect-line: #e3b9a6;
+  --incorrect-ink: #803923;
   font-family: Inter, "Helvetica Neue", system-ui, sans-serif;
   color: var(--ink);
   background: var(--background);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #161320;
+  --paper: #211c2e;
+  --ink: #f2ecfc;
+  --muted: #c0b6d1;
+  --line: #453a58;
+  --accent: #b99af8;
+  --accent-dark: #d3bbff;
+  --accent-hover: #d0b6ff;
+  --primary-ink: #211335;
+  --wash: #322547;
+  --switch: #2b233a;
+  --title-accent: #b99af8;
+  --hover: #2d233e;
+  --selected-line: #76609a;
+  --card-start: #241d34;
+  --card-end: #302241;
+  --card-line: #59456e;
+  --answer-end: #2b213d;
+  --topic-fill: #3a2a52;
+  --card-muted: #c7b0ec;
+  --card-detail: #8e70b9;
+  --art-orbit: #544469;
+  --art-line: #775f9c;
+  --art-fill: #553d75a0;
+  --art-front: #44305f;
+  --art-dot: #a681de;
+  --art-halo: #503867;
+  --correct-fill: #1f392f;
+  --correct-line: #48836b;
+  --correct-ink: #b0edce;
+  --incorrect-fill: #422c2c;
+  --incorrect-line: #9a6259;
+  --incorrect-ink: #ffc6b6;
 }
 
 * { box-sizing: border-box; }
@@ -32,25 +102,24 @@ button, a { -webkit-tap-highlight-color: transparent; }
 a { color: var(--accent-dark); }
 p, h1, h2, h3 { margin: 0; }
 
-.site-header { background: #fff; border-bottom: 1px solid var(--line); }
+.site-header { background: var(--paper); border-bottom: 1px solid var(--line); }
 .header-inner { min-height: 72px; max-width: 1160px; padding: 0 32px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
 .wordmark { display: flex; gap: 7px; align-items: center; font-weight: 740; letter-spacing: -.035em; white-space: nowrap; }
-.brand-light { color: var(--muted); font-weight: 500; }
 .brand-mark { width: 29px; height: 29px; margin-right: 3px; display: grid; place-items: center; position: relative; border-radius: 8px; background: var(--accent); }
-.brand-mark i { position: absolute; width: 12px; height: 12px; border: 1px solid #fff; border-radius: 2px; transform: rotate(45deg); }
+.brand-mark i { position: absolute; width: 12px; height: 12px; border: 1px solid var(--paper); border-radius: 2px; transform: rotate(45deg); }
 .brand-mark i:first-child { translate: 0 -4px; opacity: .45; }
 .brand-mark i:last-child { translate: 0 4px; opacity: .68; }
-.mode-switch { display: flex; align-items: center; gap: 3px; background: #f4f1fa; padding: 4px; border: 1px solid #eee9f6; border-radius: 11px; }
+.mode-switch { display: flex; align-items: center; gap: 3px; background: var(--switch); padding: 4px; border: 1px solid var(--line); border-radius: 11px; }
 .mode-switch button { padding: 7px 13px; border: 1px solid transparent; border-radius: 7px; color: var(--muted); background: transparent; font-size: .82rem; font-weight: 650; white-space: nowrap; }
 .mode-switch button:hover { color: var(--accent-dark); }
-.mode-switch button[aria-pressed="true"] { background: white; color: var(--accent-dark); border-color: var(--line); box-shadow: 0 1px 2px #2717420a; }
+.mode-switch button[aria-pressed="true"] { background: var(--paper); color: var(--accent-dark); border-color: var(--line); box-shadow: 0 1px 2px #2717420a; }
 
 .container { max-width: 1160px; margin: auto; padding: 0 32px 28px; }
 .intro { padding: 45px 0 28px; }
 .eyebrow { display: flex; align-items: center; gap: 8px; margin-bottom: 11px; color: var(--accent-dark); font-size: .7rem; font-weight: 760; letter-spacing: .13em; text-transform: uppercase; }
 .accent-dot { width: 8px; height: 8px; border-radius: 50%; background: #8a64e8; box-shadow: 0 0 0 3px #eae0fb; }
 h1 { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(3.05rem, 6vw, 5rem); line-height: .98; font-weight: 500; letter-spacing: -.067em; }
-h1 span { color: #7a51d8; }
+h1 span { color: var(--title-accent); }
 .subtitle { color: var(--muted); font-size: 1rem; line-height: 1.55; margin-top: 14px; max-width: 630px; }
 
 .progress-summary { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 30px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 17px 22px; margin-bottom: 28px; }
@@ -73,8 +142,8 @@ progress::-moz-progress-bar { border-radius: 100px; background: var(--accent); }
 .sidebar-heading > span { font-size: .72rem; color: var(--muted); white-space: nowrap; }
 #topics { display: grid; gap: 3px; }
 #topics button, #review-filter { width: 100%; display: grid; grid-template-columns: 17px minmax(0, 1fr) auto; align-items: center; gap: 7px; text-align: left; padding: 9px; min-height: 39px; background: transparent; border: 1px solid transparent; border-radius: 8px; font-size: .78rem; font-weight: 620; }
-#topics button:hover, #review-filter:hover { background: #f8f5fd; }
-#topics button[aria-pressed="true"], #review-filter[aria-pressed="true"] { background: #f0eafb; color: var(--accent-dark); border-color: #ebe1fa; }
+#topics button:hover, #review-filter:hover { background: var(--hover); }
+#topics button[aria-pressed="true"], #review-filter[aria-pressed="true"] { background: var(--wash); color: var(--accent-dark); border-color: var(--selected-line); }
 .topic-dot { width: 8px; height: 8px; justify-self: center; border-radius: 50%; background: var(--topic-color, var(--accent)); }
 .topic-total, #review-count { color: var(--muted); font-size: .7rem; font-variant-numeric: tabular-nums; }
 .topic-all { font-size: 1.08rem; line-height: 1; text-align: center; color: var(--accent); }
@@ -84,40 +153,40 @@ progress::-moz-progress-bar { border-radius: 100px; background: var(--accent); }
 .section-heading { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: 0 0 13px; min-height: 49px; }
 .section-heading h2 { font-size: clamp(1.12rem, 3vw, 1.39rem); line-height: 1.2; letter-spacing: -.035em; }
 .section-heading p { font-size: .81rem; line-height: 1.4; color: var(--muted); margin-top: 5px; }
-.position { flex: none; padding: 5px 10px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: var(--muted); font-size: .77rem; font-weight: 660; font-variant-numeric: tabular-nums; }
+.position { flex: none; padding: 5px 10px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); color: var(--muted); font-size: .77rem; font-weight: 660; font-variant-numeric: tabular-nums; }
 
-.flashcard { isolation: isolate; overflow: hidden; position: relative; min-height: 325px; display: grid; grid-template-rows: 1fr auto; gap: 24px; padding: 23px 26px 19px; background: linear-gradient(120deg, #fbf9ff 16%, #f2ecfd 100%); border: 1px solid #ded0f5; border-radius: 17px; box-shadow: 0 6px 16px #5834a10c; }
+.flashcard { isolation: isolate; overflow: hidden; position: relative; min-height: 325px; display: grid; grid-template-rows: 1fr auto; gap: 24px; padding: 23px 26px 19px; background: linear-gradient(120deg, var(--card-start) 16%, var(--card-end) 100%); border: 1px solid var(--card-line); border-radius: 17px; box-shadow: 0 6px 16px #5834a10c; }
 .flip-area { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; border: 0; background: transparent; border-radius: inherit; }
 .flip-area:focus-visible { outline-offset: -4px; }
 .card-content, .card-bottom { pointer-events: none; }
 .card-bottom a { pointer-events: auto; }
 .card-content { display: flex; flex-direction: column; align-items: flex-start; }
 .card-top { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 30px; }
-.card-topic { display: inline-block; background: #ebe1fc; color: var(--accent-dark); padding: 5px 9px; border-radius: 6px; font-size: .71rem; line-height: 1.35; font-weight: 690; }
-.card-face { color: #695792; font-size: .68rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 750; }
+.card-topic { display: inline-block; background: var(--topic-fill); color: var(--accent-dark); padding: 5px 9px; border-radius: 6px; font-size: .71rem; line-height: 1.35; font-weight: 690; }
+.card-face { color: var(--card-muted); font-size: .68rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 750; }
 .card-term { margin-bottom: 9px; color: var(--accent-dark); font-size: .82rem; font-weight: 720; }
 #card-live { width: min(100%, 550px); }
 .flashcard:not(.flipped) #card-live { width: min(77%, 485px); }
 #card-prompt { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(1.77rem, 3.45vw, 2.7rem); font-weight: 500; letter-spacing: -.045em; line-height: 1.1; text-wrap: balance; }
-.flashcard.flipped { background: linear-gradient(115deg, #fff 28%, #f5f0ff); }
+.flashcard.flipped { background: linear-gradient(115deg, var(--paper) 28%, var(--answer-end)); }
 .flashcard.flipped .card-top { margin-bottom: 18px; }
 .flashcard.flipped #card-prompt { font-family: inherit; font-size: 1.03rem; letter-spacing: -.012em; font-weight: 720; line-height: 1.35; text-wrap: pretty; }
 .card-answer { margin-top: 9px; font-size: .94rem; line-height: 1.53; }
-.card-example { display: block; margin-top: 12px; padding-left: 11px; border-left: 2px solid #ba9bec; color: #524766; font-size: .84rem; }
+.card-example { display: block; margin-top: 12px; padding-left: 11px; border-left: 2px solid var(--card-detail); color: var(--muted); font-size: .84rem; }
 .card-example strong { color: var(--accent-dark); margin-right: 4px; }
 .card-bottom { display: flex; justify-content: space-between; align-items: center; gap: 10px; color: var(--accent-dark); font-size: .79rem; font-weight: 710; }
 .flip-hint { display: flex; align-items: center; gap: 7px; }
 .flip-hint > span:first-child { font-size: 1.13rem; line-height: 1; }
 .card-bottom a { text-underline-offset: 3px; }
 .card-art { width: 270px; height: 270px; position: absolute; right: -17px; top: 45px; z-index: -2; pointer-events: none; color: #b296e8; }
-.art-orbit { position: absolute; border: 1px solid #d7c5f5; border-radius: 50%; left: 50%; top: 50%; translate: -50% -50%; }
+.art-orbit { position: absolute; border: 1px solid var(--art-orbit); border-radius: 50%; left: 50%; top: 50%; translate: -50% -50%; }
 .orbit-large { width: 234px; height: 234px; border-style: dashed; }
 .orbit-small { width: 174px; height: 174px; }
-.art-shape { position: absolute; width: 84px; height: 84px; left: 50%; top: 50%; margin: -42px; border: 1px solid #b99ae9; border-radius: 19px; background: #dfcdf9a0; rotate: 45deg; scale: 1 .68; }
+.art-shape { position: absolute; width: 84px; height: 84px; left: 50%; top: 50%; margin: -42px; border: 1px solid var(--art-line); border-radius: 19px; background: var(--art-fill); rotate: 45deg; scale: 1 .68; }
 .shape-back { translate: 0 24px; }
 .shape-middle { translate: 0 0; }
-.shape-front { translate: 0 -24px; background: #ede3fb; }
-.art-dot { position: absolute; width: 7px; height: 7px; border-radius: 50%; background: #b08de9; box-shadow: 0 0 0 4px #e9dcfa; }
+.shape-front { translate: 0 -24px; background: var(--art-front); }
+.art-dot { position: absolute; width: 7px; height: 7px; border-radius: 50%; background: var(--art-dot); box-shadow: 0 0 0 4px var(--art-halo); }
 .dot-a { left: 18%; top: 49%; }
 .dot-b { right: 15%; top: 22%; }
 .dot-c { right: 21%; bottom: 23%; width: 5px; height: 5px; }
@@ -125,15 +194,15 @@ progress::-moz-progress-bar { border-radius: 100px; background: var(--accent); }
 
 .card-controls { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 9px; margin-top: 13px; }
 .card-navigation, .rating-actions, .result-actions { display: flex; flex-wrap: wrap; gap: 7px; }
-.secondary, .primary { border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); padding: 8px 13px; min-height: 37px; font-size: .8rem; font-weight: 680; }
+.secondary, .primary { border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--ink); padding: 8px 13px; min-height: 37px; font-size: .8rem; font-weight: 680; }
 .secondary:not(:disabled):hover { background: var(--wash); }
-.primary { border-color: var(--accent); background: var(--accent); color: white; }
-.primary:not(:disabled):hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+.primary { border-color: var(--accent); background: var(--accent); color: var(--primary-ink); }
+.primary:not(:disabled):hover { background: var(--accent-hover); border-color: var(--accent-hover); }
 .keyboard-hint { margin-top: 12px; color: var(--muted); font-size: .72rem; }
 .keyboard-hint > span { margin: 0 4px; }
-kbd { display: inline-block; min-width: 17px; padding: 1px 4px; border: 1px solid var(--line); border-radius: 4px; text-align: center; background: #fff; font-family: inherit; font-size: .66rem; }
+kbd { display: inline-block; min-width: 17px; padding: 1px 4px; border: 1px solid var(--line); border-radius: 4px; text-align: center; background: var(--paper); font-family: inherit; font-size: .66rem; }
 
-.empty-panel, .quiz-panel { padding: 24px 26px; background: #fff; border: 1px solid var(--line); border-radius: 16px; }
+.empty-panel, .quiz-panel { padding: 24px 26px; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; }
 .empty-panel h3, .quiz-panel h3 { font-size: 1.27rem; line-height: 1.4; letter-spacing: -.025em; }
 .empty-panel p, #result-summary { margin: 9px 0 16px; color: var(--muted); font-size: .9rem; line-height: 1.5; }
 .quiz-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 13px; }
@@ -142,13 +211,13 @@ kbd { display: inline-block; min-width: 17px; padding: 1px 4px; border: 1px soli
 .quiz-choice { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 9px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); font-size: .85rem; line-height: 1.4; cursor: pointer; }
 .quiz-choice input { accent-color: var(--accent); margin: 0; }
 .quiz-choice:has(:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
-.quiz-choice:has(:checked) { background: var(--wash); border-color: #cbb8ed; }
+.quiz-choice:has(:checked) { background: var(--wash); border-color: var(--selected-line); }
 .quiz-choice:has(:disabled) { cursor: default; }
-.quiz-choice.correct { background: #edf8f1; border-color: #a1c9ae; }
-.quiz-choice.incorrect { background: #fdf0eb; border-color: #e3b9a6; }
+.quiz-choice.correct { background: var(--correct-fill); border-color: var(--correct-line); }
+.quiz-choice.incorrect { background: var(--incorrect-fill); border-color: var(--incorrect-line); }
 .quiz-footer { display: flex; gap: 8px; margin-top: 13px; }
-.feedback { margin-top: 13px; padding: 10px 12px; border-radius: 8px; background: #edf8f1; color: #285d43; font-size: .85rem; line-height: 1.45; }
-.feedback.incorrect { background: #fdf0eb; color: #803923; }
+.feedback { margin-top: 13px; padding: 10px 12px; border-radius: 8px; background: var(--correct-fill); color: var(--correct-ink); font-size: .85rem; line-height: 1.45; }
+.feedback.incorrect { background: var(--incorrect-fill); color: var(--incorrect-ink); }
 #missed-cards { padding-left: 19px; margin: 0 0 16px; color: var(--muted); font-size: .85rem; line-height: 1.6; }
 
 footer { margin-top: 22px; border-top: 1px solid var(--line); padding-top: 15px; display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; color: var(--muted); font-size: .76rem; }
@@ -165,8 +234,7 @@ footer > p { text-align: right; flex: none; }
 
 @media (max-width: 650px) {
   .header-inner, .container { padding-left: 16px; padding-right: 16px; }
-  .header-inner { min-height: 64px; gap: 8px; }
-  .brand-light { display: none; }
+  .header-inner { min-height: 64px; gap: 8px; flex-wrap: wrap; padding-top: 10px; padding-bottom: 10px; }
   .wordmark { font-size: .86rem; gap: 4px; }
   .mode-switch button { padding: 6px 8px; font-size: .71rem; }
   .intro { padding: 30px 0 20px; }
@@ -197,27 +265,86 @@ footer > p { text-align: right; flex: none; }
 }
 
 .card-search { display: flex; gap: 7px; margin-bottom: 12px; }
-.card-search input { min-width: 0; flex: 1; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); padding: 8px 12px; font: inherit; font-size: .85rem; min-height: 37px; }
+.card-search input { min-width: 0; flex: 1; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--ink); padding: 8px 12px; font: inherit; font-size: .85rem; min-height: 37px; }
 .card-search input::placeholder { color: var(--muted); }
 .card-search input:disabled { opacity: .55; }
+
+.header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.theme-toggle { white-space: nowrap; }
+.module-banner { display: flex; align-items: center; justify-content: space-between; gap: 20px; border: 1px solid var(--line); border-radius: 14px; padding: 15px 20px; margin-bottom: 14px; background: var(--paper); }
+.module-banner h2 { font-size: .97rem; letter-spacing: -.02em; }
+.module-banner p, .lab-intro p, .lab-controls p, .lab-results > p { color: var(--muted); font-size: .84rem; line-height: 1.55; margin-top: 5px; }
+.module-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+.module-banner .module-actions { flex: none; }
+.lab-panel { padding: 23px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
+.lab-intro { margin-bottom: 18px; }
+.lab-intro h2 { font-size: 1.52rem; letter-spacing: -.045em; }
+.lab-intro p { max-width: 720px; }
+.lab-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.18fr); gap: 16px; }
+.lab-grid > div { border: 1px solid var(--line); border-radius: 12px; padding: 16px; min-width: 0; }
+.lab-grid h3 { font-size: .98rem; }
+.lab-slider { display: grid; grid-template-columns: 1fr auto; gap: 5px 8px; margin: 15px 0; align-items: baseline; }
+.lab-slider label { font-size: .82rem; font-weight: 680; }
+.lab-slider output { color: var(--accent-dark); font-size: .79rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.lab-slider input { grid-column: 1 / -1; width: 100%; min-height: 25px; margin: 0; accent-color: var(--accent); }
+.lab-assumptions { margin-top: 16px; font-size: .82rem; }
+.lab-assumptions summary { cursor: pointer; color: var(--accent-dark); font-weight: 680; }
+.lab-assumptions table { width: 100%; margin-top: 9px; border-collapse: collapse; }
+.lab-assumptions caption { text-align: left; color: var(--muted); font-size: .76rem; padding-bottom: 4px; }
+.lab-assumptions th, .lab-assumptions td { padding: 5px 3px; border-bottom: 1px solid var(--line); text-align: left; }
+.lab-comparison { border-top: 1px solid var(--line); padding: 11px 0 0; margin-top: 12px; }
+.lab-comparison h4 { margin: 0 0 7px; font-size: .81rem; }
+.lab-comparison h4 span { font-weight: 500; color: var(--muted); margin-left: 3px; }
+.lab-row { display: grid; grid-template-columns: 34px minmax(0, 1fr) 64px; align-items: center; gap: 8px; padding: 3px 0; font-size: .79rem; }
+.lab-row strong { text-align: right; font-variant-numeric: tabular-nums; }
+.lab-track { height: 8px; border-radius: 8px; background: var(--wash); overflow: hidden; }
+.lab-track span { display: block; height: 100%; border-radius: inherit; background: var(--accent); }
+.lab-results .lab-note, .lab-results .lab-overlap { margin-top: 13px; padding: 9px 11px; border-radius: 8px; color: var(--accent-dark); background: var(--wash); }
+.lab-results .lab-overlap { color: var(--incorrect-ink); background: var(--incorrect-fill); }
+
+@media (max-width: 760px) {
+  .module-banner { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .lab-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 420px) {
+  .header-actions { gap: 5px; }
+  .theme-toggle { padding: 6px 8px; font-size: .72rem; }
+  .lab-panel, .lab-grid > div { padding: 12px; }
+}
   </style>
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <div class="wordmark"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span> World Models <span class="brand-light">Study Lab</span></div>
-      <nav class="mode-switch" aria-label="Study mode">
-        <button type="button" id="study-mode" aria-pressed="true">Flashcards</button>
-        <button type="button" id="quiz-mode" aria-pressed="false">Self-check quiz</button>
-      </nav>
+      <div class="wordmark"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span> Learning Hub</div>
+      <div class="header-actions">
+        <nav class="mode-switch" aria-label="Study mode">
+          <button type="button" id="study-mode" aria-pressed="true">Flashcards</button>
+          <button type="button" id="quiz-mode" aria-pressed="false">Self-check quiz</button>
+          <button type="button" id="lab-mode" aria-pressed="false">Simulation</button>
+        </nav>
+        <button type="button" id="theme-toggle" class="secondary theme-toggle" aria-pressed="false">Dark mode</button>
+      </div>
     </div>
   </header>
 
   <main class="container">
     <section class="intro" aria-labelledby="page-title">
-      <p class="eyebrow"><span class="accent-dot" aria-hidden="true"></span> Model-based learning</p>
-      <h1 id="page-title">World models<span>.</span></h1>
-      <p class="subtitle">Study how agents predict what happens next and use those predictions to decide what to do.</p>
+      <p class="eyebrow"><span class="accent-dot" aria-hidden="true"></span> World models and causal inference</p>
+      <h1 id="page-title">Learning hub<span>.</span></h1>
+      <p class="subtitle">Study how agents predict what happens next, plan actions, and reason about their effects.</p>
+    </section>
+
+    <section class="module-banner" aria-labelledby="module-title">
+      <div>
+        <h2 id="module-title">Causal inference for world models</h2>
+        <p>Study interventions, confounding, counterfactuals, and graph ablations. Then see how a logging policy can reverse an apparent effect.</p>
+      </div>
+      <div class="module-actions">
+        <button type="button" id="causal-cards" class="secondary">Causal inference cards</button>
+        <button type="button" id="causal-lab" class="primary">Open simulation</button>
+      </div>
     </section>
 
     <section class="progress-summary" aria-labelledby="progress-title">
@@ -231,7 +358,7 @@ footer > p { text-align: right; flex: none; }
       </div>
     </section>
 
-    <div class="workspace">
+    <div class="workspace" id="workspace">
       <aside class="topics-panel" aria-labelledby="topics-title">
         <div class="sidebar-heading"><h2 id="topics-title">Topics</h2><span id="topic-count"></span></div>
         <nav id="topics" aria-label="Filter by topic"></nav>
@@ -325,6 +452,58 @@ footer > p { text-align: right; flex: none; }
       </section>
     </div>
 
+    <section id="lab-view" class="lab-panel" aria-labelledby="lab-title" hidden>
+      <div class="lab-intro">
+        <h2 id="lab-title" tabindex="-1">Slippery-terrain simulation</h2>
+        <p>Change how often an operator chooses slow speed on each terrain. Compare the slip rates in the resulting logs with the rates when you set speed independently of terrain.</p>
+      </div>
+      <div class="lab-grid">
+        <div class="lab-controls">
+          <h3>Logging policy</h3>
+          <p>Terrain is 60% dry and 40% slippery.</p>
+          <div class="lab-slider">
+            <label for="slow-dry">Choose slow on dry terrain</label>
+            <output id="slow-dry-value" for="slow-dry">10%</output>
+            <input type="range" id="slow-dry" min="0" max="100" value="10" aria-valuetext="10%">
+          </div>
+          <div class="lab-slider">
+            <label for="slow-slippery">Choose slow on slippery terrain</label>
+            <output id="slow-slippery-value" for="slow-slippery">90%</output>
+            <input type="range" id="slow-slippery" min="0" max="100" value="90" aria-valuetext="90%">
+          </div>
+          <div class="module-actions">
+            <button type="button" id="randomize-speed" class="primary">Randomize speed</button>
+            <button type="button" id="reset-speed" class="secondary">Restore biased policy</button>
+          </div>
+          <details class="lab-assumptions">
+            <summary>Model assumptions</summary>
+            <p>Terrain affects both the operator’s speed choice and slip risk. Speed also affects slip risk. The toy model has no other common causes.</p>
+            <table>
+              <caption>Slip risk at each speed and terrain</caption>
+              <thead><tr><th scope="col">Terrain</th><th scope="col">Slow</th><th scope="col">Fast</th></tr></thead>
+              <tbody><tr><th scope="row">Dry</th><td>2%</td><td>8%</td></tr><tr><th scope="row">Slippery</th><td>20%</td><td>40%</td></tr></tbody>
+            </table>
+          </details>
+        </div>
+        <div class="lab-results">
+          <h3>Expected slip rates</h3>
+          <p>Exact probabilities from the toy model. All bars use a 0–40% scale.</p>
+          <div class="lab-comparison">
+            <h4>Logged trips <span>P(slip | speed)</span></h4>
+            <div class="lab-row"><span>Slow</span><div class="lab-track" aria-hidden="true"><span id="logged-slow-bar"></span></div><strong id="logged-slow"></strong></div>
+            <div class="lab-row"><span>Fast</span><div class="lab-track" aria-hidden="true"><span id="logged-fast-bar"></span></div><strong id="logged-fast"></strong></div>
+          </div>
+          <div class="lab-comparison">
+            <h4>Assigned speed <span>P(slip | do(speed))</span></h4>
+            <div class="lab-row"><span>Slow</span><div class="lab-track" aria-hidden="true"><span id="assigned-slow-bar"></span></div><strong id="assigned-slow"></strong></div>
+            <div class="lab-row"><span>Fast</span><div class="lab-track" aria-hidden="true"><span id="assigned-fast-bar"></span></div><strong id="assigned-fast"></strong></div>
+          </div>
+          <p id="lab-interpretation" class="lab-note" role="status"></p>
+          <p id="lab-overlap" class="lab-overlap" hidden></p>
+        </div>
+      </div>
+    </section>
+
     <footer>
       <details class="sources"><summary>References</summary><ul id="sources-list"></ul></details>
       <p id="storage-note">Progress is saved in this browser.</p>
@@ -344,7 +523,8 @@ const topics = [
   {"id": "video", "label": "Video world models", "color": "#536f9e"},
   {"id": "robotics", "label": "Robotics and control", "color": "#31765a"},
   {"id": "evaluation", "label": "Evaluation and data", "color": "#8b653a"},
-  {"id": "frontier", "label": "Recent research", "color": "#984d74"}
+  {"id": "frontier", "label": "Recent research", "color": "#984d74"},
+  {"id":"causal","label":"Causal inference","color":"#92754a"}
 ];
 
 const cards = [
@@ -825,7 +1005,21 @@ const cards = [
   {"id": "frontier-concept-grounded-world-models", "topic": "frontier", "term": "Concept-grounded world models", "question": "How does the October 2026 CGWM preprint use temporal logic?", "answer": "It uses explicit temporal knowledge to constrain concept representations and dynamics learned from observations. The approach also uses differentiable reasoning to search for actions satisfying a goal.", "example": "A temporal rule can describe when a concept is allowed to change across steps.", "source": "cgwms"},
   {"id": "frontier-scope-of-concept-grounded-evidence", "topic": "frontier", "term": "Scope of concept-grounded evidence", "question": "What should you check before generalizing the CGWM results to an open physical domain?", "answer": "Check whether the target domain has sufficiently complete and correct temporal knowledge and whether concepts are recoverable from sensors. The reported experiments use two game environments.", "example": "In robotics, unknown contacts and noisy state estimates may violate assumptions that hold in a game.", "source": "cgwms"},
   {"id": "frontier-formal-model-validity", "topic": "frontier", "term": "Formal model validity", "question": "Which evaluation dimensions did the November 2026 formal-world-model preprint distinguish?", "answer": "It separated mechanical validity, structural agreement with a reference, and semantic criteria. A generated model can be executable yet differ substantially from the intended decision problem.", "example": "A game model can pass format checks but implement different observation or action relations.", "source": "formal-eval"},
-  {"id": "frontier-reference-relative-structure", "topic": "frontier", "term": "Reference-relative structure", "question": "Why can exact agreement with one authored model be too narrow a test of semantic adequacy?", "answer": "Several formalizations may preserve the same decisions while using different symbols or abstractions. Structure comparisons are informative when paired with invariants and behavioral tests.", "example": "Two models can rename states or factor a state differently while supporting the same legal plans.", "source": "formal-eval"}
+  {"id": "frontier-reference-relative-structure", "topic": "frontier", "term": "Reference-relative structure", "question": "Why can exact agreement with one authored model be too narrow a test of semantic adequacy?", "answer": "Several formalizations may preserve the same decisions while using different symbols or abstractions. Structure comparisons are informative when paired with invariants and behavioral tests.", "example": "Two models can rename states or factor a state differently while supporting the same legal plans.", "source": "formal-eval"},
+  {"id":"causal-observe-intervene","topic":"causal","term":"Observation and intervention","question":"What changes when you replace P(Y | A = a) with P(Y | do(A = a))?","answer":"Conditioning selects cases where the logging policy chose action a. Intervening sets a and leaves the distribution of its pre-action causes in the target population intact. The two quantities can differ when those causes also affect Y.","example":"The operator may choose slow speed on slippery terrain. Assigning slow speed by design gives it to dry and slippery trials in the target proportions.","source":"pearl-causal"},
+  {"id":"causal-backdoor","topic":"causal","term":"Backdoor paths","question":"In terrain → speed, terrain → slip, and speed → slip, what does conditioning on terrain do?","answer":"Terrain is a common cause of speed and slip. Stratifying by terrain blocks the backdoor path speed ← terrain → slip while leaving the direct causal path open. For the population effect, average the stratum estimates over the target terrain mix.","example":"Compare slow and fast separately on dry and slippery terrain, then weight both speed estimates using the same proportions.","source":"pearl-causal"},
+  {"id":"causal-reversal","topic":"causal","term":"Simpson’s paradox","question":"How can slowing reduce slip on every terrain type while logged slow trips slip more often overall?","answer":"The aggregate logged comparison mixes terrain types in different proportions for each speed. If slow trips occur disproportionately on slippery terrain, the higher baseline risk can outweigh the within-terrain benefit.","example":"In the simulator’s biased preset, slow trips slip about 17.4% of the time versus 10.2% for fast trips, even though slow is safer within both terrain types."},
+  {"id":"causal-adjustment","topic":"causal","term":"Backdoor adjustment","question":"What weighting distinguishes P(slip | do(speed)) from P(slip | speed) in the terrain example?","answer":"With sufficient adjustment, the intervention risk is the sum over terrain of P(slip | speed, terrain) × P(terrain). The logged risk instead weights each stratum by P(terrain | speed).","example":"The simulator uses 60% dry and 40% slippery terrain for both intervention estimates.","source":"hernan-robins"},
+  {"id":"causal-exchangeability","topic":"causal","term":"Conditional exchangeability","question":"What does conditional exchangeability assume about logged actions and potential outcomes?","answer":"Given the chosen pre-action covariates, the potential outcome under each action is independent of the action actually taken. It is an assumption about confounding. Balance on measured variables alone cannot establish it for unmeasured factors.","example":"Adjusting for terrain is sufficient in the toy model. It can fail in practice if an unrecorded stability cue affects both speed choice and slip.","source":"hernan-robins"},
+  {"id":"causal-overlap","topic":"causal","term":"Positivity and overlap","question":"What breaks if the operator always drives slow on slippery terrain?","answer":"The logs contain no fast trips in that stratum, so the fast-on-slippery risk is unavailable from a direct comparison. Identification by adjustment requires positive probability of each action in every target stratum that matters.","example":"Set the slippery-terrain slider to 100%. The simulator can still display its known intervention risk, while logs alone lack one of the required cells.","source":"hernan-robins"},
+  {"id":"causal-consistency","topic":"causal","term":"Consistency and action definition","question":"Why does a causal analysis need a well-defined action?","answer":"Consistency links an observed outcome to the potential outcome under the treatment actually received. If a label combines versions with different effects, define the intervention and the version or policy it represents.","example":"Treating every speed below a threshold as “slow” can mix substantially different commands and execution profiles.","source":"hernan-robins"},
+  {"id":"causal-collider","topic":"causal","term":"Collider bias","question":"When can controlling for an additional variable introduce bias?","answer":"Conditioning on a common effect can associate otherwise unrelated causes. Choose adjustment variables using a causal graph and measurement timing rather than including every predictive feature.","example":"If either wet terrain or aggressive driving can trigger an alert, selecting only alerted trips can associate terrain and aggression.","source":"pearl-causal"},
+  {"id":"causal-counterfactual","topic":"causal","term":"Individual counterfactuals","question":"How does “Would this particular trip have slipped at the other speed?” differ from an intervention risk?","answer":"An intervention risk averages outcomes under a set action. A unit-level counterfactual asks about the same case, using its factual evidence to infer latent conditions before changing the action in a structural model.","example":"An average risk reduction cannot by itself establish whether one observed slip would have been prevented.","source":"pearl-causal"},
+  {"id":"causal-identifiability","topic":"causal","term":"When logs are insufficient","question":"What does it mean for an intervention effect to be unidentified from the logs?","answer":"Multiple data-generating models can fit the same observed distribution yet imply different effects of setting an action. Extra assumptions, better measurement, or experimental data can distinguish those models.","example":"If the operator always chooses one speed per terrain, collect both speeds in each terrain stratum or use a validated simulator that supports resets."},
+  {"id":"causal-sequential","topic":"causal","term":"Time-varying confounding","question":"Why is a one-step adjustment argument insufficient for an entire trajectory?","answer":"An observation can be affected by past actions and also influence future actions and outcomes. Estimating a policy’s effect requires an analysis that respects the action–observation history and assumes adequate overlap at each decision point.","example":"Earlier speed changes wheel slip, which changes the operator’s next speed choice. Comparing only the final speed can hide this feedback.","source":"hernan-robins"},
+  {"id":"causal-imitation","topic":"causal","term":"Causal confusion in imitation learning","question":"Why can a policy that predicts expert actions accurately fail when it acts on its own?","answer":"The policy may rely on features correlated with expert actions during demonstrations. When the learned policy controls the environment, its own earlier actions can change those correlations. Interventions can help distinguish useful cues from shortcuts.","example":"A feature that reveals the previous action can boost prediction on expert logs while leaving the policy poorly prepared for recovery.","source":"causal-confusion"},
+  {"id":"causal-graph-controls","topic":"causal","term":"Ablation controls for graph structure","question":"What do degree-only features and degree-preserving rewiring each test?","answer":"Degree-only features ask whether local connection counts suffice. Degree-preserving rewiring changes which nodes are connected while retaining the counts. Match model capacity, data splits, and training budget so the comparison targets the graph representation.","example":"For a directed vessel graph, preserve in-degree and out-degree separately. Compare true downstream context with rewired context and a degree-only baseline."},
+  {"id":"causal-graph-direction","topic":"causal","term":"Directional graph ablations","question":"How can an upstream versus downstream comparison isolate the contribution of relation direction?","answer":"Compare predecessor and successor context under matched retrieval budgets and the same model and split. Include a no-graph baseline and report coverage, since some entities have context in only one direction.","example":"If downstream context wins but includes more nodes, match context size before attributing the gain to direction."}
 ];
 
 const quizzes = {
@@ -954,6 +1148,12 @@ const quizzes = {
     {"card": "frontier-frozen-versus-end-to-end-jepa", "question": "Which issue must an end-to-end latent predictor address that a predictor trained on fixed embeddings avoids during dynamics training?", "choices": ["The representation itself can collapse or drift", "Future states no longer depend on actions", "Test-time goals become fully observable", "Planning requires pixel reconstruction"], "correct": 0, "why": "Updating the encoder jointly changes the target space and introduces collapse risks."},
     {"card": "frontier-worldarena-2-0-modalities", "question": "Which additional sensory modality does WorldArena 2.0 emphasize alongside vision?", "choices": ["Audio transcripts", "Touch", "GPS logs", "Speech synthesis"], "correct": 1, "why": "The benchmark extends to visuotactile prediction and evaluation."},
     {"card": "frontier-formal-model-validity", "question": "An LLM generates an executable game model. Which check most directly tests whether it captured the intended decision problem?", "choices": ["Confirm the file parses twice", "Count the number of action names", "Check that the code has comments", "Compare predicted legal actions and outcomes on controlled scenarios"], "correct": 3, "why": "Behavioral tests can expose semantic errors that mechanical validity misses."}
+  ],
+  causal: [
+    {"card":"causal-reversal","question":"In logged trips, slowing is concentrated on slippery terrain. Which comparison best targets the effect of setting speed?","choices":["Compare aggregate slow and fast logs","Use both speeds within terrain strata, then weight by the same terrain mix","Match only on the eventual slip outcome","Drop terrain from the model"],"correct":1,"why":"Standardizing across the same pre-action terrain distribution removes the difference in how the logging policy assigns speeds, if terrain suffices to adjust for confounding."},
+    {"card":"causal-overlap","question":"You find zero fast trips on slippery terrain. What is missing for a direct terrain-adjusted comparison?","choices":["An estimate of how often terrain is dry","A different outcome definition","The observed risk for fast trips on slippery terrain","A larger encoder"],"correct":2,"why":"The missing action–terrain combination violates overlap. The simulator can supply that cell from its built-in assumptions, but the logs cannot estimate it directly."},
+    {"card":"causal-counterfactual","question":"You know that assigning slow speed lowers average slip risk. What else is needed to answer whether it would have prevented one specific trip’s slip?","choices":["A model linking that trip’s observed evidence to its outcomes under both actions","Only the size of the average risk reduction","Only the aggregate number of fast trips","A different action label"],"correct":0,"why":"A unit-level counterfactual needs assumptions about the same trip’s latent conditions and how its outcomes under the two actions are related."},
+    {"card":"causal-graph-controls","question":"What control most directly tests whether exact directed connections matter beyond each node’s connection counts?","choices":["A larger model using the original graph","A new dataset with denser graphs","An undirected graph with arbitrary degree","Rewiring that preserves each node’s in-degree and out-degree"],"correct":3,"why":"This perturbs which nodes are connected while retaining directed degree information."}
   ]
 };
 
@@ -1001,8 +1201,90 @@ const sources = [
   {"id": "leap", "label": "Latent Energy Action Planning with World Models", "author": "Pham & Bera, 2026 preprint", "url": "https://arxiv.org/abs/2609.03294"},
   {"id": "jepa-wam", "label": "JEPA-WAM: Learning Vision-Language-Action Policies with Joint-Embedding World Modeling", "author": "Lin et al., 2026 preprint", "url": "https://arxiv.org/abs/2608.09381"},
   {"id": "cgwms", "label": "Neurosymbolic Learning of Interpretable World Models", "author": "Andreoni et al., 2026 preprint", "url": "https://arxiv.org/abs/2610.19955"},
-  {"id": "formal-eval", "label": "Evaluating LLM-Generated World Models for Neuro-Symbolic Reasoning", "author": "Djaffal et al., 2026 preprint", "url": "https://arxiv.org/abs/2611.14419"}
+  {"id": "formal-eval", "label": "Evaluating LLM-Generated World Models for Neuro-Symbolic Reasoning", "author": "Djaffal et al., 2026 preprint", "url": "https://arxiv.org/abs/2611.14419"},
+  {"id":"hernan-robins","label":"Causal Inference: What If","author":"Hernán & Robins","url":"https://content.sph.harvard.edu/wwwhsph/sites/1268/2024/04/hernanrobins_WhatIf_26apr24.pdf"},
+  {"id":"pearl-causal","label":"Causal Inference in Statistics: An Overview","author":"Pearl, 2009","url":"https://doi.org/10.1214/09-SS057"},
+  {"id":"causal-confusion","label":"Causal Confusion in Imitation Learning","author":"de Haan et al., 2019","url":"https://arxiv.org/abs/1905.11979"}
 ];
+
+const terrain = [
+  { label: "dry", weight: 0.6, slow: 0.02, fast: 0.08 },
+  { label: "slippery", weight: 0.4, slow: 0.20, fast: 0.40 }
+];
+
+function slipRates(slowDry, slowSlippery) {
+  const slowProbabilities = [slowDry, slowSlippery];
+  const missing = [];
+  const outcomes = {};
+  for (const speed of ["slow", "fast"]) {
+    let assigned = 0;
+    let slips = 0;
+    let loggedMass = 0;
+    for (const [i, surface] of terrain.entries()) {
+      const p = speed === "slow" ? slowProbabilities[i] : 1 - slowProbabilities[i];
+      const mass = surface.weight * p;
+      assigned += surface.weight * surface[speed];
+      slips += mass * surface[speed];
+      loggedMass += mass;
+      if (p === 0) missing.push(speed + " on " + surface.label + " terrain");
+    }
+    outcomes[speed] = { assigned, logged: loggedMass ? slips / loggedMass : null };
+  }
+  return { ...outcomes, missing };
+}
+
+function setupCausalLab() {
+  const get = id => document.getElementById(id);
+  const controls = [get("slow-dry"), get("slow-slippery")];
+  const asPercent = rate => (rate * 100).toFixed(1) + "%";
+
+  function update() {
+    for (const control of controls) {
+      const label = control.value + "%";
+      get(control.id + "-value").value = label;
+      control.setAttribute("aria-valuetext", label);
+    }
+    const { slow, fast, missing } = slipRates(...controls.map(control => Number(control.value) / 100));
+    for (const [speed, result] of [["slow", slow], ["fast", fast]]) {
+      for (const comparison of ["logged", "assigned"]) {
+        const rate = result[comparison];
+        const id = comparison + "-" + speed;
+        get(id).textContent = rate === null ? "No trips" : asPercent(rate);
+        get(id + "-bar").style.width = ((rate ?? 0) / 0.4 * 100) + "%";
+      }
+    }
+
+    const assignedGap = ((fast.assigned - slow.assigned) * 100).toFixed(1);
+    const loggedGap = slow.logged === null || fast.logged === null ? null : (slow.logged - fast.logged) * 100;
+    let interpretation = "Assigning slow speed reduces slip risk by " + assignedGap + " percentage points.";
+    if (loggedGap === null) {
+      interpretation += " The logs contain only one speed, so they cannot compare speeds.";
+    } else if (loggedGap > 0.00001) {
+      interpretation += " In the logs, slow trips look riskier because they occur more often on slippery terrain.";
+    } else if (Math.abs(controls[0].valueAsNumber - controls[1].valueAsNumber) === 0) {
+      interpretation += " Speed choice is independent of terrain, so the logged and assigned rates agree.";
+    } else {
+      interpretation += " Compare the gaps in the logged and assigned rates. The logging policy can distort the size of the effect.";
+    }
+    get("lab-interpretation").textContent = interpretation;
+    const overlap = get("lab-overlap");
+    overlap.hidden = missing.length === 0;
+    overlap.textContent = missing.length
+      ? "Missing from the logs: " + missing.join("; ") + ". The assigned rates come from the model assumptions."
+      : "";
+  }
+
+  function applyPolicy(dry, slippery) {
+    controls[0].value = dry;
+    controls[1].value = slippery;
+    update();
+  }
+
+  controls.forEach(control => control.addEventListener("input", update));
+  get("randomize-speed").addEventListener("click", () => applyPolicy(50, 50));
+  get("reset-speed").addEventListener("click", () => applyPolicy(10, 90));
+  update();
+}
 
 
 const byId = id => document.getElementById(id);
@@ -1063,6 +1345,35 @@ for (const source of sources) {
   item.append(link, document.createTextNode(" · " + source.author));
   byId("sources-list").append(item);
 }
+
+const themeButton = byId("theme-toggle");
+const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  themeButton.setAttribute("aria-pressed", String(theme === "dark"));
+  themeMeta.content = theme === "dark" ? "#161320" : "#f8f7fc";
+}
+
+applyTheme(document.documentElement.dataset.theme);
+themeButton.addEventListener("click", () => {
+  const theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  applyTheme(theme);
+  try { localStorage.setItem("world-models-theme", theme); } catch {}
+});
+setupCausalLab();
+
+function showLab() {
+  changeMode("lab");
+  byId("lab-title").focus();
+}
+
+byId("lab-mode").addEventListener("click", showLab);
+byId("causal-lab").addEventListener("click", showLab);
+byId("causal-cards").addEventListener("click", () => {
+  openStudy("causal");
+  byId("flip-area").focus();
+});
 
 byId("study-mode").addEventListener("click", () => changeMode("study"));
 byId("quiz-mode").addEventListener("click", () => changeMode("quiz"));
@@ -1202,19 +1513,23 @@ function openStudy(nextFilter, cardId = null) {
   filter = nextFilter;
   currentCardId = cardId;
   flipped = false;
-  if (cardId || nextFilter === "review") {
-    query = "";
-    searchField.value = "";
-  }
+  query = "";
+  searchField.value = "";
   render();
 }
 
 function render() {
   const isStudy = mode === "study";
+  const isQuiz = mode === "quiz";
+  const isLab = mode === "lab";
+  byId("workspace").hidden = isLab;
+  byId("lab-view").hidden = !isLab;
   byId("study-view").hidden = !isStudy;
-  byId("quiz-view").hidden = isStudy;
+  byId("quiz-view").hidden = !isQuiz;
   byId("study-mode").setAttribute("aria-pressed", String(isStudy));
-  byId("quiz-mode").setAttribute("aria-pressed", String(!isStudy));
+  byId("quiz-mode").setAttribute("aria-pressed", String(isQuiz));
+  byId("lab-mode").setAttribute("aria-pressed", String(isLab));
+  if (isLab) return;
   for (const [id, { button, count }] of topicButtons) {
     button.hidden = !isStudy && id === "all";
     button.setAttribute("aria-pressed", String(id === (isStudy ? filter : quiz.topic)));
