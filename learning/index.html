@@ -130,7 +130,7 @@ progress { display: block; width: 100%; height: 7px; border: 0; border-radius: 1
 progress::-webkit-progress-bar { border-radius: 100px; background: var(--wash); }
 progress::-webkit-progress-value { border-radius: 100px; background: var(--accent); }
 progress::-moz-progress-bar { border-radius: 100px; background: var(--accent); }
-.progress-stats { display: grid; grid-template-columns: minmax(96px, 1fr) auto; gap: 22px; }
+.progress-stats { display: grid; grid-template-columns: minmax(80px, 1fr) auto auto; gap: 15px; }
 .progress-stats > div { display: grid; gap: 3px; align-content: center; padding-left: 20px; border-left: 1px solid var(--line); }
 .progress-stats strong { font-size: 1.04rem; font-weight: 760; font-variant-numeric: tabular-nums; line-height: 1.1; }
 .progress-stats span { color: var(--muted); font-size: .75rem; }
@@ -312,6 +312,79 @@ footer > p { text-align: right; flex: none; }
   .theme-toggle { padding: 6px 8px; font-size: .72rem; }
   .lab-panel, .lab-grid > div { padding: 12px; }
 }
+
+.daily-shortcut { display: grid; gap: 3px; text-align: left; color: var(--accent-dark); white-space: nowrap; }
+.daily-shortcut span { font-size: .75rem; }
+.learning-dashboard { display: grid; gap: 14px; }
+.daily-hero { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 24px; border: 1px solid var(--card-line); border-radius: 16px; background: linear-gradient(120deg, var(--card-start), var(--card-end)); }
+.daily-hero .eyebrow { margin-bottom: 7px; }
+.daily-hero h2 { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 500; letter-spacing: -.045em; line-height: 1.04; }
+.daily-summary, .daily-comparison, .dashboard-panel p, .counting-details { color: var(--muted); font-size: .82rem; line-height: 1.55; }
+.daily-summary { margin-top: 7px; }
+.daily-comparison { margin-top: 3px; }
+.daily-actions { display: flex; flex-wrap: wrap; gap: 7px; }
+.daily-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; }
+.daily-metrics > div, .dashboard-panel { border: 1px solid var(--line); border-radius: 13px; background: var(--paper); padding: 15px 16px; }
+.daily-metrics dt { font-size: .8rem; font-weight: 690; }
+.daily-metrics dd { margin: 4px 0; }
+.daily-metrics dd strong { display: block; font-size: clamp(1.35rem, 3vw, 1.85rem); font-weight: 720; letter-spacing: -.05em; line-height: 1.05; font-variant-numeric: tabular-nums; color: var(--accent-dark); }
+.daily-metrics dd span { display: block; margin-top: 4px; color: var(--muted); font-size: .73rem; line-height: 1.3; }
+.dashboard-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: start; gap: 12px; }
+.dashboard-panel { min-width: 0; }
+.dashboard-heading { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
+.dashboard-heading h3 { font-size: .99rem; flex: 1; }
+.dashboard-heading label, .dashboard-heading strong { font-size: .76rem; color: var(--muted); }
+.dashboard-heading select { background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-radius: 7px; padding: 5px; font: inherit; font-size: .76rem; }
+.dashboard-panel .goal-caption { color: var(--accent-dark); font-weight: 690; }
+.dashboard-panel progress { margin: 7px 0; }
+.milestone-title { margin-top: 15px; font-size: .84rem; }
+.milestones, .week-chart, .knowledge-map, .daily-log { list-style: none; margin: 0; padding: 0; }
+.milestones { display: grid; gap: 4px; margin-top: 7px; }
+.milestones li, .daily-log li { display: flex; align-items: center; justify-content: space-between; gap: 7px; padding: 6px 8px; border-radius: 7px; background: var(--switch); font-size: .76rem; }
+.milestones .earned { background: var(--correct-fill); color: var(--correct-ink); }
+.milestone-state { color: var(--muted); white-space: nowrap; }
+.earned .milestone-state { color: var(--correct-ink); }
+.week-legend { display: flex; flex-wrap: wrap; gap: 12px; }
+.week-legend span { display: flex; gap: 4px; align-items: center; }
+.week-legend i { width: 9px; height: 9px; border-radius: 2px; }
+.legend-new { background: var(--accent); }
+.legend-review { background: var(--correct-line); }
+.week-chart { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; margin-top: 10px; }
+.week-chart li { min-width: 0; display: grid; grid-template-rows: 16px 82px auto; gap: 4px; text-align: center; padding: 4px 0; color: var(--muted); font-size: .67rem; font-variant-numeric: tabular-nums; }
+.week-chart .week-today { color: var(--accent-dark); background: var(--wash); border-radius: 7px; }
+.week-bars { width: min(60%, 24px); height: 100%; margin: auto; display: flex; flex-direction: column-reverse; border-bottom: 1px solid var(--line); }
+.week-bars i { border-radius: 2px 2px 0 0; }
+.knowledge-map { display: grid; gap: 7px; margin-top: 10px; }
+.knowledge-map li { display: grid; grid-template-columns: minmax(100px, 125px) minmax(0, 1fr) auto; align-items: center; gap: 8px; font-size: .72rem; line-height: 1.25; }
+.map-topic-count { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.map-tiles { display: flex; flex-wrap: wrap; gap: 3px; }
+.map-tiles span { width: 9px; height: 9px; border-radius: 2px; background: var(--line); }
+.map-tiles .tile-learned { background: var(--card-detail); }
+.map-tiles .tile-today { background: var(--accent); box-shadow: 0 0 0 1px var(--paper), 0 0 0 2px var(--accent); }
+.daily-log { display: grid; gap: 4px; margin-top: 7px; }
+.log-tag { color: var(--accent-dark); font-weight: 650; white-space: nowrap; }
+.counting-details { margin-top: 13px; }
+.counting-details summary { color: var(--accent-dark); cursor: pointer; font-weight: 680; }
+.counting-details p { margin-top: 6px; }
+#result-activity { margin: 0 0 12px; }
+
+@media (max-width: 720px) {
+  .daily-hero { flex-direction: column; align-items: flex-start; }
+  .dashboard-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 650px) {
+  .progress-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .daily-shortcut { padding: 3px 6px; }
+  .daily-shortcut span { white-space: normal; }
+  .daily-metrics { gap: 6px; }
+  .daily-metrics > div { padding: 10px 8px; }
+  .daily-hero { padding: 16px; }
+}
+@media (max-width: 360px) {
+  .mode-switch button { padding-inline: 5px; }
+  .knowledge-map li { grid-template-columns: 1fr auto; }
+  .map-tiles { grid-row: 2; grid-column: 1 / -1; }
+}
   </style>
 </head>
 <body>
@@ -322,6 +395,7 @@ footer > p { text-align: right; flex: none; }
         <nav class="mode-switch" aria-label="Study mode">
           <button type="button" id="study-mode" aria-pressed="true">Flashcards</button>
           <button type="button" id="quiz-mode" aria-pressed="false">Self-check quiz</button>
+          <button type="button" id="progress-mode" aria-pressed="false">Progress</button>
           <button type="button" id="lab-mode" aria-pressed="false">Simulation</button>
         </nav>
         <button type="button" id="theme-toggle" class="secondary theme-toggle" aria-pressed="false">Dark mode</button>
@@ -355,6 +429,71 @@ footer > p { text-align: right; flex: none; }
       <div class="progress-stats">
         <div><strong id="seen-count">0</strong><span>Cards seen</span></div>
         <div><strong id="quiz-count">0</strong><span>Topic quizzes passed</span></div>
+        <button type="button" id="view-daily-progress" class="secondary daily-shortcut">
+          <strong id="daily-shortcut-count">0</strong><span>Learned today</span>
+        </button>
+      </div>
+    </section>
+
+    <section id="progress-view" class="learning-dashboard" aria-labelledby="daily-title" hidden>
+      <div class="daily-hero">
+        <div>
+          <p class="eyebrow" id="daily-date"></p>
+          <h2 id="daily-title" tabindex="-1">Today’s learning</h2>
+          <p id="daily-summary" class="daily-summary"></p>
+          <p id="daily-comparison" class="daily-comparison" hidden></p>
+        </div>
+        <div class="daily-actions">
+          <button type="button" id="learn-next" class="primary">Quiz a new concept</button>
+          <button type="button" id="review-next" class="secondary">Review a learned concept</button>
+        </div>
+      </div>
+
+      <dl class="daily-metrics">
+        <div><dt>New concepts</dt><dd><strong id="daily-new">0</strong><span>First quiz passes</span></dd></div>
+        <div><dt>Reviewed</dt><dd><strong id="daily-review">0</strong><span>Passed again on a later day</span></dd></div>
+        <div><dt>Study streak</dt><dd><strong id="daily-streak">0 days</strong><span id="daily-best"></span></dd></div>
+      </dl>
+
+      <div class="dashboard-grid">
+        <section class="dashboard-panel" aria-labelledby="goal-title">
+          <div class="dashboard-heading">
+            <h3 id="goal-title">Daily goal</h3>
+            <label for="goal-select">Target</label>
+            <select id="goal-select">
+              <option value="1">1 concept</option><option value="3">3 concepts</option>
+              <option value="5">5 concepts</option><option value="8">8 concepts</option>
+              <option value="12">12 concepts</option><option value="20">20 concepts</option>
+            </select>
+          </div>
+          <p class="goal-caption" id="goal-label"></p>
+          <progress id="daily-goal" aria-label="Daily study goal" value="0"></progress>
+          <p>Every distinct concept you pass today moves the goal forward by one.</p>
+          <h3 class="milestone-title">Milestones</h3>
+          <ul id="milestone-list" class="milestones"></ul>
+        </section>
+
+        <section class="dashboard-panel" aria-labelledby="week-title">
+          <div class="dashboard-heading"><h3 id="week-title">Last 7 days</h3></div>
+          <p class="week-legend"><span><i class="legend-new"></i>New</span><span><i class="legend-review"></i>Reviewed</span></p>
+          <ul id="week-chart" class="week-chart"></ul>
+        </section>
+
+        <section class="dashboard-panel knowledge-panel" aria-labelledby="map-title">
+          <div class="dashboard-heading"><h3 id="map-title">Knowledge map</h3><strong id="map-count"></strong></div>
+          <p>Each tile is one concept. Passing its quiz for the first time lights up one tile.</p>
+          <ul id="knowledge-map" class="knowledge-map"></ul>
+        </section>
+
+        <section class="dashboard-panel" aria-labelledby="log-title">
+          <div class="dashboard-heading"><h3 id="log-title">Today’s study log</h3></div>
+          <p id="daily-log-empty">Pass a concept check to start your log.</p>
+          <ul id="daily-log" class="daily-log"></ul>
+          <details class="counting-details"><summary>How progress is counted</summary>
+            <p>A first correct answer to a concept check earns one new concept. A correct answer on a later day earns one review per concept that day. Topic quiz answers count toward their individual concepts.</p>
+            <p>Card flips and self-ratings still appear in your flashcard progress. Daily counts begin with this update because earlier quiz scores did not record which concepts passed or when.</p>
+          </details>
+        </section>
       </div>
     </section>
 
@@ -415,6 +554,7 @@ footer > p { text-align: right; flex: none; }
               <button type="button" id="previous" class="secondary" aria-label="Previous card"><span aria-hidden="true">←</span><span class="nav-label"> Previous</span></button>
               <button type="button" id="next" class="secondary" aria-label="Next card"><span class="nav-label">Next </span><span aria-hidden="true">→</span></button>
             </div>
+            <button type="button" id="check-concept" class="secondary">Quiz this concept</button>
             <div id="rating-actions" class="rating-actions" hidden>
               <button type="button" id="review" class="secondary">Review again</button>
               <button type="button" id="mastered" class="primary">Mark mastered</button>
@@ -440,9 +580,11 @@ footer > p { text-align: right; flex: none; }
             <div id="quiz-results" hidden>
               <h3 id="score-heading" tabindex="-1"></h3>
               <p id="result-summary"></p>
+              <p id="result-activity" class="feedback" hidden></p>
               <ul id="missed-cards" hidden></ul>
               <div class="result-actions">
                 <button type="button" id="retry-quiz" class="primary">Try again</button>
+                <button type="button" id="result-progress" class="secondary">View learning progress</button>
                 <button type="button" id="return-to-study" class="secondary">Back to flashcards</button>
               </div>
             </div>
@@ -1286,6 +1428,269 @@ function setupCausalLab() {
   update();
 }
 
+const checkPrefix = "learning-hub.check.";
+const goalKey = "learning-hub.daily-goal";
+const dayPattern = /^\d{4}-\d{2}-\d{2}$/;
+const defaultDailyGoal = 5;
+
+function localStudyDay(now = new Date()) {
+  const twoDigits = number => String(number).padStart(2, "0");
+  return now.getFullYear() + "-" + twoDigits(now.getMonth() + 1) + "-" + twoDigits(now.getDate());
+}
+
+function shiftStudyDay(day, offset) {
+  const date = new Date(day + "T00:00:00Z");
+  date.setUTCDate(date.getUTCDate() + offset);
+  return date.toISOString().slice(0, 10);
+}
+
+function getLearningActivity(cards, onStorageError) {
+  const allowed = new Set(cards.map(card => card.id));
+  const events = new Map();
+  let goal = defaultDailyGoal;
+
+  function refresh() {
+    try {
+      const savedGoal = Number(localStorage.getItem(goalKey));
+      if ([1, 3, 5, 8, 12, 20].includes(savedGoal)) goal = savedGoal;
+      for (let index = 0; index < localStorage.length; index += 1) {
+        const key = localStorage.key(index);
+        if (!key?.startsWith(checkPrefix)) continue;
+        const [day, card] = key.slice(checkPrefix.length).split("/");
+        if (dayPattern.test(day) && allowed.has(card) && localStorage.getItem(key) === "passed") {
+          events.set(key, { day, card });
+        }
+      }
+    } catch {
+      onStorageError();
+    }
+  }
+
+  function pass(card, day = localStudyDay()) {
+    if (!allowed.has(card) || !dayPattern.test(day)) return;
+    refresh();
+    const key = checkPrefix + day + "/" + card;
+    if (events.has(key)) return "repeat";
+    const result = [...events.values()].some(event => event.card === card) ? "review" : "new";
+    events.set(key, { day, card });
+    try {
+      localStorage.setItem(key, "passed");
+    } catch {
+      onStorageError();
+    }
+    return result;
+  }
+
+  function setGoal(value) {
+    if (![1, 3, 5, 8, 12, 20].includes(value)) return;
+    goal = value;
+    try {
+      localStorage.setItem(goalKey, String(value));
+    } catch {
+      onStorageError();
+    }
+  }
+
+  return {
+    refresh,
+    pass,
+    setGoal,
+    snapshot: (day = localStudyDay()) => summarizeLearning(events.values(), day, goal)
+  };
+}
+
+function summarizeLearning(events, today, goal = defaultDailyGoal) {
+  const learned = new Map();
+  const days = new Map();
+  const sorted = [...events].sort((left, right) => left.day.localeCompare(right.day));
+  for (const { day, card } of sorted) {
+    if (day > today) continue;
+    const record = days.get(day) ?? { new: [], review: [] };
+    const first = learned.get(card);
+    if (first?.last === day) continue;
+    if (first) {
+      first.last = day;
+      record.review.push(card);
+    } else {
+      learned.set(card, { first: day, last: day });
+      record.new.push(card);
+    }
+    days.set(day, record);
+  }
+
+  let run = 0;
+  let best = 0;
+  let previous;
+  for (const day of days.keys()) {
+    run = previous && shiftStudyDay(previous, 1) === day ? run + 1 : 1;
+    best = Math.max(best, run);
+    previous = day;
+  }
+  const streak = !previous || previous < shiftStudyDay(today, -1) ? 0 : run;
+  const current = days.get(today) ?? { new: [], review: [] };
+  const week = Array.from({ length: 7 }, (_, index) => {
+    const day = shiftStudyDay(today, index - 6);
+    return { day, ...(days.get(day) ?? { new: [], review: [] }) };
+  });
+  return { today, current, week, learned, goal, streak, best };
+}
+
+const ignoredWords = new Set("about after before could does from have into more most than that their them then these they this those what when where which while will with would your".split(" "));
+
+function keywords(text) {
+  return new Set(text.toLowerCase().match(/[a-z][a-z-]{3,}/g)?.filter(word => !ignoredWords.has(word)) ?? []);
+}
+
+function shuffleChoices(choices, correct, rng) {
+  const indexed = choices.map((text, index) => ({ text, correct: index === correct }));
+  for (let index = indexed.length - 1; index > 0; index -= 1) {
+    const swap = Math.floor(rng() * (index + 1));
+    [indexed[index], indexed[swap]] = [indexed[swap], indexed[index]];
+  }
+  return { choices: indexed.map(choice => choice.text), correct: indexed.findIndex(choice => choice.correct) };
+}
+
+function conceptQuestion(card, topicCards, authored, rng = Math.random) {
+  if (authored) return { ...authored, ...shuffleChoices(authored.choices, authored.correct, rng) };
+
+  const targetWords = keywords(card.term + " " + card.question + " " + card.answer);
+  const alternatives = topicCards
+    .filter(other => other.id !== card.id && other.answer !== card.answer)
+    .map(other => ({
+      answer: other.answer,
+      overlap: [...keywords(other.term + " " + other.answer)].filter(word => targetWords.has(word)).length
+    }))
+    .sort((left, right) => right.overlap - left.overlap);
+  const answers = [...new Set(alternatives.map(other => other.answer))].slice(0, 3);
+  return {
+    card: card.id,
+    question: card.question,
+    why: card.answer,
+    ...shuffleChoices([card.answer, ...answers], 0, rng)
+  };
+}
+
+const countLabel = (value, unit) => value + " " + unit + (value === 1 ? "" : "s");
+
+function renderLearningDashboard(activity, cards, topics) {
+  const get = id => document.getElementById(id);
+  const { current, week, today, learned, goal, streak, best } = activity;
+  const activeToday = current.new.length + current.review.length;
+  const left = Math.max(0, goal - activeToday);
+  const dateText = (day, options) => new Date(day + "T12:00:00Z").toLocaleDateString(undefined, { ...options, timeZone: "UTC" });
+  get("daily-date").textContent = dateText(today, { weekday: "long", month: "long", day: "numeric" });
+  get("daily-summary").textContent = activeToday
+    ? countLabel(current.new.length, "new concept") + " and " + countLabel(current.review.length, "review") +
+      ". " + (left ? left + (left === 1 ? " more pass" : " more passes") + " to hit your goal." : "Daily goal reached.")
+    : "Pass a concept quiz to record your first learning win today.";
+  const yesterday = week.at(-2);
+  const yesterdayTotal = yesterday.new.length + yesterday.review.length;
+  const comparison = get("daily-comparison");
+  comparison.hidden = activeToday === 0 && yesterdayTotal === 0;
+  const delta = activeToday - yesterdayTotal;
+  comparison.textContent = delta === 0
+    ? "You have as many concept passes as yesterday."
+    : Math.abs(delta) + (Math.abs(delta) === 1 ? " pass " : " passes ") +
+      (delta > 0 ? "more than yesterday." : "fewer than yesterday.");
+  get("daily-new").textContent = current.new.length;
+  get("daily-review").textContent = current.review.length;
+  get("daily-streak").textContent = countLabel(streak, "day");
+  get("daily-best").textContent = "Best streak " + countLabel(best, "day");
+  get("daily-goal").max = goal;
+  get("daily-goal").value = Math.min(activeToday, goal);
+  get("goal-label").textContent = activeToday + " / " + goal + " passed · " + (left ? "In progress" : "Goal reached");
+  get("goal-select").value = String(goal);
+  get("map-count").textContent = learned.size + " / " + cards.length + " lit";
+  get("learn-next").disabled = learned.size >= cards.length;
+  get("review-next").disabled = ![...learned.values()].some(record => record.last < today);
+
+  const milestones = [
+    ["First light", "Learn one concept", learned.size >= 1],
+    ["Ten lights", "Learn ten concepts", learned.size >= 10],
+    ["Three-day streak", "Pass a check on three consecutive days", best >= 3],
+    ["Complete a topic", "Light every tile in any topic", topics.some(topic => cards.filter(card => card.topic === topic.id).every(card => learned.has(card.id)))]
+  ];
+  get("milestone-list").replaceChildren(...milestones.map(([name, description, earned]) => {
+    const item = document.createElement("li");
+    if (earned) item.className = "earned";
+    const state = document.createElement("span");
+    state.className = "milestone-state";
+    state.textContent = earned ? "✓ Earned" : "Locked";
+    const label = document.createElement("strong");
+    label.textContent = name;
+    item.title = description;
+    item.append(label, state);
+    return item;
+  }));
+
+  const scale = Math.max(1, ...week.map(day => day.new.length + day.review.length));
+  get("week-chart").replaceChildren(...week.map(day => {
+    const item = document.createElement("li");
+    if (day.day === today) item.className = "week-today";
+    const label = document.createElement("span");
+    label.textContent = day.day === today ? "Today" : dateText(day.day, { weekday: "short" });
+    const newCount = day.new.length;
+    const reviewCount = day.review.length;
+    const description = dateText(day.day, { month: "short", day: "numeric" }) +
+      ", " + countLabel(newCount, "new concept") + ", " + countLabel(reviewCount, "review");
+    item.title = description;
+    const total = document.createElement("strong");
+    total.textContent = newCount + reviewCount;
+    total.setAttribute("aria-hidden", "true");
+    const bars = document.createElement("span");
+    bars.className = "week-bars";
+    bars.setAttribute("aria-hidden", "true");
+    for (const [name, count] of [["new", newCount], ["review", reviewCount]]) {
+      const bar = document.createElement("i");
+      bar.className = "legend-" + name;
+      bar.style.height = (count / scale * 100) + "%";
+      bars.append(bar);
+    }
+    const text = document.createElement("span");
+    text.className = "sr-only";
+    text.textContent = description;
+    label.setAttribute("aria-hidden", "true");
+    item.append(total, bars, label, text);
+    return item;
+  }));
+
+  get("knowledge-map").replaceChildren(...topics.map(topic => {
+    const deck = cards.filter(card => card.topic === topic.id);
+    const item = document.createElement("li");
+    const label = document.createElement("span");
+    label.textContent = topic.label;
+    const count = document.createElement("span");
+    count.className = "map-topic-count";
+    count.textContent = deck.filter(card => learned.has(card.id)).length + " / " + deck.length;
+    const tiles = document.createElement("div");
+    tiles.className = "map-tiles";
+    tiles.setAttribute("aria-hidden", "true");
+    for (const card of deck) {
+      const tile = document.createElement("span");
+      const record = learned.get(card.id);
+      if (record) tile.className = record.first === today ? "tile-today" : "tile-learned";
+      tile.title = card.term + (record ? " · Learned" : " · Ready to quiz");
+      tiles.append(tile);
+    }
+    item.append(label, tiles, count);
+    return item;
+  }));
+
+  get("daily-log-empty").hidden = activeToday > 0;
+  const terms = new Map(cards.map(card => [card.id, card.term]));
+  const log = [...current.new.map(card => [card, "New"]), ...current.review.map(card => [card, "Review"])];
+  get("daily-log").replaceChildren(...log.map(([card, kind]) => {
+    const item = document.createElement("li");
+    const term = document.createElement("span");
+    term.textContent = terms.get(card);
+    const tag = document.createElement("span");
+    tag.className = "log-tag";
+    tag.textContent = kind;
+    item.append(term, tag);
+    return item;
+  }));
+}
+
 
 const byId = id => document.getElementById(id);
 const byCard = Object.fromEntries(cards.map(card => [card.id, card]));
@@ -1294,6 +1699,9 @@ const bySource = Object.fromEntries(sources.map(source => [source.id, source]));
 const storageKey = "world-models-study.v1";
 let storageAvailable = true;
 const progress = loadProgress();
+const learning = getLearningActivity(cards, () => { storageAvailable = false; });
+learning.refresh();
+const authoredChecks = new Map(Object.values(quizzes).flat().map(check => [check.card, check]));
 
 let mode = "study";
 let filter = progress.filter;
@@ -1301,6 +1709,8 @@ let currentCardId = progress.card;
 let flipped = false;
 let query = "";
 let quiz;
+let topicQuiz;
+let lastRenderedStudyDay;
 const searchField = byId("card-search");
 const clearSearch = byId("clear-search");
 const searchable = new Map(cards.map(card => [card.id, [
@@ -1368,6 +1778,47 @@ function showLab() {
   byId("lab-title").focus();
 }
 
+function showLearningProgress() {
+  learning.refresh();
+  changeMode("progress");
+  byId("daily-title").focus();
+}
+
+for (const id of ["progress-mode", "view-daily-progress", "result-progress"]) {
+  byId(id).addEventListener("click", showLearningProgress);
+}
+byId("goal-select").addEventListener("change", event => {
+  learning.setGoal(Number(event.target.value));
+  renderProgress();
+});
+byId("learn-next").addEventListener("click", () => {
+  const { learned } = learning.snapshot();
+  const card = cards.find(item => !learned.has(item.id));
+  if (card) openConceptQuiz(card.id);
+});
+byId("review-next").addEventListener("click", () => {
+  const { today, learned } = learning.snapshot();
+  const due = [...learned].filter(([, record]) => record.last < today)
+    .sort((left, right) => left[1].last.localeCompare(right[1].last));
+  if (due.length) openConceptQuiz(due[0][0]);
+});
+byId("check-concept").addEventListener("click", () => openConceptQuiz(currentCardId));
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) {
+    learning.refresh();
+    renderProgress();
+  }
+});
+window.setInterval(() => {
+  if (!document.hidden && lastRenderedStudyDay !== localStudyDay()) renderProgress();
+}, 60_000);
+window.addEventListener("storage", event => {
+  if (event.key?.startsWith("learning-hub.")) {
+    learning.refresh();
+    renderProgress();
+  }
+});
+
 byId("lab-mode").addEventListener("click", showLab);
 byId("causal-lab").addEventListener("click", showLab);
 byId("causal-cards").addEventListener("click", () => {
@@ -1397,12 +1848,16 @@ byId("quiz-form").addEventListener("change", () => { byId("check-answer").disabl
 byId("quiz-form").addEventListener("submit", checkAnswer);
 byId("next-question").addEventListener("click", advanceQuiz);
 byId("retry-quiz").addEventListener("click", () => {
+  if (quiz.concept) {
+    openConceptQuiz(quiz.concept);
+    return;
+  }
   startQuiz(quiz.topic);
   render();
   byId("quiz-question").focus();
 });
 byId("return-to-study").addEventListener("click", () => {
-  openStudy(quiz.topic);
+  openStudy(quiz.topic, quiz.concept);
   byId("flip-area").focus();
 });
 
@@ -1488,18 +1943,22 @@ function updateSearch(value) {
 }
 
 function changeMode(nextMode) {
-  if (mode === nextMode) return;
+  if (mode === nextMode && nextMode !== "progress") return;
+  const modeBeforeChange = mode;
   mode = nextMode;
   if (mode === "quiz") {
-    const topic = byTopic[filter]?.id ?? byCard[currentCardId]?.topic ?? topics[0].id;
-    if (quiz?.topic !== topic) startQuiz(topic);
+    const topic = (modeBeforeChange === "concept" ? quiz.topic : null) ?? byTopic[filter]?.id ?? byCard[currentCardId]?.topic ?? topics[0].id;
+    if (topicQuiz?.topic !== topic) startQuiz(topic);
+    else quiz = topicQuiz;
   }
   render();
 }
 
 function selectFilter(nextFilter) {
-  if (mode === "quiz") {
-    if (quiz.topic !== nextFilter) startQuiz(nextFilter);
+  if (mode === "quiz" || mode === "concept") {
+    mode = "quiz";
+    if (topicQuiz?.topic !== nextFilter) startQuiz(nextFilter);
+    else quiz = topicQuiz;
   } else if (nextFilter !== filter) {
     filter = nextFilter;
     currentCardId = null;
@@ -1520,16 +1979,22 @@ function openStudy(nextFilter, cardId = null) {
 
 function render() {
   const isStudy = mode === "study";
-  const isQuiz = mode === "quiz";
+  const isQuiz = mode === "quiz" || mode === "concept";
   const isLab = mode === "lab";
-  byId("workspace").hidden = isLab;
+  const isProgress = mode === "progress";
+  byId("workspace").hidden = isLab || isProgress;
+  byId("progress-view").hidden = !isProgress;
   byId("lab-view").hidden = !isLab;
   byId("study-view").hidden = !isStudy;
   byId("quiz-view").hidden = !isQuiz;
   byId("study-mode").setAttribute("aria-pressed", String(isStudy));
   byId("quiz-mode").setAttribute("aria-pressed", String(isQuiz));
   byId("lab-mode").setAttribute("aria-pressed", String(isLab));
-  if (isLab) return;
+  byId("progress-mode").setAttribute("aria-pressed", String(isProgress));
+  if (isLab || isProgress) {
+    renderProgress();
+    return;
+  }
   for (const [id, { button, count }] of topicButtons) {
     button.hidden = !isStudy && id === "all";
     button.setAttribute("aria-pressed", String(id === (isStudy ? filter : quiz.topic)));
@@ -1553,6 +2018,10 @@ function renderProgress() {
   byId("progress-bar").value = mastered;
   byId("seen-count").textContent = Object.keys(progress.seen).length;
   byId("quiz-count").textContent = passed + " / " + topics.length;
+  const activity = learning.snapshot();
+  lastRenderedStudyDay = activity.today;
+  byId("daily-shortcut-count").textContent = activity.current.new.length;
+  if (mode === "progress") renderLearningDashboard(activity, cards, topics);
   byId("storage-note").textContent = storageAvailable
     ? "Progress is saved in this browser."
     : "Progress is available for this session.";
@@ -1644,15 +2113,27 @@ function rateCard(rating) {
 }
 
 function startQuiz(topic) {
-  quiz = { topic, index: 0, submitted: null, correct: 0, missed: [], done: false };
+  topicQuiz = { topic, questions: quizzes[topic], index: 0, submitted: null, correct: 0, missed: [], done: false, passes: [] };
+  quiz = topicQuiz;
+}
+
+function openConceptQuiz(id) {
+  const card = byCard[id];
+  const question = conceptQuestion(card, deckFor(card.topic), authoredChecks.get(id));
+  quiz = { topic: card.topic, concept: id, questions: [question], index: 0, submitted: null, correct: 0, missed: [], done: false, passes: [] };
+  mode = "concept";
+  render();
+  byId("quiz-question").focus();
 }
 
 function renderQuiz() {
   const topic = byTopic[quiz.topic];
-  const questions = quizzes[quiz.topic];
+  const questions = quiz.questions;
   const item = questions[quiz.index];
-  byId("section-title").textContent = topic.label;
-  byId("section-caption").textContent = "Answer every question correctly to pass this topic.";
+  byId("section-title").textContent = quiz.concept ? byCard[quiz.concept].term : topic.label;
+  byId("section-caption").textContent = quiz.concept
+    ? "Answer correctly to pass this concept."
+    : "Answer every question correctly to pass this topic. Correct answers also count as concept passes.";
   byId("position").textContent = quiz.done ? "Complete" : (quiz.index + 1) + " / " + questions.length;
   byId("quiz-question-view").hidden = quiz.done;
   byId("quiz-results").hidden = !quiz.done;
@@ -1663,7 +2144,7 @@ function renderQuiz() {
 
   byId("quiz-topic").textContent = topic.label;
   const best = progress.scores[topic.id];
-  byId("quiz-best").textContent = best === undefined ? "" : "Best " + best + " / " + questions.length;
+  byId("quiz-best").textContent = quiz.concept || best === undefined ? "" : "Best " + best + " / " + questions.length;
   byId("quiz-question").textContent = item.question;
   const optionGroup = byId("quiz-options");
   const legend = optionGroup.querySelector("legend");
@@ -1693,18 +2174,24 @@ function renderQuiz() {
   const explanation = quiz.submitted === item.correct
     ? "Correct. " + item.why
     : "Correct answer: " + item.choices[item.correct] + ". " + item.why;
-  feedback.textContent = answered ? explanation : "";
+  const credit = quiz.passes.at(-1);
+  const logged = quiz.submitted === item.correct && credit
+    ? { new: " New concept learned.", review: " Review logged for today.", repeat: " Already counted today." }[credit]
+    : "";
+  feedback.textContent = answered ? explanation + logged : "";
 }
 
 function checkAnswer(event) {
   event.preventDefault();
-  if (quiz.submitted !== null) return;
+  if (quiz.done || quiz.submitted !== null) return;
   const selected = new FormData(event.currentTarget).get("answer");
   if (selected === null) return;
-  const item = quizzes[quiz.topic][quiz.index];
+  const item = quiz.questions[quiz.index];
   quiz.submitted = Number(selected);
   if (quiz.submitted === item.correct) {
     quiz.correct += 1;
+    const result = learning.pass(item.card);
+    quiz.passes.push(result);
   } else {
     quiz.missed.push(item.card);
     progress.ratings[item.card] = "review";
@@ -1715,11 +2202,13 @@ function checkAnswer(event) {
 }
 
 function advanceQuiz() {
-  if (quiz.submitted === null) return;
-  if (quiz.index + 1 === quizzes[quiz.topic].length) {
+  if (quiz.done || quiz.submitted === null) return;
+  if (quiz.index + 1 === quiz.questions.length) {
     quiz.done = true;
-    progress.scores[quiz.topic] = Math.max(quiz.correct, progress.scores[quiz.topic] ?? 0);
-    saveProgress();
+    if (!quiz.concept) {
+      progress.scores[quiz.topic] = Math.max(quiz.correct, progress.scores[quiz.topic] ?? 0);
+      saveProgress();
+    }
   } else {
     quiz.index += 1;
     quiz.submitted = null;
@@ -1730,9 +2219,18 @@ function advanceQuiz() {
 
 function renderResults(total) {
   byId("score-heading").textContent = quiz.correct + " / " + total + " correct";
-  byId("result-summary").textContent = quiz.correct === total
-    ? "Topic passed. Your best score has been saved."
+  const passed = quiz.correct === total;
+  byId("result-summary").textContent = passed
+    ? (quiz.concept ? "Concept passed." : "Topic passed. Your best score has been saved.")
     : "The cards below were added to your review queue.";
+  const fresh = quiz.passes.filter(result => result === "new").length;
+  const review = quiz.passes.filter(result => result === "review").length;
+  const feedback = byId("result-activity");
+  feedback.hidden = quiz.passes.length === 0;
+  const gains = [];
+  if (fresh) gains.push(fresh + (fresh === 1 ? " new concept" : " new concepts"));
+  if (review) gains.push(review + (review === 1 ? " review" : " reviews"));
+  feedback.textContent = gains.length ? gains.join(" and ") + " added to today’s log." : "Already counted in today’s log.";
   const list = byId("missed-cards");
   list.hidden = quiz.missed.length === 0;
   list.replaceChildren();
