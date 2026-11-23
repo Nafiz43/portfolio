@@ -1,10 +1,12 @@
 """Write data/scholar.json = citations, h-index and article count from the Google Scholar profile.
 
+Scholar blocks GitHub runners (HTTP 403), so this runs daily on Nafiz's Mac through
+tools/scholar_daily.sh (launchd job com.user.portfolio-scholar), which commits and pushes.
+
 Scholar has no API, so this reads the public profile page. If Google blocks the request or the
 page layout changes, the script exits 1 and leaves the old data/scholar.json untouched, so the
 site never shows wrong numbers. Stdlib only.  Run: python3 tools/sync_scholar.py
 """
-import datetime
 import json
 import re
 import sys
@@ -47,7 +49,7 @@ def scholar():
         rows = count_rows(fetch(articles))
     if articles == 0:
         raise ValueError("found 0 articles")
-    return {**stats, "articles": articles, "updated": datetime.date.today().isoformat()}
+    return {**stats, "articles": articles}
 
 
 def demo():

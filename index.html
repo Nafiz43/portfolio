@@ -322,16 +322,14 @@
         .then(c => show(c[0].commit.committer.date))
         .catch(() => show(document.lastModified));
     })();
-    // Scholar stats, refreshed nightly by .github/workflows/sync-publications.yml (tools/sync_scholar.py).
+    // Scholar stats, refreshed daily from the Mac by tools/scholar_daily.sh (Scholar blocks GitHub Actions).
     fetch("data/scholar.json", { cache: "no-cache" })
       .then(r => r.ok ? r.json() : Promise.reject())
       .then(g => {
         document.getElementById("gs-citations").textContent = g.citations.toLocaleString("en-US");
         document.getElementById("gs-h").textContent = g.h_index;
         document.getElementById("gs-articles").textContent = g.articles;
-        const el = document.getElementById("scholar-stats");
-        el.title = "As of " + g.updated;
-        el.hidden = false;
+        document.getElementById("scholar-stats").hidden = false;
       })
       .catch(() => {});
   </script>
