@@ -960,4 +960,11 @@ body, body *:not(h1):not(h2):not(h2 *):not(.fa):not(.fab):not(.fas):not(.far):no
 /* Publications: full list folded under the selected ones */
 .pub-all { margin-top: 1rem; }
 .pub-all > summary { cursor: pointer; font-weight: 600; color: var(--claude-orange-dark); }
-.scholar-stats { margin: 1rem 0 0; color: var(--claude-text-secondary); }
+/* Photo with Google Scholar stats right below it (data/scholar.json). */
+.about-side { float: right; margin: 0 0 1rem 2rem; text-align: center; }
+.about-side .about-photo { float: none; display: block; margin: 0 auto 0.6rem; }
+.scholar-stats { display: flex; justify-content: center; gap: 1rem; text-decoration: none !important; }
+.scholar-stats[hidden] { display: none; }
+.scholar-stats span { display: flex; flex-direction: column; font-size: 0.75rem !important; color: var(--claude-text-muted) !important; }
+.scholar-stats strong { font-size: 1.05rem !important; color: var(--claude-text-primary) !important; }
+@media (max-width: 768px) { .about-side { float: none; margin: 0 auto 1rem; } }
