@@ -15,8 +15,7 @@
       { code: "CSE - 360", name: "Integrated Design Project - I", term: "Spring '22" },
       { code: "CSE - 460", name: "Integrated Design Project - II", term: "Fall '22" },
       { code: "CSE - 122", name: "Introduction to Computer Science and Programming Language Sessional", term: "Fall '22" },
-      { code: "CSE - 204", name: "Data Structure & Algorithm Sessional" },
-      { code: "CSE - 206", name: "Object Oriented Programming Language Sessional" }
+      { code: "CSE - 204", name: "Data Structure & Algorithm Sessional" }
     ];
 
     const coursesList = document.getElementById("courses-taught-mist");
