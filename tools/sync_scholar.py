@@ -27,7 +27,8 @@ def parse_stats(html):
     # Stats table cells, in order: citations (all, since), h-index (all, since), i10 (all, since).
     cells = [int(x) for x in re.findall(r'class="gsc_rsb_std">(\d+)<', html)]
     if len(cells) != 6:
-        raise ValueError(f"expected 6 stat cells, found {len(cells)}")
+        title = re.search(r"<title>(.*?)</title>", html, re.S)
+        raise ValueError(f"expected 6 stat cells, found {len(cells)}; page title: {title.group(1).strip() if title else html[:200]!r}")
     return {"citations": cells[0], "h_index": cells[2]}
 
 
