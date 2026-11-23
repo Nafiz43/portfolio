@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ["data/publications.manual.json", "tools/sync_publications.py"]
+    paths: ["data/publications.manual.json", "tools/sync_publications.py", "tools/sync_scholar.py"]
 
 permissions:
   contents: write
@@ -18,12 +18,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python3 tools/sync_publications.py
+      # Scholar may block GitHub runners; on failure the old data/scholar.json stays and the step shows a warning.
+      - run: python3 tools/sync_scholar.py
+        continue-on-error: true
       - name: Commit publications.json
         id: commit
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: sync publications from ORCID [skip ci]"
-          file_pattern: data/publications.json
+          file_pattern: data/publications.json data/scholar.json
       # Pushes made with GITHUB_TOKEN don't trigger the Pages build on their own.
       - name: Rebuild GitHub Pages
         if: steps.commit.outputs.changes_detected == 'true'

@@ -960,3 +960,4 @@ body, body *:not(h1):not(h2):not(h2 *):not(.fa):not(.fab):not(.fas):not(.far):no
 /* Publications: full list folded under the selected ones */
 .pub-all { margin-top: 1rem; }
 .pub-all > summary { cursor: pointer; font-weight: 600; color: var(--claude-orange-dark); }
+.scholar-stats { margin: 1rem 0 0; color: var(--claude-text-secondary); }
