@@ -988,3 +988,11 @@ body, body *:not(h1):not(h2):not(h2 *):not(.fa):not(.fab):not(.fas):not(.far):no
   #sideNav .navbar-nav .nav-link { padding: 0.4rem 0.35rem; font-size: 0.75rem; }
   #theme-toggle { margin-left: 0.4rem; }
 }
+
+/* Solid menu bar: page text must not show through it when you scroll */
+:root { --nav-solid: #FFFFFF; }
+body.dark-mode { --nav-solid: #0F172A; }
+#sideNav { background: var(--nav-solid) !important; }
+
+/* Email address in lowercase (the subheading style is uppercase) */
+#contact .subheading a { text-transform: none; }

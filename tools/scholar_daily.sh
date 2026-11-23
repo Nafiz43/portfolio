@@ -2,6 +2,8 @@
 # Daily Scholar stats refresh, run by launchd (~/Library/LaunchAgents/com.user.portfolio-scholar.plist).
 # Uses its own clone so it never touches the working copy in ~/Documents/GitHub/portfolio.
 set -euo pipefail
+# Any failure (Scholar blocked, page changed, git push refused) shows a macOS notification.
+trap 'osascript -e "display notification \"Scholar stats sync failed. See ~/Library/Logs/portfolio-scholar.log\" with title \"Portfolio\""' ERR
 export PATH=/opt/homebrew/bin:/usr/bin:/bin
 DIR="$HOME/.local/share/portfolio-scholar"
 [ -d "$DIR/.git" ] || git clone -q https://github.com/Nafiz43/portfolio "$DIR"
