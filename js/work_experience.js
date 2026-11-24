@@ -17,7 +17,7 @@
         company: "Scale AI",
         companyLink: "https://scale.com/",
         logo: "img/Scale-logo.jpg",
-        date: "Aug 2025 – Sep 2025",
+        date: "Jul 2025 – Sep 2025",
         width: 80,
         height: 80,
         tasks: [
