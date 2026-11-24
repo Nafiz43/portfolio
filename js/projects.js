@@ -30,7 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
       links: {
         Page: "https://oss-prey.github.io/OSSPREY-Website/",
         Paper: "https://ieeexplore.ieee.org/abstract/document/11334666",
-        Code: "https://github.com/OSS-PREY"
+        Code: "https://github.com/OSS-PREY",
+        Video: "https://www.youtube.com/watch?v=N7a0v4hPylU"
       }
     },
     {
