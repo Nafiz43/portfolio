@@ -34,18 +34,19 @@
   </noscript>
 
   <!-- Custom styles -->
-  <link href="css/resume.css?v=16" rel="stylesheet">
+  <link href="css/resume.css?v=17" rel="stylesheet">
   <!-- Chat widget turned off for now. Remove these comment marks to turn it back on.
   <link href="css/chat.css?v=1" rel="stylesheet">
   <script src="js/chat.js?v=2" defer></script>
   -->
 
   <!-- Deferred so these data scripts don't block HTML parsing/first paint -->
+  <script src="js/news.js?v=1" defer></script>
   <script src="js/articles.js?v=8" defer></script>
   <script src="js/projects.js?v=2" defer></script>
   <script src="js/activities.js?v=2" defer></script>
   <script src="js/work_experience.js?v=5" defer></script>
-  <script src="js/awards.js?v=5" defer></script>
+  <script src="js/awards.js?v=6" defer></script>
   <script src="js/teaching_experience_mist.js?v=2" defer></script>
 </head>
 
@@ -119,14 +120,8 @@
         <p class="lead">Shoot me an email at <a href="mailto:nikhan@ucdavis.edu">nikhan@ucdavis.edu</a>.</p>
 
         <h3>News</h3>
-        <ul class="news-list">
-          <li><span class="news-date">Oct 2026</span> Presented <a href="medvision/" target="_blank">MedVision</a> at the UC Davis Radiology Research Symposium.</li>
-          <li><span class="news-date">Aug 2026</span> RepoWise won the <b>Best Paper Award</b> at SEET (Springer CCIS).</li>
-          <li><span class="news-date">Jun 2026</span> Started a summer internship at <a href="https://www.betterhelp.com/" target="_blank">BetterHelp</a>, working on reducing bias in language models.</li>
-          <li><span class="news-date">Nov 2025</span> OSSPREY published at the ASE 2025 Tool Demonstrations track.</li>
-          <li><span class="news-date">Aug 2025</span> Joined <a href="https://scale.com/" target="_blank">Scale AI</a> as a Human Frontier Collective Specialist (GenAI).</li>
-          <li><span class="news-date">Jun 2025</span> EvidenceBot published at the FSE 2025 Tool Demonstrations track.</li>
-        </ul>
+        <ul class="news-list" id="news-list" data-limit="5"></ul>
+        <p class="news-more"><a href="news.html">Read more news &rarr;</a></p>
 
         <div class="row">
           <div class="col-12">

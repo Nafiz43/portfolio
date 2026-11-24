@@ -996,3 +996,6 @@ body.dark-mode { --nav-solid: #0F172A; }
 
 /* Email address in lowercase (the subheading style is uppercase) */
 #contact .subheading a { text-transform: none; }
+.news-more { margin: 0 0 1rem; }
+.news-year { margin-top: 1.2rem; }
+.news-year h4 { margin: 0 0 0.4rem; }

@@ -30,13 +30,13 @@
         organizerLink: ""
       },
       {
-        year: "2020",
+        year: "2021",
         title: "Top Downloaded Article Award, issued by ",
         event: "Engineering Reports",
         eventLink: ""
       },
       {
-        year: "2021",
+        year: "2022",
         title: "Top Downloaded Article Award, issued by ",
         event: "Engineering Reports",
         eventLink: ""
