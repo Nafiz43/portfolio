@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
       image: "img/projects/medvision.jpg",
       venue: "UC Davis Radiology Research Symposium 2026",
       description: "Ask a hospital imaging archive questions in words, with an image, or both. It runs on premises inside the hospital network.",
-      links: { Page: "medvision/" }
+      links: { Page: "medvision/", Video: "medvision/medvision_demo.mp4" }
     },
     {
       title: "RepoWise",
@@ -19,7 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
         Page: "https://repowise.github.io/RepoWise-website",
         Paper: "https://link.springer.com/chapter/10.1007/978-3-032-39763-8_16",
         Code: "https://github.com/RepoWise",
-        Demo: "https://repowise.netlify.app"
+        Demo: "https://repowise.netlify.app",
+        Video: "https://www.youtube.com/watch?v=0xwoYf62TEc"
       }
     },
     {
