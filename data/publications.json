@@ -273,8 +273,8 @@
     "description": "A brain tumor is a life-threatening neurological condition caused by the unregulated development of cells inside the brain or skull. The death rate of people with this condition is steadily increasing. Early diagnosis of malignant tumors is critical for providing treatment to patients, and early discovery improves the patient’s chances of survival. The patient’s survival rate is usually very less if they are not adequately treated. If a brain tumor cannot be identified in an early stage, it can surely lead to death. Therefore, early diagnosis of brain tumors necessitates the use of an automated tool. The segmentation, diagnosis, and isolation of contaminated tumor areas from magnetic resonance (MR) images is a prime concern. However, it is a tedious and time-consuming process that radiologists or clinical specialists must undertake, and their performance is solely dependent on their expertise. To address these limitations, the use of computer-assisted techniques becomes critical. In this paper, different traditional and hybrid ML models were built and analyzed in detail to classify the brain tumor images without any human intervention. Along with these, 16 different transfer learning models were also analyzed to identify the best transfer learning model to classify brain tumors based on neural networks. Finally, using different state-of-the-art technologies, a stacked classifier was proposed which outperforms all the other developed models. The proposed VGG-SCNet’s (VGG Stacked Classifier Network) precision, recall, and f1 scores were found to be 99.2%, 99.1%, and 99.2% respectively.",
     "resume_note": "IF = 3.367 and SJR Rank = Q1",
     "resume_pin": true,
-    "doi": "10.1109/access.2021.3105874",
-    "resume_exclude": true
+    "resume_exclude": true,
+    "doi": "10.1109/access.2021.3105874"
   },
   {
     "title": "Data-driven shear strength prediction of steel fiber reinforced concrete beams using machine learning approach",
