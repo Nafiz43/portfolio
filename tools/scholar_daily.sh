@@ -1,5 +1,5 @@
 #!/bin/bash
-# Daily Scholar stats refresh, run by launchd (~/Library/LaunchAgents/com.user.portfolio-scholar.plist).
+# Daily Scholar stats refresh (website and resume), run by launchd (~/Library/LaunchAgents/com.user.portfolio-scholar.plist).
 # Uses its own clone so it never touches the working copy in ~/Documents/GitHub/portfolio.
 set -euo pipefail
 # Any failure (Scholar blocked, page changed, git push refused) shows a macOS notification.
@@ -15,3 +15,6 @@ git diff --cached --quiet && { echo "$(date) no change"; exit 0; }
 git commit -qm "chore: sync Google Scholar stats"
 git push -q
 echo "$(date) pushed: $(tr -d '\n ' < data/scholar.json)"
+# New numbers: rebuild the resume now (Nafiz43/resume reads data/scholar.json into its Publications heading).
+gh workflow run build-resume.yml -R Nafiz43/resume
+echo "$(date) started resume build"
