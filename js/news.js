@@ -3,7 +3,7 @@
 (function () {
   const a = (text, href) => `<a href="${href}" target="_blank" rel="noopener">${text}</a>`;
   const news = [
-    { d: "2026-11", t: `Paper ${a("Multi-Ecosystem Modeling of OSS Project Sustainability", "https://doi.org/10.1016/j.jss.2026.112985")} published in the <b>Journal of Systems and Software (JSS)</b>, with equal first authorship.` },
+    { d: "2026-07", t: `Paper ${a("Multi-Ecosystem Modeling of OSS Project Sustainability", "https://doi.org/10.1016/j.jss.2026.112985")} published in the <b>Journal of Systems and Software (JSS)</b>.` },
     { d: "2026-10", t: `Presented <a href="medvision/">MedVision</a> at the UC Davis Radiology Research Symposium.` },
     { d: "2026-08", t: `${a("RepoWise", "https://link.springer.com/chapter/10.1007/978-3-032-39763-8_16")} won the <b>Best Paper Award</b> at SEET (Springer CCIS).` },
     { d: "2026-06", t: `Started a summer internship at ${a("BetterHelp", "https://www.betterhelp.com/")}, working on reducing bias in language models.` },
