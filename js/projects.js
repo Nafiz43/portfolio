@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
       title: "AngioVision",
       image: "img/projects/angiovision.svg",
       venue: "Ongoing research with UC Davis Health",
-      description: "A vision-language model that learns to read digital subtraction angiography (DSA) videos from the reports that interventional radiologists already write, with no manual labels. I designed a new contrastive learning algorithm for this task and built AngioBERT, a custom clinical text encoder trained on UC Davis Health radiology reports.",
+      description: "A contrastive learning model that learns to read digital subtraction angiography (DSA) videos from the reports that interventional radiologists already write, with no manual labels. I designed its new contrastive learning algorithm and built AngioBERT, a custom clinical text encoder trained on UC Davis Health radiology reports.",
       links: {} // code and data are private (patient data)
     },
     {
