@@ -3,6 +3,13 @@
 document.addEventListener("DOMContentLoaded", function () {
   const projects = [
     {
+      title: "AngioVision",
+      image: "img/projects/angiovision.svg",
+      venue: "Ongoing research with UC Davis Health",
+      description: "A vision-language model that learns to read digital subtraction angiography (DSA) videos from the reports that interventional radiologists already write, with no manual labels. I designed a new contrastive learning algorithm for this task and built AngioBERT, a custom clinical text encoder trained on UC Davis Health radiology reports.",
+      links: {} // code and data are private (patient data)
+    },
+    {
       title: "MedVision",
       image: "img/projects/medvision.jpg",
       venue: "UC Davis Radiology Research Symposium 2026",
@@ -112,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!container) return;
   const card = p => `
     <div class="project-card">
-      <a href="${p.links.Page || Object.values(p.links)[0]}" target="_blank" rel="noopener"><img src="${p.image}" alt="${p.title} screenshot" loading="lazy" decoding="async"></a>
+      ${(u => u ? `<a href="${u}" target="_blank" rel="noopener">` : "")(p.links.Page || Object.values(p.links)[0])}<img src="${p.image}" alt="${p.title} screenshot" loading="lazy" decoding="async">${Object.keys(p.links).length ? "</a>" : ""}
       <div class="project-body">
         <h3>${p.title}</h3>
         <div class="project-venue">${p.venue}${p.award ? ` <span class="pub-award">🏆 ${p.award}</span>` : ""}</div>

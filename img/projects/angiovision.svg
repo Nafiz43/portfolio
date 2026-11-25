@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="AngioVision">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1d33"/>
+      <stop offset="1" stop-color="#1b3a5c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <!-- stylized vessel tree, drawn by hand: not patient data -->
+  <g fill="none" stroke="#e8eef5" stroke-linecap="round" opacity="0.85">
+    <path d="M140 720 C180 560 230 470 330 400" stroke-width="22"/>
+    <path d="M330 400 C420 340 470 250 520 140" stroke-width="14"/>
+    <path d="M330 400 C430 400 520 440 600 520" stroke-width="12"/>
+    <path d="M520 140 C540 100 580 70 630 50" stroke-width="8"/>
+    <path d="M470 250 C520 240 570 250 610 280" stroke-width="7"/>
+    <path d="M600 520 C640 560 660 620 670 690" stroke-width="7"/>
+    <path d="M520 450 C540 500 530 560 500 610" stroke-width="6"/>
+    <path d="M230 500 C190 450 170 380 180 300" stroke-width="9"/>
+    <path d="M180 300 C170 240 190 190 230 150" stroke-width="5"/>
+  </g>
+  <text x="760" y="330" fill="#ffffff" font-family="Helvetica, Arial, sans-serif" font-size="84" font-weight="700">AngioVision</text>
+  <text x="762" y="400" fill="#9fc3e6" font-family="Helvetica, Arial, sans-serif" font-size="34">Angiography video + report</text>
+  <text x="762" y="446" fill="#9fc3e6" font-family="Helvetica, Arial, sans-serif" font-size="34">vision-language learning</text>
+</svg>
