@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4a5568"/></marker>
+  </defs>
+  <rect x="10" y="10" width="880" height="280" rx="14" fill="#fafbfc" stroke="#a0aec0" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="870" y="34" text-anchor="end" font-size="13" font-weight="bold" fill="#4a5568" letter-spacing="1">HOSPITAL NETWORK, ON PREMISES</text>
+
+  <rect x="40" y="70" width="220" height="170" rx="10" fill="#fff" stroke="#b7791f" stroke-width="2"/>
+  <rect x="40" y="70" width="220" height="40" rx="10" fill="#b7791f"/><rect x="40" y="100" width="220" height="10" fill="#b7791f"/>
+  <text x="150" y="96" text-anchor="middle" font-size="17" font-weight="bold" fill="#fff">Imaging archive</text>
+  <text x="150" y="145" text-anchor="middle" font-size="15" fill="#2d3748">Images</text>
+  <text x="150" y="172" text-anchor="middle" font-size="15" fill="#2d3748">Radiology reports</text>
+  <text x="150" y="199" text-anchor="middle" font-size="15" fill="#2d3748">Study details</text>
+
+  <rect x="340" y="70" width="220" height="170" rx="10" fill="#fff" stroke="#2b6cb0" stroke-width="2"/>
+  <rect x="340" y="70" width="220" height="40" rx="10" fill="#2b6cb0"/><rect x="340" y="100" width="220" height="10" fill="#2b6cb0"/>
+  <text x="450" y="96" text-anchor="middle" font-size="17" font-weight="bold" fill="#fff">MedVision</text>
+  <text x="450" y="145" text-anchor="middle" font-size="15" fill="#2d3748">Reads the archive once</text>
+  <text x="450" y="172" text-anchor="middle" font-size="15" fill="#2d3748">Answers questions</text>
+  <text x="450" y="199" text-anchor="middle" font-size="15" fill="#2d3748">with a local AI model</text>
+
+  <rect x="640" y="70" width="220" height="170" rx="10" fill="#fff" stroke="#6b46c1" stroke-width="2"/>
+  <rect x="640" y="70" width="220" height="40" rx="10" fill="#6b46c1"/><rect x="640" y="100" width="220" height="10" fill="#6b46c1"/>
+  <text x="750" y="96" text-anchor="middle" font-size="17" font-weight="bold" fill="#fff">Clinician</text>
+  <text x="750" y="145" text-anchor="middle" font-size="15" fill="#2d3748">Asks in words,</text>
+  <text x="750" y="172" text-anchor="middle" font-size="15" fill="#2d3748">with an image, or both</text>
+  <text x="750" y="199" text-anchor="middle" font-size="15" fill="#2d3748">Gets answers with evidence</text>
+
+  <line x1="262" y1="155" x2="336" y2="155" stroke="#4a5568" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="638" y1="140" x2="564" y2="140" stroke="#4a5568" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="564" y1="172" x2="638" y2="172" stroke="#4a5568" stroke-width="2" marker-end="url(#a)"/>
+  <text x="600" y="130" text-anchor="middle" font-size="12" fill="#4a5568">question</text>
+  <text x="600" y="190" text-anchor="middle" font-size="12" fill="#4a5568">answer</text>
+
+  <text x="450" y="272" text-anchor="middle" font-size="13" font-style="italic" fill="#4a5568">Patient data stays inside the institution</text>
+</svg>
